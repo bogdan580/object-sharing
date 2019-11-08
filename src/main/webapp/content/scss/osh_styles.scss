@@ -1,0 +1,34 @@
+@import '~bootstrap/scss/variables';
+/* ==========================================================================
+Navbar
+========================================================================== */
+.navbar a.nav-link,
+.navbar-title {
+  color: whitesmoke;
+}
+.navbar a.nav-link:hover,
+.navbar-title:hover {
+  color: greenyellow;
+}
+.navbar {
+  .dropdown-item:hover {
+    background-color: $success;
+    color: white;
+  }
+  .dropdown-item.active,
+  .dropdown-item.active:focus,
+  .dropdown-item.active:hover {
+    background-color: $success!important;
+    color: white;
+  }
+}
+/* ==========================================================================
+Page heading
+========================================================================== */
+.btn.btn-primary.float-right.jh-create-entity {
+  font-size: 0.475em;
+}
+
+.btn-group {
+  font-size: larger;
+}

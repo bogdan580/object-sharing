@@ -1,0 +1,53 @@
+{
+    "name": "Renting",
+    "fields": [
+        {
+            "fieldName": "startTime",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "endTime",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "rentPeriod",
+            "fieldType": "RentPeriod",
+            "fieldValues": "HOUR,DAY"
+        },
+        {
+            "fieldName": "currency",
+            "fieldType": "Currency",
+            "fieldValues": "BEER,PLN,EUR,USD"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "renting",
+            "relationshipName": "user",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "article",
+            "otherEntityRelationshipName": "renting",
+            "relationshipName": "article",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20191106184313",
+    "entityTableName": "renting",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,9 @@
+package com.mbohdan.projects.osharing.service;
+
+public class UsernameAlreadyUsedException extends RuntimeException {
+
+    public UsernameAlreadyUsedException() {
+        super("Login name already used!");
+    }
+
+}

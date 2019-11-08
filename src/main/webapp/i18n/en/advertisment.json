@@ -1,0 +1,25 @@
+{
+  "objectSharingApp": {
+    "advertisment": {
+      "home": {
+        "title": "Advertisments",
+        "createLabel": "Create a new Advertisment",
+        "createOrEditLabel": "Create or edit a Advertisment",
+        "notFound": "No Advertisments found"
+      },
+      "created": "A new Advertisment is created with identifier {{ param }}",
+      "updated": "A Advertisment is updated with identifier {{ param }}",
+      "deleted": "A Advertisment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Advertisment {{ id }}?"
+      },
+      "detail": {
+        "title": "Advertisment"
+      },
+      "title": "Title",
+      "imageUrl": "Image Url",
+      "desc": "Desc",
+      "status": "Status"
+    }
+  }
+}

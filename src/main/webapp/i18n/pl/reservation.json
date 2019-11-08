@@ -1,0 +1,25 @@
+{
+  "objectSharingApp": {
+    "reservation": {
+      "home": {
+        "title": "Reservation",
+        "createLabel": "Dodaj Reservation",
+        "createOrEditLabel": "Dodaj lub edytuj: Reservation",
+        "notFound": "No Reservations found"
+      },
+      "created": "Utworzono nowy obiekt typu Reservation z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Reservation z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Reservation z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Reservation {{ id }}?"
+      },
+      "detail": {
+        "title": "Reservation"
+      },
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "user": "User",
+      "article": "Article"
+    }
+  }
+}

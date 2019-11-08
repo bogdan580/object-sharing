@@ -1,0 +1,11 @@
+{
+  "objectSharingApp": {
+    "ObjectStatus": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "DISACTIVE": "DISACTIVE",
+      "RESERVED": "RESERVED",
+      "INRENT": "INRENT"
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+    "name": "Article",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "desc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "ObjectStatus",
+            "fieldValues": "ACTIVE,DISACTIVE,RESERVED,INRENT",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "addTime",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "rentPeriod",
+            "fieldType": "RentPeriod",
+            "fieldValues": "HOUR,DAY"
+        },
+        {
+            "fieldName": "currency",
+            "fieldType": "Currency",
+            "fieldValues": "BEER,PLN,EUR,USD"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "reservation",
+            "otherEntityRelationshipName": "article",
+            "relationshipName": "reservation"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "renting",
+            "otherEntityRelationshipName": "article",
+            "relationshipName": "renting"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "article",
+            "relationshipName": "user",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "category",
+            "otherEntityRelationshipName": "article",
+            "relationshipName": "category",
+            "otherEntityField": "categoryName"
+        }
+    ],
+    "changelogDate": "20191106184312",
+    "entityTableName": "article",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

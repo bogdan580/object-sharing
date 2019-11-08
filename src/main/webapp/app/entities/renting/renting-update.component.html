@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-renting-heading" jhiTranslate="objectSharingApp.renting.home.createOrEditLabel">Create or edit a Renting</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="objectSharingApp.renting.startTime" for="field_startTime">Start Time</label>
+                    <input type="number" class="form-control" name="startTime" id="field_startTime"
+                           formControlName="startTime"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="objectSharingApp.renting.endTime" for="field_endTime">End Time</label>
+                    <input type="number" class="form-control" name="endTime" id="field_endTime"
+                           formControlName="endTime"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="objectSharingApp.renting.price" for="field_price">Price</label>
+                    <input type="number" class="form-control" name="price" id="field_price"
+                           formControlName="price"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="objectSharingApp.renting.rentPeriod" for="field_rentPeriod">Rent Period</label>
+                    <select class="form-control" name="rentPeriod" formControlName="rentPeriod" id="field_rentPeriod">
+                        <option value="HOUR">{{'objectSharingApp.RentPeriod.HOUR' | translate}}</option>
+                        <option value="DAY">{{'objectSharingApp.RentPeriod.DAY' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="objectSharingApp.renting.currency" for="field_currency">Currency</label>
+                    <select class="form-control" name="currency" formControlName="currency" id="field_currency">
+                        <option value="BEER">{{'objectSharingApp.Currency.BEER' | translate}}</option>
+                        <option value="PLN">{{'objectSharingApp.Currency.PLN' | translate}}</option>
+                        <option value="EUR">{{'objectSharingApp.Currency.EUR' | translate}}</option>
+                        <option value="USD">{{'objectSharingApp.Currency.USD' | translate}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="objectSharingApp.renting.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" formControlName="user">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === editForm.get('user').value?.id ? editForm.get('user').value : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="objectSharingApp.renting.article" for="field_article">Article</label>
+                    <select class="form-control" id="field_article" name="article" formControlName="article">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="articleOption.id === editForm.get('article').value?.id ? editForm.get('article').value : articleOption" *ngFor="let articleOption of articles; trackBy: trackArticleById">{{articleOption.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

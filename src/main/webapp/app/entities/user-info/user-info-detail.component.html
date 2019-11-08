@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="userInfo">
+            <h2><span jhiTranslate="objectSharingApp.userInfo.detail.title">User Info</span> {{userInfo.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="objectSharingApp.userInfo.tel">Tel</span></dt>
+                <dd>
+                    <span>{{userInfo.tel}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.userInfo.fullName">Full Name</span></dt>
+                <dd>
+                    <span>{{userInfo.fullName}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.userInfo.providedObjects">Provided Objects</span></dt>
+                <dd>
+                    <span>{{userInfo.providedObjects}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.userInfo.rentedObjects">Rented Objects</span></dt>
+                <dd>
+                    <span>{{userInfo.rentedObjects}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.userInfo.user">User</span></dt>
+                <dd>
+                    {{userInfo.user?.login}}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/user-info', userInfo.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

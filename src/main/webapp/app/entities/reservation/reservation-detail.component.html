@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="reservation">
+            <h2><span jhiTranslate="objectSharingApp.reservation.detail.title">Reservation</span> {{reservation.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="objectSharingApp.reservation.startTime">Start Time</span></dt>
+                <dd>
+                    <span>{{reservation.startTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.reservation.endTime">End Time</span></dt>
+                <dd>
+                    <span>{{reservation.endTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.reservation.user">User</span></dt>
+                <dd>
+                    {{reservation.user?.login}}
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.reservation.article">Article</span></dt>
+                <dd>
+                    <div *ngIf="reservation.article">
+                        <a [routerLink]="['/article', reservation.article?.id, 'view']">{{reservation.article?.name}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/reservation', reservation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="renting">
+            <h2><span jhiTranslate="objectSharingApp.renting.detail.title">Renting</span> {{renting.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="objectSharingApp.renting.startTime">Start Time</span></dt>
+                <dd>
+                    <span>{{renting.startTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.renting.endTime">End Time</span></dt>
+                <dd>
+                    <span>{{renting.endTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.renting.price">Price</span></dt>
+                <dd>
+                    <span>{{renting.price}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.renting.rentPeriod">Rent Period</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'objectSharingApp.RentPeriod.' + renting.rentPeriod}}">{{renting.rentPeriod}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.renting.currency">Currency</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'objectSharingApp.Currency.' + renting.currency}}">{{renting.currency}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.renting.user">User</span></dt>
+                <dd>
+                    {{renting.user?.login}}
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.renting.article">Article</span></dt>
+                <dd>
+                    <div *ngIf="renting.article">
+                        <a [routerLink]="['/article', renting.article?.id, 'view']">{{renting.article?.name}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/renting', renting.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

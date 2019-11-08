@@ -1,0 +1,39 @@
+{
+    "name": "Reservation",
+    "fields": [
+        {
+            "fieldName": "startTime",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "endTime",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "reservation",
+            "relationshipName": "user",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "article",
+            "otherEntityRelationshipName": "reservation",
+            "relationshipName": "article",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20191106184314",
+    "entityTableName": "reservation",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

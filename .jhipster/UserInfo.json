@@ -1,0 +1,41 @@
+{
+    "name": "UserInfo",
+    "fields": [
+        {
+            "fieldName": "tel",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "fullName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "providedObjects",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "rentedObjects",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "userInfo",
+            "relationshipName": "user",
+            "otherEntityField": "login",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20191106184310",
+    "entityTableName": "user_info",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

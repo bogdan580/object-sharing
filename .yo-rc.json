@@ -1,0 +1,45 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.mbohdan.projects.osharing",
+      "nativeLanguage": "pl"
+    },
+    "jhipsterVersion": "6.4.1",
+    "applicationType": "monolith",
+    "baseName": "object_sharing",
+    "packageName": "com.mbohdan.projects.osharing",
+    "packageFolder": "com/mbohdan/projects/osharing",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NWI4M2QyOTU4Y2NhOGEzZmI1NGE2NTFhMDMxMzc4ZmQ1NjQyYjJhNDJlM2U0ZmE3NWM1NTQxNGY2MTJmNjUxZDBlN2NiM2I5N2Y1Yzg4ZjdhZDA5ZjM0MDk0NTY4MDNiYTRiYThmZWRhZjhiOWRjODQzOGJhNGI4NzYxMDVjYmQ=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "litera",
+    "clientThemeVariant": "primary",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "pl",
+    "languages": [
+      "pl",
+      "en"
+    ],
+    "blueprints": []
+  }
+}

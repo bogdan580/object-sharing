@@ -1,0 +1,11 @@
+{
+  "objectSharingApp": {
+    "Currency": {
+      "null": "",
+      "BEER": "BEER",
+      "PLN": "PLN",
+      "EUR": "EUR",
+      "USD": "USD"
+    }
+  }
+}

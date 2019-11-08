@@ -1,0 +1,42 @@
+{
+    "name": "Advertisment",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "imageUrl",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "desc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "ObjectStatus",
+            "fieldValues": "ACTIVE,DISACTIVE,RESERVED,INRENT",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20191106184308",
+    "entityTableName": "advertisment",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,26 @@
+{
+  "objectSharingApp": {
+    "userInfo": {
+      "home": {
+        "title": "User Info",
+        "createLabel": "Dodaj User Info",
+        "createOrEditLabel": "Dodaj lub edytuj: User Info",
+        "notFound": "No User Infos found"
+      },
+      "created": "Utworzono nowy obiekt typu User Info z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu User Info z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu User Info z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć User Info {{ id }}?"
+      },
+      "detail": {
+        "title": "User Info"
+      },
+      "tel": "Tel",
+      "fullName": "Full Name",
+      "providedObjects": "Provided Objects",
+      "rentedObjects": "Rented Objects",
+      "user": "User"
+    }
+  }
+}

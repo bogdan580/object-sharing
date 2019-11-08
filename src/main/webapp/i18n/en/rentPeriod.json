@@ -1,0 +1,9 @@
+{
+  "objectSharingApp": {
+    "RentPeriod": {
+      "null": "",
+      "HOUR": "HOUR",
+      "DAY": "DAY"
+    }
+  }
+}

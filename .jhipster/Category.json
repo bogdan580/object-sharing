@@ -1,0 +1,30 @@
+{
+    "name": "Category",
+    "fields": [
+        {
+            "fieldName": "categoryName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "article",
+            "otherEntityRelationshipName": "category",
+            "relationshipName": "article"
+        }
+    ],
+    "changelogDate": "20191106184311",
+    "entityTableName": "category",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

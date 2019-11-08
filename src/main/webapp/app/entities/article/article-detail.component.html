@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="article">
+            <h2><span jhiTranslate="objectSharingApp.article.detail.title">Article</span> {{article.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="objectSharingApp.article.name">Name</span></dt>
+                <dd>
+                    <span>{{article.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.article.desc">Desc</span></dt>
+                <dd>
+                    <span>{{article.desc}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.article.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'objectSharingApp.ObjectStatus.' + article.status}}">{{article.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.article.addTime">Add Time</span></dt>
+                <dd>
+                    <span>{{article.addTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.article.price">Price</span></dt>
+                <dd>
+                    <span>{{article.price}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.article.rentPeriod">Rent Period</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'objectSharingApp.RentPeriod.' + article.rentPeriod}}">{{article.rentPeriod}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.article.currency">Currency</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'objectSharingApp.Currency.' + article.currency}}">{{article.currency}}</span>
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.article.user">User</span></dt>
+                <dd>
+                    {{article.user?.login}}
+                </dd>
+                <dt><span jhiTranslate="objectSharingApp.article.category">Category</span></dt>
+                <dd>
+                    <div *ngIf="article.category">
+                        <a [routerLink]="['/category', article.category?.id, 'view']">{{article.category?.categoryName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/article', article.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

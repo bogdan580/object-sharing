@@ -1,0 +1,28 @@
+{
+  "objectSharingApp": {
+    "renting": {
+      "home": {
+        "title": "Renting",
+        "createLabel": "Dodaj Renting",
+        "createOrEditLabel": "Dodaj lub edytuj: Renting",
+        "notFound": "No Rentings found"
+      },
+      "created": "Utworzono nowy obiekt typu Renting z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Renting z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Renting z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Renting {{ id }}?"
+      },
+      "detail": {
+        "title": "Renting"
+      },
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "price": "Price",
+      "rentPeriod": "Rent Period",
+      "currency": "Currency",
+      "user": "User",
+      "article": "Article"
+    }
+  }
+}

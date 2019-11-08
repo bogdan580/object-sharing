@@ -1,0 +1,28 @@
+{
+  "objectSharingApp": {
+    "renting": {
+      "home": {
+        "title": "Rentings",
+        "createLabel": "Create a new Renting",
+        "createOrEditLabel": "Create or edit a Renting",
+        "notFound": "No Rentings found"
+      },
+      "created": "A new Renting is created with identifier {{ param }}",
+      "updated": "A Renting is updated with identifier {{ param }}",
+      "deleted": "A Renting is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Renting {{ id }}?"
+      },
+      "detail": {
+        "title": "Renting"
+      },
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "price": "Price",
+      "rentPeriod": "Rent Period",
+      "currency": "Currency",
+      "user": "User",
+      "article": "Article"
+    }
+  }
+}

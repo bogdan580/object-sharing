@@ -1,0 +1,78 @@
+entity Advertisment {
+	title String required,
+    imageUrl String required,
+    desc String,
+    status ObjectStatus required
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity Location {
+	streetAddress String,
+	postalCode String,
+	city String,
+	stateProvince String,
+    lat Long required,
+    lon Long required
+}
+
+entity UserInfo {
+    tel Integer,
+    fullName String,
+    providedObjects Integer,
+    rentedObjects Integer
+}
+
+entity Category {
+	categoryName String required
+}
+
+entity Article {
+	name String required,
+    desc String,
+    status ObjectStatus required,
+    addTime Long,
+    price Double,
+    rentPeriod RentPeriod,
+    currency Currency
+}
+entity Renting {
+    startTime Long,
+    endTime Long,
+    price Integer,
+    rentPeriod RentPeriod,
+    currency Currency
+}
+
+entity Reservation {
+    startTime String,
+    endTime String
+}
+
+enum ObjectStatus {
+    ACTIVE, DISACTIVE, RESERVED, INRENT
+}
+enum Currency {
+    BEER, PLN, EUR, USD
+}
+enum RentPeriod {
+    HOUR, DAY
+}
+
+relationship OneToOne {
+	UserInfo{user(login)} to User 
+}
+
+relationship OneToMany {
+	Category{article} to Article{category(categoryName)},
+   
+    Article to Reservation{article(name)},
+    Article to Renting{article(name)}
+}
+
+relationship ManyToOne {
+	Location{user(login)} to User,
+    Article{user(login)} to User,
+    Reservation{user(login)} to User,
+    Renting{user(login)} to User
+}

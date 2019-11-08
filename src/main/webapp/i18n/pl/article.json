@@ -1,0 +1,32 @@
+{
+  "objectSharingApp": {
+    "article": {
+      "home": {
+        "title": "Article",
+        "createLabel": "Dodaj Article",
+        "createOrEditLabel": "Dodaj lub edytuj: Article",
+        "notFound": "No Articles found"
+      },
+      "created": "Utworzono nowy obiekt typu Article z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Article z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Article z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Article {{ id }}?"
+      },
+      "detail": {
+        "title": "Article"
+      },
+      "name": "Name",
+      "desc": "Desc",
+      "status": "Status",
+      "addTime": "Add Time",
+      "price": "Price",
+      "rentPeriod": "Rent Period",
+      "currency": "Currency",
+      "reservation": "Reservation",
+      "renting": "Renting",
+      "user": "User",
+      "category": "Category"
+    }
+  }
+}
