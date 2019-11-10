@@ -6,13 +6,15 @@ import { JhiLanguageService } from 'ng-jhipster';
 import { SearchListService } from 'app/osh-core/search-list/shared/services/search-list.service';
 import { SearchListComponent } from 'app/osh-core/search-list/containers/search-list.component';
 import { searchListRoute } from 'app/osh-core/search-list/search-list.route';
+import { ObjectSharingSharedModule } from 'app/shared/shared.module';
 const SEARCH_LIST_ROUTES = [...searchListRoute];
 const CONTAINERS = [SearchListComponent];
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule.forChild(SEARCH_LIST_ROUTES)
+    RouterModule.forChild(SEARCH_LIST_ROUTES),
+    ObjectSharingSharedModule
   ],
   exports: [], // need add ui module
   declarations: [...CONTAINERS],

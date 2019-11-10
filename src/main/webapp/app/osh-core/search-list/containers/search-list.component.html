@@ -1,1 +1,50 @@
-<p>search list works!</p>
+<div class="page">
+    <h2 id="page-heading">
+        <span jhiTranslate="osh.searchList.title">Search list</span>
+        <a (click)="showedDetail =!showedDetail" *jhiHasAnyAuthority="'ROLE_ADMIN'">Details</a>
+        <button id="jh-create-entity"
+                class="btn btn-primary float-right jh-create-entity create-location"
+                (click)="showedFilter =!showedFilter">
+            <fa-icon [icon]="'filter'"></fa-icon>
+            <span>
+            Show filter
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="searchedArticles?.length === 0">
+        <span jhiTranslate="objectSharingApp.article.home.notFound">No articles found</span>
+    </div>
+    <div class="page-body" *ngIf="searchedArticles?.length > 0">
+        <div class="card article-details-block" *ngIf="showedDetail">
+            <div class="card-body" style="display: flex; flex-direction: column;">
+                <div class="article-details">
+                    <div class="article-img">Image</div>
+                    <div class="article-info">Details Info</div>
+                </div>
+                <div class="article-calendar">Calendar</div>
+            </div>
+        </div>
+        <div class="right-sidebar" [ngStyle]="{'display': getFullViewSettings('right-sidebar') }">
+            <div class="card article-filter" *ngIf="showedFilter">
+                Filter
+            </div>
+            <div class="card search-map" [ngStyle]="{'flex': getFullViewSettings('search-map') }">
+                Maps
+            </div>
+            <div class="card search-list table-responsive" [ngStyle]="{'flex': getFullViewSettings('search-list') }">
+                <table class="table table-striped" aria-describedby="page-heading">
+                    <tbody>
+                    <tr *ngFor="let artcl of searchedArticles ;trackBy: trackId">
+                        <td>
+                            {{artcl.id}} {{artcl.name}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

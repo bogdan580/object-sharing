@@ -1,0 +1,39 @@
+.page a {
+  cursor: pointer;
+  font-size: large;
+  color: blue;
+}
+
+.page-body {
+  display: flex;
+  .article-details-block {
+    flex: 1.2;
+    margin: 5px;
+  }
+  .right-sidebar {
+    margin: 5px;
+    flex: 1;
+    .article-filter {
+      margin: 0 5px 5px;
+    }
+    .search-map {
+      margin: 0 5px 5px;
+    }
+    .search-list {
+      margin: 0 5px;
+    }
+  }
+}
+
+.article-details-block {
+  .article-details {
+    display: flex;
+    min-height: 150px;
+    .article-img {
+      flex: 0.5;
+    }
+    .article-info {
+      flex: 1;
+    }
+  }
+}
