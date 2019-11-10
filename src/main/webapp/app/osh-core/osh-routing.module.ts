@@ -11,6 +11,24 @@ const routes: Routes = [
       pageTitle: 'osh.articles.title'
     },
     canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then(p => p.ProfileModule),
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'osh.profile.title'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'search-list',
+    loadChildren: () => import('./search-list/search-list.module').then(s => s.SearchListModule),
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'osh.searchList.title'
+    },
+    canActivate: [UserRouteAccessService]
   }
 ];
 

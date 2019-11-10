@@ -2,6 +2,12 @@
   "osh": {
     "articles": {
       "title": "Artykuły"
+    },
+    "profile": {
+      "title": "Moje konto"
+    },
+    "searchList": {
+      "title": "Lista wyszukiwania"
     }
   }
 }
