@@ -1,5 +1,11 @@
-<<<<<<< HEAD
-# object_sharing
+# object-sharing
+
+## Tytuł projektu:
+Aplikacja webowa "Object Sharing"
+## Cel:
+Celem naszej pracy jest stworzenie aplikacji webowej, responsywnej, która ma pełnić funkcję wypożyczalni sprzętu domowego i nie tylko.
+## Opis:
+Idea aplikacji ma na celu odciążenia użytkowników od wydawania niepotrzebnych sum pieniędzy na sprzęty, które są nam potrzebne tylko w krótkim odstępie czasu. Dla przykładu potrzebujemy wywiercić dziurę na obraz, który został przez nas zakupiony, lecz nie mamy wiertarki i zamiast niepotrzebnie wydawać pieniądze, możemy ja wypożyczyć od naszego najbliższego sąsiada, który jest w stanie nam ja udostępnić za drobną kwotę, bądź inną usługę.
 
 This application was generated using JHipster 6.4.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.4.1](https://www.jhipster.tech/documentation-archive/v6.4.1).
 
@@ -196,13 +202,3 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [protractor]: https://angular.github.io/protractor/
 [leaflet]: https://leafletjs.com/
 [definitelytyped]: https://definitelytyped.org/
-=======
-# object-sharing
-
-## Tytuł projektu:
-Aplikacja webowa "Object Sharing"
-## Cel:
-Celem naszej pracy jest stworzenie aplikacji webowej, responsywnej, która ma pełnić funkcję wypożyczalni sprzętu domowego i nie tylko.
-## Opis:
-Idea aplikacji ma na celu odciążenia użytkowników od wydawania niepotrzebnych sum pieniędzy na sprzęty, które są nam potrzebne tylko w krótkim odstępie czasu. Dla przykładu potrzebujemy wywiercić dziurę na obraz, który został przez nas zakupiony, lecz nie mamy wiertarki i zamiast niepotrzebnie wydawać pieniądze, możemy ja wypożyczyć od naszego najbliższego sąsiada, który jest w stanie nam ja udostępnić za drobną kwotę, bądź inną usługę.
->>>>>>> 6414ef944402f18ef060876d5f9716ab47e65704
