@@ -27,6 +27,9 @@ public class UserInfo implements Serializable {
     @Column(name = "full_name")
     private String fullName;
 
+    @Column(name = "avatar")
+    private String avatar;
+
     @Column(name = "provided_objects")
     private Integer providedObjects;
 
@@ -70,6 +73,19 @@ public class UserInfo implements Serializable {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public UserInfo avatar(String avatar) {
+        this.avatar = avatar;
+        return this;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public Integer getProvidedObjects() {
@@ -134,6 +150,7 @@ public class UserInfo implements Serializable {
             "id=" + getId() +
             ", tel=" + getTel() +
             ", fullName='" + getFullName() + "'" +
+            ", avatar='" + getAvatar() + "'" +
             ", providedObjects=" + getProvidedObjects() +
             ", rentedObjects=" + getRentedObjects() +
             "}";

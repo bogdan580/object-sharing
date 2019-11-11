@@ -39,6 +39,9 @@ public class UserInfoResourceIT {
     private static final String DEFAULT_FULL_NAME = "AAAAAAAAAA";
     private static final String UPDATED_FULL_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_AVATAR = "AAAAAAAAAA";
+    private static final String UPDATED_AVATAR = "BBBBBBBBBB";
+
     private static final Integer DEFAULT_PROVIDED_OBJECTS = 1;
     private static final Integer UPDATED_PROVIDED_OBJECTS = 2;
 
@@ -89,6 +92,7 @@ public class UserInfoResourceIT {
         UserInfo userInfo = new UserInfo()
             .tel(DEFAULT_TEL)
             .fullName(DEFAULT_FULL_NAME)
+            .avatar(DEFAULT_AVATAR)
             .providedObjects(DEFAULT_PROVIDED_OBJECTS)
             .rentedObjects(DEFAULT_RENTED_OBJECTS);
         return userInfo;
@@ -103,6 +107,7 @@ public class UserInfoResourceIT {
         UserInfo userInfo = new UserInfo()
             .tel(UPDATED_TEL)
             .fullName(UPDATED_FULL_NAME)
+            .avatar(UPDATED_AVATAR)
             .providedObjects(UPDATED_PROVIDED_OBJECTS)
             .rentedObjects(UPDATED_RENTED_OBJECTS);
         return userInfo;
@@ -130,6 +135,7 @@ public class UserInfoResourceIT {
         UserInfo testUserInfo = userInfoList.get(userInfoList.size() - 1);
         assertThat(testUserInfo.getTel()).isEqualTo(DEFAULT_TEL);
         assertThat(testUserInfo.getFullName()).isEqualTo(DEFAULT_FULL_NAME);
+        assertThat(testUserInfo.getAvatar()).isEqualTo(DEFAULT_AVATAR);
         assertThat(testUserInfo.getProvidedObjects()).isEqualTo(DEFAULT_PROVIDED_OBJECTS);
         assertThat(testUserInfo.getRentedObjects()).isEqualTo(DEFAULT_RENTED_OBJECTS);
     }
@@ -167,6 +173,7 @@ public class UserInfoResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(userInfo.getId().intValue())))
             .andExpect(jsonPath("$.[*].tel").value(hasItem(DEFAULT_TEL)))
             .andExpect(jsonPath("$.[*].fullName").value(hasItem(DEFAULT_FULL_NAME)))
+            .andExpect(jsonPath("$.[*].avatar").value(hasItem(DEFAULT_AVATAR)))
             .andExpect(jsonPath("$.[*].providedObjects").value(hasItem(DEFAULT_PROVIDED_OBJECTS)))
             .andExpect(jsonPath("$.[*].rentedObjects").value(hasItem(DEFAULT_RENTED_OBJECTS)));
     }
@@ -184,6 +191,7 @@ public class UserInfoResourceIT {
             .andExpect(jsonPath("$.id").value(userInfo.getId().intValue()))
             .andExpect(jsonPath("$.tel").value(DEFAULT_TEL))
             .andExpect(jsonPath("$.fullName").value(DEFAULT_FULL_NAME))
+            .andExpect(jsonPath("$.avatar").value(DEFAULT_AVATAR))
             .andExpect(jsonPath("$.providedObjects").value(DEFAULT_PROVIDED_OBJECTS))
             .andExpect(jsonPath("$.rentedObjects").value(DEFAULT_RENTED_OBJECTS));
     }
@@ -211,6 +219,7 @@ public class UserInfoResourceIT {
         updatedUserInfo
             .tel(UPDATED_TEL)
             .fullName(UPDATED_FULL_NAME)
+            .avatar(UPDATED_AVATAR)
             .providedObjects(UPDATED_PROVIDED_OBJECTS)
             .rentedObjects(UPDATED_RENTED_OBJECTS);
 
@@ -225,6 +234,7 @@ public class UserInfoResourceIT {
         UserInfo testUserInfo = userInfoList.get(userInfoList.size() - 1);
         assertThat(testUserInfo.getTel()).isEqualTo(UPDATED_TEL);
         assertThat(testUserInfo.getFullName()).isEqualTo(UPDATED_FULL_NAME);
+        assertThat(testUserInfo.getAvatar()).isEqualTo(UPDATED_AVATAR);
         assertThat(testUserInfo.getProvidedObjects()).isEqualTo(UPDATED_PROVIDED_OBJECTS);
         assertThat(testUserInfo.getRentedObjects()).isEqualTo(UPDATED_RENTED_OBJECTS);
     }

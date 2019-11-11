@@ -13,18 +13,33 @@
   .right-sidebar {
     margin: 5px;
     flex: 1;
-    .article-filter {
-      margin: 0 5px 5px;
-    }
-    .search-map {
-      margin: 0 5px 5px;
-    }
-    .search-list {
-      margin: 0 5px;
-    }
   }
 }
 
+// full view right sidebar
+.right-sidebar {
+  .search-map {
+    margin: 0 0 15px 5px;
+    min-height: 200px;
+  }
+  .search-list {
+    margin: 0 5px;
+  }
+}
+
+// minimal view
+.right-sidebar.minimal {
+  display: flex;
+  .search-map.minimal {
+    flex: 0.5;
+    margin-bottom: 0;
+  }
+  .search-list.minimal {
+    flex: 1;
+  }
+}
+
+// article details block
 .article-details-block {
   .article-details {
     display: flex;
@@ -37,3 +52,4 @@
     }
   }
 }
+

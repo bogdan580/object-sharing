@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(UserInfoService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new UserInfo(0, 0, 'AAAAAAA', 0, 0);
+      elemDefault = new UserInfo(0, 0, 'AAAAAAA', 'AAAAAAA', 0, 0);
     });
 
     describe('Service methods', () => {
@@ -58,6 +58,7 @@ describe('Service Tests', () => {
           {
             tel: 1,
             fullName: 'BBBBBB',
+            avatar: 'BBBBBB',
             providedObjects: 1,
             rentedObjects: 1
           },
@@ -79,6 +80,7 @@ describe('Service Tests', () => {
           {
             tel: 1,
             fullName: 'BBBBBB',
+            avatar: 'BBBBBB',
             providedObjects: 1,
             rentedObjects: 1
           },

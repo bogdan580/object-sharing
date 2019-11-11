@@ -18,6 +18,7 @@
       },
       "tel": "Tel",
       "fullName": "Full Name",
+      "avatar": "Avatar",
       "providedObjects": "Provided Objects",
       "rentedObjects": "Rented Objects",
       "user": "User"

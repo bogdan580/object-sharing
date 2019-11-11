@@ -1,5 +1,6 @@
-import { IReservation } from 'app/shared/model/reservation.model';
+import { IImage } from 'app/shared/model/image.model';
 import { IRenting } from 'app/shared/model/renting.model';
+import { IReservation } from 'app/shared/model/reservation.model';
 import { IUser } from 'app/core/user/user.model';
 import { ICategory } from 'app/shared/model/category.model';
 import { ObjectStatus } from 'app/shared/model/enumerations/object-status.model';
@@ -13,10 +14,12 @@ export interface IArticle {
   status?: ObjectStatus;
   addTime?: number;
   price?: number;
+  mainImage?: string;
   rentPeriod?: RentPeriod;
   currency?: Currency;
-  reservations?: IReservation[];
+  images?: IImage[];
   rentings?: IRenting[];
+  reservations?: IReservation[];
   user?: IUser;
   category?: ICategory;
 }
@@ -29,10 +32,12 @@ export class Article implements IArticle {
     public status?: ObjectStatus,
     public addTime?: number,
     public price?: number,
+    public mainImage?: string,
     public rentPeriod?: RentPeriod,
     public currency?: Currency,
-    public reservations?: IReservation[],
+    public images?: IImage[],
     public rentings?: IRenting[],
+    public reservations?: IReservation[],
     public user?: IUser,
     public category?: ICategory
   ) {}

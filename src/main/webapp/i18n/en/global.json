@@ -14,6 +14,7 @@
         "article": "Article",
         "renting": "Renting",
         "reservation": "Reservation",
+        "image": "Image",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

@@ -31,6 +31,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'reservation',
         loadChildren: () => import('./reservation/reservation.module').then(m => m.ObjectSharingReservationModule)
+      },
+      {
+        path: 'image',
+        loadChildren: () => import('./image/image.module').then(m => m.ObjectSharingImageModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

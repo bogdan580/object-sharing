@@ -49,6 +49,9 @@ public class Article implements Serializable {
     @Column(name = "price")
     private Double price;
 
+    @Column(name = "main_image")
+    private String mainImage;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "rent_period")
     private RentPeriod rentPeriod;
@@ -59,11 +62,15 @@ public class Article implements Serializable {
 
     @OneToMany(mappedBy = "article")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Reservation> reservations = new HashSet<>();
+    private Set<Image> images = new HashSet<>();
 
     @OneToMany(mappedBy = "article")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Renting> rentings = new HashSet<>();
+
+    @OneToMany(mappedBy = "article")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Reservation> reservations = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties("articles")
@@ -147,6 +154,19 @@ public class Article implements Serializable {
         this.price = price;
     }
 
+    public String getMainImage() {
+        return mainImage;
+    }
+
+    public Article mainImage(String mainImage) {
+        this.mainImage = mainImage;
+        return this;
+    }
+
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
+    }
+
     public RentPeriod getRentPeriod() {
         return rentPeriod;
     }
@@ -173,29 +193,29 @@ public class Article implements Serializable {
         this.currency = currency;
     }
 
-    public Set<Reservation> getReservations() {
-        return reservations;
+    public Set<Image> getImages() {
+        return images;
     }
 
-    public Article reservations(Set<Reservation> reservations) {
-        this.reservations = reservations;
+    public Article images(Set<Image> images) {
+        this.images = images;
         return this;
     }
 
-    public Article addReservation(Reservation reservation) {
-        this.reservations.add(reservation);
-        reservation.setArticle(this);
+    public Article addImage(Image image) {
+        this.images.add(image);
+        image.setArticle(this);
         return this;
     }
 
-    public Article removeReservation(Reservation reservation) {
-        this.reservations.remove(reservation);
-        reservation.setArticle(null);
+    public Article removeImage(Image image) {
+        this.images.remove(image);
+        image.setArticle(null);
         return this;
     }
 
-    public void setReservations(Set<Reservation> reservations) {
-        this.reservations = reservations;
+    public void setImages(Set<Image> images) {
+        this.images = images;
     }
 
     public Set<Renting> getRentings() {
@@ -221,6 +241,31 @@ public class Article implements Serializable {
 
     public void setRentings(Set<Renting> rentings) {
         this.rentings = rentings;
+    }
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public Article reservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
+        return this;
+    }
+
+    public Article addReservation(Reservation reservation) {
+        this.reservations.add(reservation);
+        reservation.setArticle(this);
+        return this;
+    }
+
+    public Article removeReservation(Reservation reservation) {
+        this.reservations.remove(reservation);
+        reservation.setArticle(null);
+        return this;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     public User getUser() {
@@ -275,6 +320,7 @@ public class Article implements Serializable {
             ", status='" + getStatus() + "'" +
             ", addTime=" + getAddTime() +
             ", price=" + getPrice() +
+            ", mainImage='" + getMainImage() + "'" +
             ", rentPeriod='" + getRentPeriod() + "'" +
             ", currency='" + getCurrency() + "'" +
             "}";

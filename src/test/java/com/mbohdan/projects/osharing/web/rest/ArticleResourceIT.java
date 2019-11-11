@@ -51,6 +51,9 @@ public class ArticleResourceIT {
     private static final Double DEFAULT_PRICE = 1D;
     private static final Double UPDATED_PRICE = 2D;
 
+    private static final String DEFAULT_MAIN_IMAGE = "AAAAAAAAAA";
+    private static final String UPDATED_MAIN_IMAGE = "BBBBBBBBBB";
+
     private static final RentPeriod DEFAULT_RENT_PERIOD = RentPeriod.HOUR;
     private static final RentPeriod UPDATED_RENT_PERIOD = RentPeriod.DAY;
 
@@ -104,6 +107,7 @@ public class ArticleResourceIT {
             .status(DEFAULT_STATUS)
             .addTime(DEFAULT_ADD_TIME)
             .price(DEFAULT_PRICE)
+            .mainImage(DEFAULT_MAIN_IMAGE)
             .rentPeriod(DEFAULT_RENT_PERIOD)
             .currency(DEFAULT_CURRENCY);
         return article;
@@ -121,6 +125,7 @@ public class ArticleResourceIT {
             .status(UPDATED_STATUS)
             .addTime(UPDATED_ADD_TIME)
             .price(UPDATED_PRICE)
+            .mainImage(UPDATED_MAIN_IMAGE)
             .rentPeriod(UPDATED_RENT_PERIOD)
             .currency(UPDATED_CURRENCY);
         return article;
@@ -151,6 +156,7 @@ public class ArticleResourceIT {
         assertThat(testArticle.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testArticle.getAddTime()).isEqualTo(DEFAULT_ADD_TIME);
         assertThat(testArticle.getPrice()).isEqualTo(DEFAULT_PRICE);
+        assertThat(testArticle.getMainImage()).isEqualTo(DEFAULT_MAIN_IMAGE);
         assertThat(testArticle.getRentPeriod()).isEqualTo(DEFAULT_RENT_PERIOD);
         assertThat(testArticle.getCurrency()).isEqualTo(DEFAULT_CURRENCY);
     }
@@ -227,6 +233,7 @@ public class ArticleResourceIT {
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].addTime").value(hasItem(DEFAULT_ADD_TIME.intValue())))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
+            .andExpect(jsonPath("$.[*].mainImage").value(hasItem(DEFAULT_MAIN_IMAGE)))
             .andExpect(jsonPath("$.[*].rentPeriod").value(hasItem(DEFAULT_RENT_PERIOD.toString())))
             .andExpect(jsonPath("$.[*].currency").value(hasItem(DEFAULT_CURRENCY.toString())));
     }
@@ -247,6 +254,7 @@ public class ArticleResourceIT {
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.addTime").value(DEFAULT_ADD_TIME.intValue()))
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()))
+            .andExpect(jsonPath("$.mainImage").value(DEFAULT_MAIN_IMAGE))
             .andExpect(jsonPath("$.rentPeriod").value(DEFAULT_RENT_PERIOD.toString()))
             .andExpect(jsonPath("$.currency").value(DEFAULT_CURRENCY.toString()));
     }
@@ -277,6 +285,7 @@ public class ArticleResourceIT {
             .status(UPDATED_STATUS)
             .addTime(UPDATED_ADD_TIME)
             .price(UPDATED_PRICE)
+            .mainImage(UPDATED_MAIN_IMAGE)
             .rentPeriod(UPDATED_RENT_PERIOD)
             .currency(UPDATED_CURRENCY);
 
@@ -294,6 +303,7 @@ public class ArticleResourceIT {
         assertThat(testArticle.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testArticle.getAddTime()).isEqualTo(UPDATED_ADD_TIME);
         assertThat(testArticle.getPrice()).isEqualTo(UPDATED_PRICE);
+        assertThat(testArticle.getMainImage()).isEqualTo(UPDATED_MAIN_IMAGE);
         assertThat(testArticle.getRentPeriod()).isEqualTo(UPDATED_RENT_PERIOD);
         assertThat(testArticle.getCurrency()).isEqualTo(UPDATED_CURRENCY);
     }

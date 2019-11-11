@@ -30,6 +30,9 @@
             <column name="price" type="double">
                 <constraints nullable="true" />
             </column>
+            <column name="main_image" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="rent_period" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -70,6 +73,7 @@
             <column name="status" type="string"/>
             <column name="add_time" type="numeric"/>
             <column name="price" type="numeric"/>
+            <column name="main_image" type="string"/>
             <column name="rent_period" type="string"/>
             <column name="currency" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->

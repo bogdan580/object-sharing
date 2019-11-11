@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       service = injector.get(ArticleService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Article(0, 'AAAAAAA', 'AAAAAAA', ObjectStatus.ACTIVE, 0, 0, RentPeriod.HOUR, Currency.BEER);
+      elemDefault = new Article(0, 'AAAAAAA', 'AAAAAAA', ObjectStatus.ACTIVE, 0, 0, 'AAAAAAA', RentPeriod.HOUR, Currency.BEER);
     });
 
     describe('Service methods', () => {
@@ -64,6 +64,7 @@ describe('Service Tests', () => {
             status: 'BBBBBB',
             addTime: 1,
             price: 1,
+            mainImage: 'BBBBBB',
             rentPeriod: 'BBBBBB',
             currency: 'BBBBBB'
           },
@@ -88,6 +89,7 @@ describe('Service Tests', () => {
             status: 'BBBBBB',
             addTime: 1,
             price: 1,
+            mainImage: 'BBBBBB',
             rentPeriod: 'BBBBBB',
             currency: 'BBBBBB'
           },

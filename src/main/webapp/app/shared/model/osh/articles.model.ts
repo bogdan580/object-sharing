@@ -9,6 +9,7 @@ export interface IArticlesFilter {
   text?: string;
   category?: string;
   postalCode?: string;
+  city?: string;
   page: number;
   items: number;
   sort: Sorting;
@@ -21,6 +22,7 @@ export class ArticlesFilter implements IArticlesFilter{
     public sort = Sorting.ADDTIME_DESK,
     public text?: string,
     public category?: string,
-    public postalCode?: string
+    public postalCode?: string,
+    public city?: string
   ){}
 }

@@ -29,6 +29,10 @@
             "fieldType": "Double"
         },
         {
+            "fieldName": "mainImage",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "rentPeriod",
             "fieldType": "RentPeriod",
             "fieldValues": "HOUR,DAY"
@@ -42,15 +46,21 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "otherEntityName": "reservation",
+            "otherEntityName": "image",
             "otherEntityRelationshipName": "article",
-            "relationshipName": "reservation"
+            "relationshipName": "image"
         },
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "renting",
             "otherEntityRelationshipName": "article",
             "relationshipName": "renting"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "reservation",
+            "otherEntityRelationshipName": "article",
+            "relationshipName": "reservation"
         },
         {
             "relationshipType": "many-to-one",

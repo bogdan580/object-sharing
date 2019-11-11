@@ -1,78 +1,84 @@
 entity Advertisment {
-	title String required,
-    imageUrl String required,
-    desc String,
-    status ObjectStatus required
+  title String required,
+  imageUrl String required,
+  desc String,
+  status ObjectStatus required
 }
-
-// an ignored comment
-/** not an ignored comment */
-entity Location {
-	streetAddress String,
-	postalCode String,
-	city String,
-	stateProvince String,
-    lat Long required,
-    lon Long required
-}
-
-entity UserInfo {
-    tel Integer,
-    fullName String,
-    providedObjects Integer,
-    rentedObjects Integer
-}
-
-entity Category {
-	categoryName String required
-}
-
 entity Article {
-	name String required,
-    desc String,
-    status ObjectStatus required,
-    addTime Long,
-    price Double,
-    rentPeriod RentPeriod,
-    currency Currency
+  name String required,
+  desc String,
+  status ObjectStatus required,
+  addTime Long,
+  price Double,
+  mainImage String,
+  rentPeriod RentPeriod,
+  currency Currency
+}
+entity Category {
+  categoryName String required
+}
+entity Image {
+  url String required
+}
+/**
+ * not an ignored comment
+ */
+entity Location {
+  streetAddress String,
+  postalCode String,
+  city String,
+  stateProvince String,
+  lat Long required,
+  lon Long required
 }
 entity Renting {
-    startTime Long,
-    endTime Long,
-    price Integer,
-    rentPeriod RentPeriod,
-    currency Currency
+  startTime Long,
+  endTime Long,
+  price Integer,
+  rentPeriod RentPeriod,
+  currency Currency
 }
-
 entity Reservation {
-    startTime String,
-    endTime String
+  startTime String,
+  endTime String
 }
-
+entity UserInfo {
+  tel Integer,
+  fullName String,
+  avatar String,
+  providedObjects Integer,
+  rentedObjects Integer
+}
 enum ObjectStatus {
-    ACTIVE, DISACTIVE, RESERVED, INRENT
-}
-enum Currency {
-    BEER, PLN, EUR, USD
+  ACTIVE,
+  DISACTIVE,
+  RESERVED,
+  INRENT
 }
 enum RentPeriod {
-    HOUR, DAY
+  HOUR,
+  DAY
+}
+enum Currency {
+  BEER,
+  PLN,
+  EUR,
+  USD
 }
 
 relationship OneToOne {
-	UserInfo{user(login)} to User 
+  UserInfo{user(login)} to User
 }
-
 relationship OneToMany {
-	Category{article} to Article{category(categoryName)},
-   
-    Article to Reservation{article(name)},
-    Article to Renting{article(name)}
+  Category{article} to Article{category(categoryName)},
+  Article{image} to Image{article(name)},
+  Article{renting} to Renting{article(name)},
+  Article{reservation} to Reservation{article(name)}
+}
+relationship ManyToOne {
+  Article{user(login)} to User,
+  Location{user(login)} to User,
+  Renting{user(login)} to User,
+  Reservation{user(login)} to User
 }
 
-relationship ManyToOne {
-	Location{user(login)} to User,
-    Article{user(login)} to User,
-    Reservation{user(login)} to User,
-    Renting{user(login)} to User
-}

@@ -21,10 +21,12 @@
       "status": "Status",
       "addTime": "Add Time",
       "price": "Price",
+      "mainImage": "Main Image",
       "rentPeriod": "Rent Period",
       "currency": "Currency",
-      "reservation": "Reservation",
+      "image": "Image",
       "renting": "Renting",
+      "reservation": "Reservation",
       "user": "User",
       "category": "Category"
     }
