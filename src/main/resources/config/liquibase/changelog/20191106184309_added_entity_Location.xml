@@ -27,10 +27,10 @@
             <column name="state_province" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="lat" type="bigint">
+            <column name="lat" type="double">
                 <constraints nullable="false" />
             </column>
-            <column name="lon" type="bigint">
+            <column name="lon" type="double">
                 <constraints nullable="false" />
             </column>
             <column name="user_id" type="bigint">

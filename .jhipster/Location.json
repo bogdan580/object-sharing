@@ -19,14 +19,14 @@
         },
         {
             "fieldName": "lat",
-            "fieldType": "Long",
+            "fieldType": "Double",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
             "fieldName": "lon",
-            "fieldType": "Long",
+            "fieldType": "Double",
             "fieldValidateRules": [
                 "required"
             ]

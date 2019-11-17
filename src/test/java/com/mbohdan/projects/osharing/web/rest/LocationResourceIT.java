@@ -45,11 +45,11 @@ public class LocationResourceIT {
     private static final String DEFAULT_STATE_PROVINCE = "AAAAAAAAAA";
     private static final String UPDATED_STATE_PROVINCE = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_LAT = 1L;
-    private static final Long UPDATED_LAT = 2L;
+    private static final Double DEFAULT_LAT = 1D;
+    private static final Double UPDATED_LAT = 2D;
 
-    private static final Long DEFAULT_LON = 1L;
-    private static final Long UPDATED_LON = 2L;
+    private static final Double DEFAULT_LON = 1D;
+    private static final Double UPDATED_LON = 2D;
 
     @Autowired
     private LocationRepository locationRepository;
@@ -217,8 +217,8 @@ public class LocationResourceIT {
             .andExpect(jsonPath("$.[*].postalCode").value(hasItem(DEFAULT_POSTAL_CODE)))
             .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY)))
             .andExpect(jsonPath("$.[*].stateProvince").value(hasItem(DEFAULT_STATE_PROVINCE)))
-            .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.intValue())))
-            .andExpect(jsonPath("$.[*].lon").value(hasItem(DEFAULT_LON.intValue())));
+            .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.doubleValue())))
+            .andExpect(jsonPath("$.[*].lon").value(hasItem(DEFAULT_LON.doubleValue())));
     }
     
     @Test
@@ -236,8 +236,8 @@ public class LocationResourceIT {
             .andExpect(jsonPath("$.postalCode").value(DEFAULT_POSTAL_CODE))
             .andExpect(jsonPath("$.city").value(DEFAULT_CITY))
             .andExpect(jsonPath("$.stateProvince").value(DEFAULT_STATE_PROVINCE))
-            .andExpect(jsonPath("$.lat").value(DEFAULT_LAT.intValue()))
-            .andExpect(jsonPath("$.lon").value(DEFAULT_LON.intValue()));
+            .andExpect(jsonPath("$.lat").value(DEFAULT_LAT.doubleValue()))
+            .andExpect(jsonPath("$.lon").value(DEFAULT_LON.doubleValue()));
     }
 
     @Test

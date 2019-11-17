@@ -28,8 +28,8 @@ entity Location {
   postalCode String,
   city String,
   stateProvince String,
-  lat Long required,
-  lon Long required
+  lat Double required,
+  lon Double required
 }
 entity Renting {
   startTime Long,
@@ -45,7 +45,7 @@ entity Reservation {
 entity UserInfo {
   tel Integer,
   fullName String,
-  avatar String,
+  avatar String, // todo delete because it is user.imageUrl
   providedObjects Integer,
   rentedObjects Integer
 }
@@ -70,13 +70,13 @@ relationship OneToOne {
   UserInfo{user(login)} to User
 }
 relationship OneToMany {
-  Category{article} to Article{category(categoryName)},
+  Category{article} to Article{category(categoryName)}, // todo step2 add localization to article
   Article{image} to Image{article(name)},
   Article{renting} to Renting{article(name)},
   Article{reservation} to Reservation{article(name)}
 }
 relationship ManyToOne {
-  Article{user(login)} to User,
+  Article{user(login)} to User, // todo add article to userInfo
   Location{user(login)} to User,
   Renting{user(login)} to User,
   Reservation{user(login)} to User

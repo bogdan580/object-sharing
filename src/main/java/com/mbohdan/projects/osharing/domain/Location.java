@@ -39,11 +39,11 @@ public class Location implements Serializable {
 
     @NotNull
     @Column(name = "lat", nullable = false)
-    private Long lat;
+    private Double lat;
 
     @NotNull
     @Column(name = "lon", nullable = false)
-    private Long lon;
+    private Double lon;
 
     @ManyToOne
     @JsonIgnoreProperties("locations")
@@ -110,29 +110,29 @@ public class Location implements Serializable {
         this.stateProvince = stateProvince;
     }
 
-    public Long getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public Location lat(Long lat) {
+    public Location lat(Double lat) {
         this.lat = lat;
         return this;
     }
 
-    public void setLat(Long lat) {
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 
-    public Long getLon() {
+    public Double getLon() {
         return lon;
     }
 
-    public Location lon(Long lon) {
+    public Location lon(Double lon) {
         this.lon = lon;
         return this;
     }
 
-    public void setLon(Long lon) {
+    public void setLon(Double lon) {
         this.lon = lon;
     }
 

@@ -2,6 +2,7 @@
     <h2 id="page-heading">
         <span jhiTranslate="osh.searchList.title">Search list</span>
         <a (click)="showedDetail =!showedDetail" *jhiHasAnyAuthority="'ROLE_ADMIN'">Details</a>
+        <a (click)="search()" *jhiHasAnyAuthority="'ROLE_ADMIN'">Search</a>
         <button id="jh-create-entity"
                 class="btn btn-primary float-right jh-create-entity create-location">
             <fa-icon [icon]="'filter'"></fa-icon>

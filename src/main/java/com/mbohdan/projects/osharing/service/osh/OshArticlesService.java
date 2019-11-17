@@ -1,10 +1,14 @@
 package com.mbohdan.projects.osharing.service.osh;
 
+import com.mbohdan.projects.osharing.domain.Article;
 import com.mbohdan.projects.osharing.repository.osh.OshArticlesRepository;
 import com.mbohdan.projects.osharing.service.dto.osh.ArticlesFilterDTO;
+import com.mbohdan.projects.osharing.service.dto.osh.OshArticlesDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class OshArticlesService {
@@ -15,7 +19,8 @@ public class OshArticlesService {
         this.oshArticlesRepository = oshArticlesRepository;
     }
 
-    public void searchArticles(ArticlesFilterDTO filterDTO) {
+    public List<Article> searchArticles(ArticlesFilterDTO filterDTO) {
         log.debug("OshArticlesService.searchArticles({})", filterDTO);
+        return this.oshArticlesRepository.searchArticles(null, filterDTO.category, null,null,null,null,null,null);
     }
 }
