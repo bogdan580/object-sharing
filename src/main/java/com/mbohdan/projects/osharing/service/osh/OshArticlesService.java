@@ -1,6 +1,5 @@
 package com.mbohdan.projects.osharing.service.osh;
 
-import com.mbohdan.projects.osharing.domain.Article;
 import com.mbohdan.projects.osharing.repository.osh.OshArticlesRepository;
 import com.mbohdan.projects.osharing.service.dto.osh.ArticlesFilterDTO;
 import com.mbohdan.projects.osharing.service.dto.osh.OshArticlesDTO;
@@ -19,8 +18,8 @@ public class OshArticlesService {
         this.oshArticlesRepository = oshArticlesRepository;
     }
 
-    public List<Article> searchArticles(ArticlesFilterDTO filterDTO) {
+    public List<OshArticlesDTO> searchArticles(ArticlesFilterDTO filterDTO) {
         log.debug("OshArticlesService.searchArticles({})", filterDTO);
-        return this.oshArticlesRepository.searchArticles(null, filterDTO.category, null,null,null,null,null,null);
+        return this.oshArticlesRepository.searchArticles(filterDTO.category);
     }
 }

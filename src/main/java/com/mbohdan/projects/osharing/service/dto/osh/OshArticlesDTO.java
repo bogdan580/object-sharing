@@ -23,10 +23,13 @@ public class OshArticlesDTO implements Serializable {
     private Double lat;
     private Double lon;
     private Integer tel;
-    private String fullName;
-    private String avatar;
     private Integer providedObjects;
     private Integer rentedObjects;
+
+    public OshArticlesDTO(Long id, String categoryName) {
+        this.id = id;
+        this.categoryName = categoryName;
+    }
 
     public Long getId() {
         return id;
@@ -156,22 +159,6 @@ public class OshArticlesDTO implements Serializable {
         this.tel = tel;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
     public Integer getProvidedObjects() {
         return providedObjects;
     }
@@ -207,8 +194,6 @@ public class OshArticlesDTO implements Serializable {
             ", lat=" + lat +
             ", lon=" + lon +
             ", tel=" + tel +
-            ", fullName='" + fullName + '\'' +
-            ", avatar='" + avatar + '\'' +
             ", providedObjects=" + providedObjects +
             ", rentedObjects=" + rentedObjects +
             '}';

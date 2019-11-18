@@ -25,7 +25,7 @@ import java.util.List;
 @RequestMapping("/api/proxy")
 public class OshArticlesResource {
     private final Logger log = LoggerFactory.getLogger(OshArticlesResource.class);
-    private static final String ENTITY_NAME = "oshArticle";
+    private static final String ENTITY_NAME = "oshArticleDTO";
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
     private final OshArticlesService articlesService;
@@ -44,13 +44,13 @@ public class OshArticlesResource {
      * @throws URISyntaxException
      */
     @PostMapping("/search/articles")
-    public ResponseEntity<List<Article>> searchArticles(@Valid @RequestBody ArticlesFilterDTO filterDTO) throws URISyntaxException {
+    public ResponseEntity<List<OshArticlesDTO>> searchArticles(@Valid @RequestBody ArticlesFilterDTO filterDTO) throws URISyntaxException {
         log.debug("REST request to search Articles : {}", filterDTO);
 
         if (filterDTO.getPage() == null || filterDTO.getItems() == null) {
             throw new BadRequestAlertException("A search parameters are wrong", ENTITY_NAME, "request error");
         }
-        List<Article> results = articlesService.searchArticles(filterDTO);
+        List<OshArticlesDTO> results = articlesService.searchArticles(filterDTO);
         log.debug("OshArticlesService.searchArticles() {}", results);
         return  ResponseEntity.created(new URI("/api/proxy/search/articles"))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, "/search/articles"))

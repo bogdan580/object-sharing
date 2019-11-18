@@ -28,7 +28,7 @@ public class Category implements Serializable {
     @Column(name = "category_name", nullable = false)
     private String categoryName;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(targetEntity = Article.class, mappedBy = "category", orphanRemoval = false, fetch = FetchType.LAZY)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Article> articles = new HashSet<>();
 

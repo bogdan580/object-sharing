@@ -48,7 +48,7 @@ public class Location implements Serializable {
     @JsonIgnoreProperties("locations")
     private User user;
 
-    @OneToMany(mappedBy = "location")
+    @OneToMany(targetEntity = Article.class, mappedBy = "location", orphanRemoval = false, fetch = FetchType.LAZY)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Article> articles = new HashSet<>();
 

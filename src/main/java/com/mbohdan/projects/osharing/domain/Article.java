@@ -15,6 +15,8 @@ import com.mbohdan.projects.osharing.domain.enumeration.ObjectStatus;
 import com.mbohdan.projects.osharing.domain.enumeration.RentPeriod;
 
 import com.mbohdan.projects.osharing.domain.enumeration.Currency;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  * A Article.
@@ -76,12 +78,14 @@ public class Article implements Serializable {
     @JsonIgnoreProperties("articles")
     private User user;
 
-    @ManyToOne
-    @JsonIgnoreProperties("articles")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_id", insertable = false, updatable = false)
+    @Fetch(FetchMode.JOIN)
     private Location location;
 
-    @ManyToOne
-    @JsonIgnoreProperties("articles")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", insertable = false, updatable = false)
+    @Fetch(FetchMode.JOIN)
     private Category category;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
