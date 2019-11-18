@@ -28,6 +28,7 @@
             <th scope="col" ><span jhiTranslate="objectSharingApp.article.rentPeriod">Rent Period</span></th>
             <th scope="col" ><span jhiTranslate="objectSharingApp.article.currency">Currency</span></th>
             <th scope="col" ><span jhiTranslate="objectSharingApp.article.user">User</span></th>
+            <th scope="col" ><span jhiTranslate="objectSharingApp.article.location">Location</span></th>
             <th scope="col" ><span jhiTranslate="objectSharingApp.article.category">Category</span></th>
             <th scope="col"></th>
             </tr>
@@ -45,6 +46,11 @@
                 <td jhiTranslate="{{'objectSharingApp.Currency.' + article.currency}}">{{article.currency}}</td>
                 <td>
                     {{article.user?.login}}
+                </td>
+                <td>
+                    <div *ngIf="article.location">
+                        <a [routerLink]="['/location', article.location?.id, 'view' ]" >{{article.location?.streetAddress}}</a>
+                    </div>
                 </td>
                 <td>
                     <div *ngIf="article.category">

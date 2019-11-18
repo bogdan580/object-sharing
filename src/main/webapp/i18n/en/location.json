@@ -22,7 +22,8 @@
       "stateProvince": "State Province",
       "lat": "Lat",
       "lon": "Lon",
-      "user": "User"
+      "user": "User",
+      "article": "Article"
     }
   }
 }

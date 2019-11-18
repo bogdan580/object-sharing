@@ -54,6 +54,7 @@ public class CacheConfiguration {
             createCache(cm, com.mbohdan.projects.osharing.domain.Reservation.class.getName());
             createCache(cm, com.mbohdan.projects.osharing.domain.Article.class.getName() + ".images");
             createCache(cm, com.mbohdan.projects.osharing.domain.Image.class.getName());
+            createCache(cm, com.mbohdan.projects.osharing.domain.Location.class.getName() + ".articles");
             // jhipster-needle-ehcache-add-entry
         };
     }

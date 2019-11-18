@@ -5,9 +5,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * not an ignored comment
@@ -37,17 +38,19 @@ public class Location implements Serializable {
     @Column(name = "state_province")
     private String stateProvince;
 
-    @NotNull
-    @Column(name = "lat", nullable = false)
+    @Column(name = "lat")
     private Double lat;
 
-    @NotNull
-    @Column(name = "lon", nullable = false)
+    @Column(name = "lon")
     private Double lon;
 
     @ManyToOne
     @JsonIgnoreProperties("locations")
     private User user;
+
+    @OneToMany(mappedBy = "location")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Article> articles = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -147,6 +150,31 @@ public class Location implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Article> getArticles() {
+        return articles;
+    }
+
+    public Location articles(Set<Article> articles) {
+        this.articles = articles;
+        return this;
+    }
+
+    public Location addArticle(Article article) {
+        this.articles.add(article);
+        article.setLocation(this);
+        return this;
+    }
+
+    public Location removeArticle(Article article) {
+        this.articles.remove(article);
+        article.setLocation(null);
+        return this;
+    }
+
+    public void setArticles(Set<Article> articles) {
+        this.articles = articles;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

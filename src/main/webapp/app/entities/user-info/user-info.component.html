@@ -20,8 +20,6 @@
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
             <th scope="col" ><span jhiTranslate="objectSharingApp.userInfo.tel">Tel</span></th>
-            <th scope="col" ><span jhiTranslate="objectSharingApp.userInfo.fullName">Full Name</span></th>
-            <th scope="col" ><span jhiTranslate="objectSharingApp.userInfo.avatar">Avatar</span></th>
             <th scope="col" ><span jhiTranslate="objectSharingApp.userInfo.providedObjects">Provided Objects</span></th>
             <th scope="col" ><span jhiTranslate="objectSharingApp.userInfo.rentedObjects">Rented Objects</span></th>
             <th scope="col" ><span jhiTranslate="objectSharingApp.userInfo.user">User</span></th>
@@ -32,8 +30,6 @@
             <tr *ngFor="let userInfo of userInfos ;trackBy: trackId">
                 <td><a [routerLink]="['/user-info', userInfo.id, 'view' ]">{{userInfo.id}}</a></td>
                 <td>{{userInfo.tel}}</td>
-                <td>{{userInfo.fullName}}</td>
-                <td>{{userInfo.avatar}}</td>
                 <td>{{userInfo.providedObjects}}</td>
                 <td>{{userInfo.rentedObjects}}</td>
                 <td>

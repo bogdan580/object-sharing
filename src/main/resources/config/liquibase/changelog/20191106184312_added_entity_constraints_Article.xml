@@ -14,6 +14,12 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
+        <addForeignKeyConstraint baseColumnNames="location_id"
+                                 baseTableName="article"
+                                 constraintName="fk_article_location_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="location"/>
+
         <addForeignKeyConstraint baseColumnNames="category_id"
                                  baseTableName="article"
                                  constraintName="fk_article_category_id"

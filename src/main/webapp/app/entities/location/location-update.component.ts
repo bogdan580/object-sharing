@@ -27,8 +27,8 @@ export class LocationUpdateComponent implements OnInit {
     postalCode: [],
     city: [],
     stateProvince: [],
-    lat: [null, [Validators.required]],
-    lon: [null, [Validators.required]],
+    lat: [],
+    lon: [],
     user: []
   });
 

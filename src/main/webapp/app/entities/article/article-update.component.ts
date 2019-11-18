@@ -11,6 +11,8 @@ import { IArticle, Article } from 'app/shared/model/article.model';
 import { ArticleService } from './article.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
+import { ILocation } from 'app/shared/model/location.model';
+import { LocationService } from 'app/entities/location/location.service';
 import { ICategory } from 'app/shared/model/category.model';
 import { CategoryService } from 'app/entities/category/category.service';
 
@@ -22,6 +24,8 @@ export class ArticleUpdateComponent implements OnInit {
   isSaving: boolean;
 
   users: IUser[];
+
+  locations: ILocation[];
 
   categories: ICategory[];
 
@@ -36,6 +40,7 @@ export class ArticleUpdateComponent implements OnInit {
     rentPeriod: [],
     currency: [],
     user: [],
+    location: [],
     category: []
   });
 
@@ -43,6 +48,7 @@ export class ArticleUpdateComponent implements OnInit {
     protected jhiAlertService: JhiAlertService,
     protected articleService: ArticleService,
     protected userService: UserService,
+    protected locationService: LocationService,
     protected categoryService: CategoryService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -60,6 +66,13 @@ export class ArticleUpdateComponent implements OnInit {
         map((response: HttpResponse<IUser[]>) => response.body)
       )
       .subscribe((res: IUser[]) => (this.users = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.locationService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<ILocation[]>) => mayBeOk.ok),
+        map((response: HttpResponse<ILocation[]>) => response.body)
+      )
+      .subscribe((res: ILocation[]) => (this.locations = res), (res: HttpErrorResponse) => this.onError(res.message));
     this.categoryService
       .query()
       .pipe(
@@ -81,6 +94,7 @@ export class ArticleUpdateComponent implements OnInit {
       rentPeriod: article.rentPeriod,
       currency: article.currency,
       user: article.user,
+      location: article.location,
       category: article.category
     });
   }
@@ -112,6 +126,7 @@ export class ArticleUpdateComponent implements OnInit {
       rentPeriod: this.editForm.get(['rentPeriod']).value,
       currency: this.editForm.get(['currency']).value,
       user: this.editForm.get(['user']).value,
+      location: this.editForm.get(['location']).value,
       category: this.editForm.get(['category']).value
     };
   }
@@ -133,6 +148,10 @@ export class ArticleUpdateComponent implements OnInit {
   }
 
   trackUserById(index: number, item: IUser) {
+    return item.id;
+  }
+
+  trackLocationById(index: number, item: ILocation) {
     return item.id;
   }
 

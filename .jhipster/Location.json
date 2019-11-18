@@ -19,17 +19,11 @@
         },
         {
             "fieldName": "lat",
-            "fieldType": "Double",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "Double"
         },
         {
             "fieldName": "lon",
-            "fieldType": "Double",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "Double"
         }
     ],
     "relationships": [
@@ -39,6 +33,12 @@
             "otherEntityRelationshipName": "location",
             "relationshipName": "user",
             "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "article",
+            "otherEntityRelationshipName": "location",
+            "relationshipName": "article"
         }
     ],
     "changelogDate": "20191106184309",

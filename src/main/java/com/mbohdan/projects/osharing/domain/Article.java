@@ -78,6 +78,10 @@ public class Article implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("articles")
+    private Location location;
+
+    @ManyToOne
+    @JsonIgnoreProperties("articles")
     private Category category;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -280,6 +284,20 @@ public class Article implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public Article location(Location location) {
+        this.location = location;
+        return this;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
 
     public Category getCategory() {
         return category;

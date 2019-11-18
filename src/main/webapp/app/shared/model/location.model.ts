@@ -1,4 +1,5 @@
 import { IUser } from 'app/core/user/user.model';
+import { IArticle } from 'app/shared/model/article.model';
 
 export interface ILocation {
   id?: number;
@@ -9,6 +10,7 @@ export interface ILocation {
   lat?: number;
   lon?: number;
   user?: IUser;
+  articles?: IArticle[];
 }
 
 export class Location implements ILocation {
@@ -20,6 +22,7 @@ export class Location implements ILocation {
     public stateProvince?: string,
     public lat?: number,
     public lon?: number,
-    public user?: IUser
+    public user?: IUser,
+    public articles?: IArticle[]
   ) {}
 }

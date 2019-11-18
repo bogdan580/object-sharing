@@ -2,6 +2,7 @@ import { IImage } from 'app/shared/model/image.model';
 import { IRenting } from 'app/shared/model/renting.model';
 import { IReservation } from 'app/shared/model/reservation.model';
 import { IUser } from 'app/core/user/user.model';
+import { ILocation } from 'app/shared/model/location.model';
 import { ICategory } from 'app/shared/model/category.model';
 import { ObjectStatus } from 'app/shared/model/enumerations/object-status.model';
 import { RentPeriod } from 'app/shared/model/enumerations/rent-period.model';
@@ -21,6 +22,7 @@ export interface IArticle {
   rentings?: IRenting[];
   reservations?: IReservation[];
   user?: IUser;
+  location?: ILocation;
   category?: ICategory;
 }
 
@@ -39,6 +41,7 @@ export class Article implements IArticle {
     public rentings?: IRenting[],
     public reservations?: IReservation[],
     public user?: IUser,
+    public location?: ILocation,
     public category?: ICategory
   ) {}
 }

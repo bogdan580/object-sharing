@@ -41,6 +41,12 @@
                 <dd>
                     {{article.user?.login}}
                 </dd>
+                <dt><span jhiTranslate="objectSharingApp.article.location">Location</span></dt>
+                <dd>
+                    <div *ngIf="article.location">
+                        <a [routerLink]="['/location', article.location?.id, 'view']">{{article.location?.streetAddress}}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="objectSharingApp.article.category">Category</span></dt>
                 <dd>
                     <div *ngIf="article.category">

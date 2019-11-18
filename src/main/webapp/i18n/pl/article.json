@@ -28,6 +28,7 @@
       "renting": "Renting",
       "reservation": "Reservation",
       "user": "User",
+      "location": "Location",
       "category": "Category"
     }
   }

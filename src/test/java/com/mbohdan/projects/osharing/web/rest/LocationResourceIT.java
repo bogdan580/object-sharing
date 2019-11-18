@@ -168,42 +168,6 @@ public class LocationResourceIT {
 
     @Test
     @Transactional
-    public void checkLatIsRequired() throws Exception {
-        int databaseSizeBeforeTest = locationRepository.findAll().size();
-        // set the field null
-        location.setLat(null);
-
-        // Create the Location, which fails.
-
-        restLocationMockMvc.perform(post("/api/locations")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(location)))
-            .andExpect(status().isBadRequest());
-
-        List<Location> locationList = locationRepository.findAll();
-        assertThat(locationList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkLonIsRequired() throws Exception {
-        int databaseSizeBeforeTest = locationRepository.findAll().size();
-        // set the field null
-        location.setLon(null);
-
-        // Create the Location, which fails.
-
-        restLocationMockMvc.perform(post("/api/locations")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(location)))
-            .andExpect(status().isBadRequest());
-
-        List<Location> locationList = locationRepository.findAll();
-        assertThat(locationList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllLocations() throws Exception {
         // Initialize the database
         locationRepository.saveAndFlush(location);

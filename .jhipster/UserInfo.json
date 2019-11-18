@@ -6,14 +6,6 @@
             "fieldType": "Integer"
         },
         {
-            "fieldName": "fullName",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "avatar",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "providedObjects",
             "fieldType": "Integer"
         },
