@@ -5,9 +5,9 @@ public class ArticlesFilterDTO {
     public String category;
     public String postalCode;
     public String city;
-    public Integer page;
-    public Integer items;
-    public Sorting sort;
+    public Integer page;    //required
+    public Integer items;   //required
+    public Sorting sort;    //required
 
     public String getText() {
         return text;

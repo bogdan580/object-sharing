@@ -33,7 +33,11 @@ export class SearchListComponent implements OnInit {
   }
 
   search() {
-    this.searchListService.searchArticles(this.filter).subscribe(r => console.log(r));
+    console.log(this.filter);
+    this.searchListService.searchArticles(this.filter).subscribe(r => {
+      console.log(r);
+      // this.searchedArticles = r;
+    });
   }
 }
 

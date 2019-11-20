@@ -6,8 +6,9 @@ import com.mbohdan.projects.osharing.domain.enumeration.RentPeriod;
 
 import java.io.Serializable;
 
-public class OshArticlesDTO implements Serializable {
+public class OshArticleDTO implements Serializable {
     private Long id;
+    private String name;
     private String desc;
     private ObjectStatus status;
     private Long addTime;
@@ -22,13 +23,27 @@ public class OshArticlesDTO implements Serializable {
     private String stateProvince;
     private Double lat;
     private Double lon;
-    private Integer tel;
-    private Integer providedObjects;
-    private Integer rentedObjects;
 
-    public OshArticlesDTO(Long id, String categoryName) {
+    public OshArticleDTO(Long id, String name, String desc, ObjectStatus status, Long addTime, Double price,
+                         String mainImage, RentPeriod rentPeriod, Currency currency, String categoryName,
+                         String streetAddress, String postalCode, String city, String stateProvince,
+                         Double lat, Double lon) {
         this.id = id;
+        this.name = name;
+        this.desc = desc;
+        this.status = status;
+        this.addTime =addTime;
+        this.price = price;
+        this.mainImage = mainImage;
+        this.rentPeriod = rentPeriod;
+        this.currency = currency;
         this.categoryName = categoryName;
+        this.streetAddress = streetAddress;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.stateProvince = stateProvince;
+        this.lat = lat;
+        this.lon = lon;
     }
 
     public Long getId() {
@@ -37,6 +52,14 @@ public class OshArticlesDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDesc() {
@@ -151,51 +174,25 @@ public class OshArticlesDTO implements Serializable {
         this.lon = lon;
     }
 
-    public Integer getTel() {
-        return tel;
-    }
-
-    public void setTel(Integer tel) {
-        this.tel = tel;
-    }
-
-    public Integer getProvidedObjects() {
-        return providedObjects;
-    }
-
-    public void setProvidedObjects(Integer providedObjects) {
-        this.providedObjects = providedObjects;
-    }
-
-    public Integer getRentedObjects() {
-        return rentedObjects;
-    }
-
-    public void setRentedObjects(Integer rentedObjects) {
-        this.rentedObjects = rentedObjects;
-    }
-
     @Override
     public String toString() {
-        return "OshArticlesDTO{" +
+        return "OshArticleDTO{" +
             "id=" + id +
-            ", jhiDesc='" + desc + '\'' +
+            ", name='" + name + '\'' +
+            ", desc='" + desc + '\'' +
             ", status=" + status +
             ", addTime=" + addTime +
             ", price=" + price +
             ", mainImage='" + mainImage + '\'' +
             ", rentPeriod=" + rentPeriod +
             ", currency=" + currency +
-            ", category_name='" + categoryName + '\'' +
+            ", categoryName='" + categoryName + '\'' +
             ", streetAddress='" + streetAddress + '\'' +
             ", postalCode='" + postalCode + '\'' +
             ", city='" + city + '\'' +
             ", stateProvince='" + stateProvince + '\'' +
             ", lat=" + lat +
             ", lon=" + lon +
-            ", tel=" + tel +
-            ", providedObjects=" + providedObjects +
-            ", rentedObjects=" + rentedObjects +
             '}';
     }
 }

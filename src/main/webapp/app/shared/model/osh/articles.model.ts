@@ -6,21 +6,21 @@ export const enum Sorting {
 }
 
 export interface IArticlesFilter {
-  text?: string;
-  category?: string;
-  postalCode?: string;
-  city?: string;
   page: number;
   items: number;
   sort: Sorting;
+  text: string;
+  category?: string;
+  postalCode?: string;
+  city?: string;
 }
 
 export class ArticlesFilter implements IArticlesFilter{
   constructor(
-    public page = 1,
+    public page = 0,
     public items = 20,
     public sort = Sorting.ADDTIME_DESK,
-    public text?: string,
+    public text = '',
     public category?: string,
     public postalCode?: string,
     public city?: string

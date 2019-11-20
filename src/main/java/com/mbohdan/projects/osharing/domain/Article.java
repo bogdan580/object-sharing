@@ -79,13 +79,15 @@ public class Article implements Serializable {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "location_id", insertable = false, updatable = false)
+    @JoinColumn(name = "location_id", insertable = false, updatable = true)
     @Fetch(FetchMode.JOIN)
+    @JsonIgnoreProperties("articles")
     private Location location;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", insertable = false, updatable = false)
+    @JoinColumn(name = "category_id", insertable = false, updatable = true)
     @Fetch(FetchMode.JOIN)
+    @JsonIgnoreProperties("articles")
     private Category category;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

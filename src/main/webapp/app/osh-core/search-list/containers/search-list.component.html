@@ -2,12 +2,22 @@
     <h2 id="page-heading">
         <span jhiTranslate="osh.searchList.title">Search list</span>
         <a (click)="showedDetail =!showedDetail" *jhiHasAnyAuthority="'ROLE_ADMIN'">Details</a>
-        <a (click)="search()" *jhiHasAnyAuthority="'ROLE_ADMIN'">Search</a>
-        <button id="jh-create-entity"
+        <input style="font-size: medium" [(ngModel)]="filter.text" placeholder="Article">
+        <input style="font-size: medium;width: 130px;" [(ngModel)]="filter.category" placeholder="category">
+        <input style="font-size: medium" [(ngModel)]="filter.city" placeholder="city, postal">
+        <input style="font-size: medium;width: 40px;" type="number" [(ngModel)]="filter.page" placeholder="page">
+        <input style="font-size: medium;width: 40px;" type="number" [(ngModel)]="filter.items" placeholder="items">
+        <select [(ngModel)]="filter.sort">
+            <option value="ADDTIME_ASK">ADDTIME_ASK</option>
+            <option value="ADDTIME_DESK">ADDTIME_DESK</option>
+            <option value="PRISE_ASC">PRISE_ASC</option>
+            <option value="PRISE_DESK">PRISE_DESK</option>
+        </select>
+        <button id="jh-create-entity" (click)="search()"
                 class="btn btn-primary float-right jh-create-entity create-location">
-            <fa-icon [icon]="'filter'"></fa-icon>
+            <fa-icon [icon]="'search'"></fa-icon>
             <span>
-            Show filter
+            Search
             </span>
         </button>
     </h2>

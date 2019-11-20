@@ -1,8 +1,7 @@
 package com.mbohdan.projects.osharing.web.rest.osh;
 
-import com.mbohdan.projects.osharing.domain.Article;
 import com.mbohdan.projects.osharing.service.dto.osh.ArticlesFilterDTO;
-import com.mbohdan.projects.osharing.service.dto.osh.OshArticlesDTO;
+import com.mbohdan.projects.osharing.service.dto.osh.OshArticleDTO;
 import com.mbohdan.projects.osharing.service.osh.OshArticlesService;
 import com.mbohdan.projects.osharing.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
@@ -10,14 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,26 +31,46 @@ public class OshArticlesResource {
         this.articlesService = articlesService;
     }
 
-    // TODO search by category, name, location(city, postalCode, ?lat/lon)
-
-    /** First search by locations in userInfo
-     * next
+    /**
+     * Search by category, name, location(city, postalCode, ?lat/lon)
      *
-     * @param filterDTO
-     * @return
-     * @throws URISyntaxException
+     * @param filterDTO - filter object
+     * @return - List<OshArticleDTO>
      */
-    @PostMapping("/search/articles")
-    public ResponseEntity<List<OshArticlesDTO>> searchArticles(@Valid @RequestBody ArticlesFilterDTO filterDTO) throws URISyntaxException {
+    @PostMapping("/articles/search")
+    public ResponseEntity<List<OshArticleDTO>> searchArticles(@Valid @RequestBody ArticlesFilterDTO filterDTO) throws URISyntaxException {
         log.debug("REST request to search Articles : {}", filterDTO);
 
         if (filterDTO.getPage() == null || filterDTO.getItems() == null) {
             throw new BadRequestAlertException("A search parameters are wrong", ENTITY_NAME, "request error");
         }
-        List<OshArticlesDTO> results = articlesService.searchArticles(filterDTO);
+        List<OshArticleDTO> results = articlesService.searchArticles(filterDTO);
         log.debug("OshArticlesService.searchArticles() {}", results);
-        return  ResponseEntity.created(new URI("/api/proxy/search/articles"))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, "/search/articles"))
-            .body(results);
+        return  ResponseEntity.ok(results);
+    }
+
+    // TODO add new article
+    @PostMapping("/articles/add")
+    public ResponseEntity<OshArticleDTO> addArticle(@Valid @RequestBody OshArticleDTO newArticle) throws URISyntaxException {
+
+        return ResponseEntity.created(new URI("/api/articles/" + "must be result.id"))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, "must be article name"))
+            .body(null);
+    }
+
+    //TODO get all user articles
+    @GetMapping("/articles/my")
+    public ResponseEntity<List<OshArticleDTO>> getMyArticles() throws URISyntaxException {
+        List<OshArticleDTO> results = new ArrayList<OshArticleDTO>();
+        log.debug("OshArticlesService.getMyArticles() {}", results);
+        return  ResponseEntity.ok(results);
+    }
+
+    //TODO get all articles reserve or rent by user
+    @GetMapping("/articles/reserves")
+    public ResponseEntity<List<OshArticleDTO>> getMyReservedArticles() throws URISyntaxException {
+        List<OshArticleDTO> results = new ArrayList<OshArticleDTO>();
+        log.debug("OshArticlesService.getMyReservedArticles() {}", results);
+        return  ResponseEntity.ok(results);
     }
 }

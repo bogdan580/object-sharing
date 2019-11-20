@@ -11,6 +11,6 @@ export class SearchListService {
   constructor(protected http: HttpClient) {}
 
   searchArticles(filter: ArticlesFilter): Observable<any> {
-    return this.http.post(`${this.resourceUrl}/search/articles`, filter,{ observe: 'response' });
+    return this.http.post(`${this.resourceUrl}/articles/search`, filter,{ observe: 'response' });
   }
 }
