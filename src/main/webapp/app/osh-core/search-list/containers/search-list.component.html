@@ -1,7 +1,6 @@
 <div class="page">
     <h2 id="page-heading">
         <span jhiTranslate="osh.searchList.title">Search list</span>
-        <a (click)="showedDetail =!showedDetail" *jhiHasAnyAuthority="'ROLE_ADMIN'">Details</a>
         <input style="font-size: medium" [(ngModel)]="filter.text" placeholder="Article">
         <input style="font-size: medium;width: 130px;" [(ngModel)]="filter.category" placeholder="category">
         <input style="font-size: medium" [(ngModel)]="filter.city" placeholder="city, postal">
@@ -28,25 +27,32 @@
         <span jhiTranslate="objectSharingApp.article.home.notFound">No articles found</span>
     </div>
     <div class="page-body" *ngIf="searchedArticles?.length > 0">
-        <div class="card article-details-block" *ngIf="showedDetail">
+        <div class="card article-details-block" *ngIf="selectedArticle">
             <div class="card-body" style="display: flex; flex-direction: column;">
                 <div class="article-details">
                     <div class="article-img">Image</div>
-                    <div class="article-info">Details Info</div>
+                    <div class="article-info">
+                        <h4>{{selectedArticle.name}}</h4>
+                        <h6>{{selectedArticle.price}} {{selectedArticle.currency.toString()}}</h6>
+                        {{selectedArticle.city}} {{selectedArticle.postalCode}}
+                        <hr>
+                        {{selectedArticle.desc}}
+                    </div>
                 </div>
                 <div class="article-calendar">Calendar</div>
             </div>
         </div>
-        <div class="right-sidebar" [ngClass]="{'minimal' : !showedDetail}">
-            <div class="card search-map" [ngClass]="{'minimal' : !showedDetail}">
+        <div class="right-sidebar" [ngClass]="{'minimal' : !selectedArticle}">
+            <div class="card search-map" [ngClass]="{'minimal' : !selectedArticle}">
                 Maps
             </div>
-            <div class="card search-list table-responsive" [ngClass]="{'minimal' : !showedDetail}">
+            <div class="card search-list table-responsive" [ngClass]="{'minimal' : !selectedArticle}">
                 <table class="table table-striped" aria-describedby="page-heading">
                     <tbody>
                     <tr *ngFor="let artcl of searchedArticles ;trackBy: trackId">
-                        <td>
-                            {{artcl.id}} {{artcl.name}}
+                        <td (click)="selectArticle(artcl)">
+                            {{artcl.id}} {{artcl.addTime}} {{artcl.name}} {{artcl.city}} {{artcl.postalCode}}
+                            {{artcl.price}}
                         </td>
                     </tr>
                     </tbody>

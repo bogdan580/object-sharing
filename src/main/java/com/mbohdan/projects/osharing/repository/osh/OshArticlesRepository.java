@@ -14,7 +14,7 @@ public interface OshArticlesRepository extends JpaRepository<Article, Long> {
 
     @Query("SELECT new com.mbohdan.projects.osharing.service.dto.osh.OshArticleDTO("
                            + "a.id, a.name, a.desc, a.status, a.addTime, a.price, a.mainImage, a.rentPeriod,"
-                           + "a.currency, c.categoryName, l.streetAddress, l.postalCode, l.city, l.stateProvince,"
+                           + "a.currency, a.user.id, c.categoryName, l.streetAddress, l.postalCode, l.city, l.stateProvince,"
                            + "l.lat, l.lon) "
           + "FROM Article a JOIN a.category c JOIN a.location l ON (:category IS NULL OR c.categoryName = :category) AND (:postalCode IS NULL OR l.postalCode = :postalCode) AND (:city IS NULL OR l.city = :city) "
           + "WHERE a.name LIKE :text"

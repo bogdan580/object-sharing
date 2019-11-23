@@ -16,6 +16,7 @@ public class OshArticleDTO implements Serializable {
     private String mainImage;
     private RentPeriod rentPeriod;
     private Currency currency;
+    private Long userId;
     private String categoryName;
     private String streetAddress;
     private String postalCode;
@@ -25,18 +26,19 @@ public class OshArticleDTO implements Serializable {
     private Double lon;
 
     public OshArticleDTO(Long id, String name, String desc, ObjectStatus status, Long addTime, Double price,
-                         String mainImage, RentPeriod rentPeriod, Currency currency, String categoryName,
-                         String streetAddress, String postalCode, String city, String stateProvince,
+                         String mainImage, RentPeriod rentPeriod, Currency currency, Long userId,
+                         String categoryName, String streetAddress, String postalCode, String city, String stateProvince,
                          Double lat, Double lon) {
         this.id = id;
         this.name = name;
         this.desc = desc;
         this.status = status;
-        this.addTime =addTime;
+        this.addTime = addTime;
         this.price = price;
         this.mainImage = mainImage;
         this.rentPeriod = rentPeriod;
         this.currency = currency;
+        this.userId = userId;
         this.categoryName = categoryName;
         this.streetAddress = streetAddress;
         this.postalCode = postalCode;
@@ -118,6 +120,14 @@ public class OshArticleDTO implements Serializable {
         this.currency = currency;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     public String getCategoryName() {
         return categoryName;
     }
@@ -186,6 +196,7 @@ public class OshArticleDTO implements Serializable {
             ", mainImage='" + mainImage + '\'' +
             ", rentPeriod=" + rentPeriod +
             ", currency=" + currency +
+            ", userId=" + userId +
             ", categoryName='" + categoryName + '\'' +
             ", streetAddress='" + streetAddress + '\'' +
             ", postalCode='" + postalCode + '\'' +

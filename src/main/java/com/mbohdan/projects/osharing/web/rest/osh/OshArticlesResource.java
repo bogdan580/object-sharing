@@ -49,6 +49,8 @@ public class OshArticlesResource {
         return  ResponseEntity.ok(results);
     }
 
+    // TODO get userInfo, images, active reserves and renting for selected article
+
     // TODO add new article
     @PostMapping("/articles/add")
     public ResponseEntity<OshArticleDTO> addArticle(@Valid @RequestBody OshArticleDTO newArticle) throws URISyntaxException {
@@ -73,4 +75,6 @@ public class OshArticlesResource {
         log.debug("OshArticlesService.getMyReservedArticles() {}", results);
         return  ResponseEntity.ok(results);
     }
+
+    // TODO add new reservation
 }

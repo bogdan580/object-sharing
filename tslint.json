@@ -12,6 +12,13 @@
     "use-pipe-transform-interface": false,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "no-console": false
+    "no-console": [
+      true,
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace"
+    ]
   }
 }

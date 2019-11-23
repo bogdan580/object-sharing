@@ -49,7 +49,6 @@ public class OshArticlesService {
                 log.debug("zip: " + zipMatcher.group());
                 postalCode = zipMatcher.group();
             }
-
             Pattern cityPattern = Pattern.compile(regexCity);
             Matcher cityMatcher = cityPattern.matcher(filterDTO.getCity());
             if (cityMatcher.find()) {

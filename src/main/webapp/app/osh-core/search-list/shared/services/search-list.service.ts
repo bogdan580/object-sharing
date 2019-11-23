@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ArticlesFilter } from 'app/shared/model/osh/articles.model';
+import { ArticlesFilter, IOshArticleDTO } from 'app/shared/model/osh/articles.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/index';
 import { SERVER_API_URL } from 'app/app.constants';
@@ -12,5 +12,9 @@ export class SearchListService {
 
   searchArticles(filter: ArticlesFilter): Observable<any> {
     return this.http.post(`${this.resourceUrl}/articles/search`, filter,{ observe: 'response' });
+  }
+
+  getArticleInfo(id: number): Observable<any>  {
+    return this.http.get(`${this.resourceUrl}/articles/${id}`,{ observe: 'response' });
   }
 }

@@ -1,3 +1,10 @@
+import { ObjectStatus } from 'app/shared/model/enumerations/object-status.model';
+import { RentPeriod } from 'app/shared/model/enumerations/rent-period.model';
+import { Currency } from 'app/shared/model/enumerations/currency.model';
+import { Reservation } from 'app/shared/model/reservation.model';
+import { Renting } from 'app/shared/model/renting.model';
+import { Image } from 'app/shared/model/image.model';
+
 export const enum Sorting {
   PRISE_ASC = 'PRISE_ASC',
   PRISE_DESK = 'PRISE_DESK',
@@ -15,7 +22,7 @@ export interface IArticlesFilter {
   city?: string;
 }
 
-export class ArticlesFilter implements IArticlesFilter{
+export class ArticlesFilter implements IArticlesFilter {
   constructor(
     public page = 0,
     public items = 20,
@@ -24,5 +31,38 @@ export class ArticlesFilter implements IArticlesFilter{
     public category?: string,
     public postalCode?: string,
     public city?: string
-  ){}
+  ) {
+  }
+}
+
+export interface IOshArticleDTO {
+  id: number;
+  name: string;
+  desc?: string;
+  status?: ObjectStatus;
+  addTime?: number;
+  price?: number;
+  mainImage?: string;
+  rentPeriod?: RentPeriod;
+  currency?: Currency;
+  userId?: number;
+  categoryName?: string;
+  streetAddress?: string;
+  postalCode?: string;
+  city?: string;
+  stateProvince?: string;
+  lat?: number;
+  lon?: number;
+}
+
+export interface IOshArticleInfoDTO {
+  login?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  langKey?: string;
+  createdDate?: Date;
+  reserves?: Reservation[];
+  rents?: Renting[];
+  images?: Image[];
 }

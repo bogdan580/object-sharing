@@ -4,6 +4,10 @@
   color: blue;
 }
 
+.page select {
+  font-size: 1rem;
+}
+
 .page-body {
   display: flex;
   .article-details-block {
@@ -24,6 +28,7 @@
   }
   .search-list {
     margin: 0 5px;
+    height: 250px;
   }
 }
 
@@ -36,6 +41,7 @@
   }
   .search-list.minimal {
     flex: 1;
+    height: 460px;
   }
 }
 
