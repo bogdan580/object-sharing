@@ -12,7 +12,7 @@
             <option value="PRISE_ASC">PRISE_ASC</option>
             <option value="PRISE_DESK">PRISE_DESK</option>
         </select>
-        <button id="jh-create-entity" (click)="search()"
+        <button (click)="search()"
                 class="btn btn-primary float-right jh-create-entity create-location">
             <fa-icon [icon]="'search'"></fa-icon>
             <span>
@@ -30,16 +30,29 @@
         <div class="card article-details-block" *ngIf="selectedArticle">
             <div class="card-body" style="display: flex; flex-direction: column;">
                 <div class="article-details">
-                    <div class="article-img">Image</div>
+                    <div class="article-img">
+                        <span class="hipster img-fluid rounded"></span>
+                    </div>
                     <div class="article-info">
                         <h4>{{selectedArticle.name}}</h4>
-                        <h6>{{selectedArticle.price}} {{selectedArticle.currency.toString()}}</h6>
+                        <h6>{{selectedArticle.price}} {{selectedArticle.currency}}</h6>
                         {{selectedArticle.city}} {{selectedArticle.postalCode}}
                         <hr>
                         {{selectedArticle.desc}}
                     </div>
                 </div>
-                <div class="article-calendar">Calendar</div>
+                <div class="article-calendar">
+                    <jhi-calendar #calendar id="calendar" [events]="events"></jhi-calendar>
+                    <div class="calendar-action">
+                        <button (click)="calendar.reserve()"
+                                class="btn btn-success float-right reserve-article">
+                            <fa-icon [icon]="'check'"></fa-icon>
+                            <span>
+                                Reserve
+                            </span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="right-sidebar" [ngClass]="{'minimal' : !selectedArticle}">

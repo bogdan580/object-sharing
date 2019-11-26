@@ -18,6 +18,7 @@ export class SearchListComponent implements OnInit {
   selectedArticle: IOshArticleDTO;
   selectedArticleInfo: IOshArticleInfoDTO;
   filter: IArticlesFilter;
+  events: any[];
 
   constructor(protected searchListService: SearchListService) {
     // debug
@@ -37,9 +38,34 @@ export class SearchListComponent implements OnInit {
       { id: 11, name: 'Article 5' },
       { id: 12, name: 'Article 6' }
     ];
+    this.selectedArticle = this.searchedArticles[0];
   }
 
   ngOnInit() {
+    this.events = [
+      {
+        "title": "All Day Event",
+        "start": "2016-01-01"
+      },
+      {
+        "title": "Long Event",
+        "start": "2016-01-07",
+        "end": "2016-01-10"
+      },
+      {
+        "title": "Repeating Event",
+        "start": "2016-01-09T16:00:00"
+      },
+      {
+        "title": "Repeating Event",
+        "start": "2016-01-16T16:00:00"
+      },
+      {
+        "title": "Conference",
+        "start": "2016-01-11",
+        "end": "2016-01-13"
+      }
+    ];
   }
 
   trackId(index: number, item: IArticle) {
@@ -56,7 +82,7 @@ export class SearchListComponent implements OnInit {
 
   selectArticle(article: IOshArticleDTO) {
     this.selectedArticle = article;
-    /*this.searchListService.getArticleInfo(article.id).subscribe(r => {
+    /* this.searchListService.getArticleInfo(article.id).subscribe(r => {
       console.log(r.body);
       this.selectedArticleInfo = r.body;
     });*/

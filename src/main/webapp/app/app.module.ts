@@ -16,6 +16,7 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { OshCoreModule } from 'app/osh-core/osh-core.module';
 import { OshRoutingModule } from 'app/osh-core/osh-routing.module';
+import { OshUiModule } from 'app/osh-ui/ui.module';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { OshRoutingModule } from 'app/osh-core/osh-routing.module';
     ObjectSharingHomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     ObjectSharingEntityModule,
-    ObjectSharingAppRoutingModule
+    ObjectSharingAppRoutingModule,
+    OshUiModule
   ],
   declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
   bootstrap: [JhiMainComponent]

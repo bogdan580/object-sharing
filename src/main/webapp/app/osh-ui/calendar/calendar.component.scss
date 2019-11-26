@@ -1,0 +1,29 @@
+@import '../../../content/scss/bootstrap-variables';
+
+/* TABLE STYLES*/
+.fc-scroller.fc-day-grid-container {
+  height: 370px !important;
+}
+
+.fc-row.fc-week.fc-widget-content {
+  height: 61px !important;
+}
+
+/* EVENT STYLES*/
+.fc-event-container {
+  color: white;
+}
+
+a.fc-day-grid-event.fc-h-event.fc-event{
+  background: $p-color;
+}
+
+/* BUTTONS STYLES*/
+.fc-button.fc-icon {
+  font-size: 1.2em;
+}
+
+button.fc-next-button.fc-button.fc-button-primary,
+button.fc-prev-button.fc-button.fc-button-primary{
+  background: $p-color;
+}

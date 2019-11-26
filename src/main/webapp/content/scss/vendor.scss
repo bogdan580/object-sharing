@@ -12,3 +12,7 @@ eg $input-color: red;
 @import '~bootswatch/dist/litera/bootswatch';
 
 /* jhipster-needle-scss-add-vendor JHipster will add new css style */
+@import '~primeicons/primeicons.css';
+@import '~primeng/resources/themes/nova-light/theme.css'; // pick whatever theme
+@import '~primeng/resources/primeng.min.css';
+@import '~@fullcalendar/core/main.min.css';

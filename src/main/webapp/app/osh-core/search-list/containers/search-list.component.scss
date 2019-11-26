@@ -1,3 +1,12 @@
+.hipster {
+  display: inline-block;
+  width: 260px;
+  height: 210px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-right: 25px;
+  background: url('../../../../content/images/jhipster_family_member_0_head-384.png') no-repeat center top;
+  background-size: contain;
+}
 .page a {
   cursor: pointer;
   font-size: large;
@@ -17,6 +26,8 @@
   .right-sidebar {
     margin: 5px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -24,11 +35,13 @@
 .right-sidebar {
   .search-map {
     margin: 0 0 15px 5px;
-    min-height: 200px;
+    //min-height: 200px;
+    flex: 0.7;
   }
   .search-list {
     margin: 0 5px;
-    height: 250px;
+    //height: 250px;
+    flex: 1;
   }
 }
 
@@ -57,5 +70,24 @@
       flex: 1;
     }
   }
+  .article-calendar {
+    display: flex;
+    #calendar {
+      flex: 1;
+    }
+    .calendar-action {
+      flex: 0.3;
+      .reserve-article {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin: 20px;
+      }
+    }
+  }
 }
 
+// table styles
+.table-striped tbody tr {
+  cursor:  pointer;
+}
