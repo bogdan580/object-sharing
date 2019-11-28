@@ -1,1 +1,52 @@
-<p>articles works!</p>
+<div class="page">
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <h2 id="page-heading">
+        <span jhiTranslate="osh.articles.title">My articles</span>
+    </h2>
+    <div class="page-body">
+        <div class="card" style="flex: 1">
+            <div class="card-body">
+                <p-tabView>
+                    <p-tabPanel header="Mój sprzęt">
+                        <p-panel header="Wyporzyczone">
+                            <table class="table table-striped" aria-describedby="page-heading">
+                                <tbody>
+                                <tr><td>1</td></tr>
+                                <tr><td>2</td></tr>
+                                <tr><td>3</td></tr>
+                                <tr><td>4</td></tr>
+                                <tr><td>5</td></tr>
+                                </tbody>
+                            </table>
+                        </p-panel>
+                        <p-panel header="Zarezerwowane">
+                            Content
+                        </p-panel>
+                        <p-panel header="Aktywne">
+                            Content
+                        </p-panel>
+                        <p-panel header="Nieaktywne">
+                            Content
+                        </p-panel>
+                    </p-tabPanel>
+                    <p-tabPanel header="Moje wypożyczenia">
+                        <p-panel header="Wypożyczone">
+                            Content
+                        </p-panel>
+                        <p-panel header="Zarezerwowane">
+                            Content
+                        </p-panel>
+                    </p-tabPanel>
+                </p-tabView>
+            </div>
+        </div>
+        <div class="right-sidebar">
+            <div class="card add-panel">
+                <div class="card-body">
+                    <h4 style="text-align: center">Dodaj nowy</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

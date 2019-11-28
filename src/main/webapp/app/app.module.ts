@@ -17,10 +17,12 @@ import { ErrorComponent } from './layouts/error/error.component';
 import { OshCoreModule } from 'app/osh-core/osh-core.module';
 import { OshRoutingModule } from 'app/osh-core/osh-routing.module';
 import { OshUiModule } from 'app/osh-ui/ui.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     OshCoreModule,
     OshRoutingModule,
     ObjectSharingSharedModule,

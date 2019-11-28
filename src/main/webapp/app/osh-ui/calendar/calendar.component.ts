@@ -35,6 +35,7 @@ export class CalendarComponent implements OnInit {
       },
       select(e) {
         console.log(e);
+        alert('selected ' + e.startStr + ' to ' + e.endStr);
       }
     };
   }

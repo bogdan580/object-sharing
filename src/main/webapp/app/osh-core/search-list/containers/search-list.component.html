@@ -1,4 +1,6 @@
 <div class="page">
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
     <h2 id="page-heading">
         <span jhiTranslate="osh.searchList.title">Search list</span>
         <input style="font-size: medium" [(ngModel)]="filter.text" placeholder="Article">
@@ -20,8 +22,6 @@
             </span>
         </button>
     </h2>
-    <jhi-alert-error></jhi-alert-error>
-    <jhi-alert></jhi-alert>
     <br/>
     <div class="alert alert-warning" *ngIf="searchedArticles?.length === 0">
         <span jhiTranslate="objectSharingApp.article.home.notFound">No articles found</span>

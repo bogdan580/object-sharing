@@ -6,13 +6,19 @@ import { ArticlesComponent } from './containers/articles.component';
 import { JhiLanguageService } from 'ng-jhipster';
 import { ArticlesService } from 'app/osh-core/articles/shared/services/article.service';
 import { articlesRoute } from 'app/osh-core/articles/articles.route';
+import { ObjectSharingSharedModule } from 'app/shared/shared.module';
+import {TabViewModule} from 'primeng/tabview';
+import { PanelModule } from 'primeng/panel';
 const ARTICLES_ROUTES = [...articlesRoute];
 const CONTAINERS = [ArticlesComponent];
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule.forChild(ARTICLES_ROUTES)
+    RouterModule.forChild(ARTICLES_ROUTES),
+    ObjectSharingSharedModule,
+    TabViewModule,
+    PanelModule
   ],
   exports: [], // need add ui module
   declarations: [...CONTAINERS],

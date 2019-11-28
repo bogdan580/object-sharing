@@ -17,20 +17,6 @@
   font-size: 1rem;
 }
 
-.page-body {
-  display: flex;
-  .article-details-block {
-    flex: 1.2;
-    margin: 5px;
-  }
-  .right-sidebar {
-    margin: 5px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-}
-
 // full view right sidebar
 .right-sidebar {
   .search-map {
