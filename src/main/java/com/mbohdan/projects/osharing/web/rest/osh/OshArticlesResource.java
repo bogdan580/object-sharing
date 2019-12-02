@@ -76,5 +76,12 @@ public class OshArticlesResource {
         return  ResponseEntity.ok(results);
     }
 
+    @GetMapping("/articles/myArticles")
+    public ResponseEntity<List<OshArticleDTO>> getMyArticlesByID(@RequestParam("mail") Long userID) throws URISyntaxException {
+        List<OshArticleDTO> results = articlesService.getMyArticles(userID);
+        log.debug("OshArticlesService.getMyArticles() {}", results);
+        return  ResponseEntity.ok(results);
+    }
+
     // TODO add new reservation
 }
