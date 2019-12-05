@@ -4,6 +4,7 @@ import com.mbohdan.projects.osharing.service.dto.osh.ArticlesFilterDTO;
 import com.mbohdan.projects.osharing.service.dto.osh.OshArticleDTO;
 import com.mbohdan.projects.osharing.service.osh.OshArticlesService;
 import com.mbohdan.projects.osharing.web.rest.errors.BadRequestAlertException;
+import com.mbohdan.projects.osharing.web.rest.facades.ResourcesFacede;
 import io.github.jhipster.web.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,9 +27,11 @@ public class OshArticlesResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
     private final OshArticlesService articlesService;
+    private final ResourcesFacede resourcesFacede;
 
-    public OshArticlesResource(OshArticlesService articlesService) {
+    public OshArticlesResource(OshArticlesService articlesService, ResourcesFacede resourcesFacede) {
         this.articlesService = articlesService;
+        this.resourcesFacede = resourcesFacede;
     }
 
     /**
@@ -46,7 +49,7 @@ public class OshArticlesResource {
         }
         List<OshArticleDTO> results = articlesService.searchArticles(filterDTO);
         log.debug("OshArticlesService.searchArticles() {}", results);
-        return  ResponseEntity.ok(results);
+        return ResponseEntity.ok(results);
     }
 
     // TODO get userInfo, images, active reserves and renting for selected article
@@ -63,25 +66,45 @@ public class OshArticlesResource {
     //TODO get all user articles
     @GetMapping("/articles/my")
     public ResponseEntity<List<OshArticleDTO>> getMyArticles() throws URISyntaxException {
-        List<OshArticleDTO> results = new ArrayList<OshArticleDTO>();
-        log.debug("OshArticlesService.getMyArticles() {}", results);
-        return  ResponseEntity.ok(results);
+        ArrayList<OshArticleDTO> articleDTOS = new ArrayList<>();
+        resourcesFacede
+            .getArticleRepository()
+            .findByUserIsCurrentUser()
+            .forEach(x -> articleDTOS.add(new OshArticleDTO(x)));
+        log.debug("OshArticlesService.getMyArticles() {}", articleDTOS);
+        return ResponseEntity.ok(articleDTOS);
     }
 
     //TODO get all articles reserve or rent by user
     @GetMapping("/articles/reserves")
     public ResponseEntity<List<OshArticleDTO>> getMyReservedArticles() throws URISyntaxException {
-        List<OshArticleDTO> results = new ArrayList<OshArticleDTO>();
-        log.debug("OshArticlesService.getMyReservedArticles() {}", results);
-        return  ResponseEntity.ok(results);
+        ArrayList<OshArticleDTO> articleDTOS = new ArrayList<>();
+        resourcesFacede.
+            getReservationRepository()
+            .findByUserIsCurrentUser()
+            .forEach(x->articleDTOS
+                .add(new OshArticleDTO(resourcesFacede
+                    .getArticleResource()
+                    .getArticle(x.getUser().getId()).getBody())));
+        log.debug("OshArticlesService.getMyReservedArticles() {}", articleDTOS);
+        return ResponseEntity.ok(articleDTOS);
     }
 
-    @GetMapping("/articles/myArticles")
-    public ResponseEntity<List<OshArticleDTO>> getMyArticlesByID(@RequestParam("mail") Long userID) throws URISyntaxException {
-        List<OshArticleDTO> results = articlesService.getMyArticles(userID);
-        log.debug("OshArticlesService.getMyArticles() {}", results);
-        return  ResponseEntity.ok(results);
+    //TODO SORT PAGABLE
+
+    @GetMapping("/articles/rented")
+    public ResponseEntity<List<OshArticleDTO>> getMyRentedArticles() throws URISyntaxException {
+        ArrayList<OshArticleDTO> articleDTOS = new ArrayList<>();
+        resourcesFacede.
+            getRentingRepository()
+            .findByUserIsCurrentUser()
+            .forEach(x->articleDTOS
+                .add(new OshArticleDTO(resourcesFacede
+                    .getArticleResource()
+                    .getArticle(x.getUser().getId()).getBody())));
+        log.debug("OshArticlesService.getMyRentedArticles() {}", articleDTOS);
+        return ResponseEntity.ok(articleDTOS);
     }
 
-    // TODO add new reservation
+    //TODO SORT PAGABLE
 }

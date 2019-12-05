@@ -1,5 +1,8 @@
 package com.mbohdan.projects.osharing.service.dto.osh;
 
+import com.mbohdan.projects.osharing.domain.Article;
+import com.mbohdan.projects.osharing.domain.Category;
+import com.mbohdan.projects.osharing.domain.Location;
 import com.mbohdan.projects.osharing.domain.enumeration.Currency;
 import com.mbohdan.projects.osharing.domain.enumeration.ObjectStatus;
 import com.mbohdan.projects.osharing.domain.enumeration.RentPeriod;
@@ -46,6 +49,26 @@ public class OshArticleDTO implements Serializable {
         this.stateProvince = stateProvince;
         this.lat = lat;
         this.lon = lon;
+    }
+
+    public OshArticleDTO(Article article){
+        this.id = article.getId();
+        this.name = article.getName();
+        this.desc = article.getDesc();
+        this.status = article.getStatus();
+        this.addTime = article.getAddTime();
+        this.price = article.getPrice();
+        this.mainImage = article.getMainImage(); //null ale git
+        this.rentPeriod = article.getRentPeriod();
+        this.currency = article.getCurrency();
+        this.userId = article.getUser().getId();
+        this.categoryName = article.getCategory().getCategoryName(); //null
+        this.streetAddress = article.getLocation().getStreetAddress();//
+        this.postalCode = article.getLocation().getPostalCode();
+        this.city = article.getLocation().getCity();
+        this.stateProvince = article.getLocation().getStateProvince();
+        this.lat = article.getLocation().getLat();
+        this.lon = article.getLocation().getLon();
     }
 
     public Long getId() {

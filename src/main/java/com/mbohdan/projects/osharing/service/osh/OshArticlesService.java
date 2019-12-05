@@ -81,9 +81,4 @@ public class OshArticlesService {
             pagebleSortParam
         );
     }
-
-    public List<OshArticleDTO> getMyArticles(long userID) {
-        log.debug("OshArticlesService.getMyArticles({})",userID);
-        return this.oshArticlesRepository.searchArticlesByUser(userID);
-    }
 }
