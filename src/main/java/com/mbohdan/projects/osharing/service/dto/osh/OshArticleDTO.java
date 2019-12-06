@@ -1,7 +1,6 @@
 package com.mbohdan.projects.osharing.service.dto.osh;
 
 import com.mbohdan.projects.osharing.domain.Article;
-import com.mbohdan.projects.osharing.domain.Category;
 import com.mbohdan.projects.osharing.domain.Location;
 import com.mbohdan.projects.osharing.domain.enumeration.Currency;
 import com.mbohdan.projects.osharing.domain.enumeration.ObjectStatus;
@@ -51,7 +50,7 @@ public class OshArticleDTO implements Serializable {
         this.lon = lon;
     }
 
-    public OshArticleDTO(Article article){
+    public OshArticleDTO(Article article) {
         this.id = article.getId();
         this.name = article.getName();
         this.desc = article.getDesc();
@@ -69,6 +68,32 @@ public class OshArticleDTO implements Serializable {
         this.stateProvince = article.getLocation().getStateProvince();
         this.lat = article.getLocation().getLat();
         this.lon = article.getLocation().getLon();
+    }
+
+    public Article getArticleFromOshArticleDTO() {
+        Article article = new Article();
+        article.setId(getId());
+        article.setName(getName());
+        article.setDesc(getDesc());
+        article.setStatus(getStatus());
+        article.addTime(getAddTime());
+        article.setPrice(getPrice());
+        article.setMainImage(getMainImage());
+        article.setRentPeriod(getRentPeriod());
+        article.setCurrency(getCurrency());
+        return article;
+    }
+
+    public Location getLocationFromOshArticleDTO() {
+
+        Location location = new Location();
+        location.setStreetAddress(getStreetAddress());
+        location.setPostalCode(getPostalCode());
+        location.setCity(getCity());
+        location.setStateProvince(getStateProvince());
+        location.setLat(getLat());
+        location.setLon(getLon());
+        return location;
     }
 
     public Long getId() {
