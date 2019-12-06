@@ -26,4 +26,5 @@ public interface OshArticlesRepository extends JpaRepository<Article, Long> {
         @Param("city") String city,
         Pageable pageable
     );
+
 }

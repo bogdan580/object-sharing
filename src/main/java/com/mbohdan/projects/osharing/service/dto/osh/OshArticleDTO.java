@@ -1,5 +1,7 @@
 package com.mbohdan.projects.osharing.service.dto.osh;
 
+import com.mbohdan.projects.osharing.domain.Article;
+import com.mbohdan.projects.osharing.domain.Location;
 import com.mbohdan.projects.osharing.domain.enumeration.Currency;
 import com.mbohdan.projects.osharing.domain.enumeration.ObjectStatus;
 import com.mbohdan.projects.osharing.domain.enumeration.RentPeriod;
@@ -46,6 +48,52 @@ public class OshArticleDTO implements Serializable {
         this.stateProvince = stateProvince;
         this.lat = lat;
         this.lon = lon;
+    }
+
+    public OshArticleDTO(Article article) {
+        this.id = article.getId();
+        this.name = article.getName();
+        this.desc = article.getDesc();
+        this.status = article.getStatus();
+        this.addTime = article.getAddTime();
+        this.price = article.getPrice();
+        this.mainImage = article.getMainImage(); //null ale git
+        this.rentPeriod = article.getRentPeriod();
+        this.currency = article.getCurrency();
+        this.userId = article.getUser().getId();
+        this.categoryName = article.getCategory().getCategoryName(); //null
+        this.streetAddress = article.getLocation().getStreetAddress();//
+        this.postalCode = article.getLocation().getPostalCode();
+        this.city = article.getLocation().getCity();
+        this.stateProvince = article.getLocation().getStateProvince();
+        this.lat = article.getLocation().getLat();
+        this.lon = article.getLocation().getLon();
+    }
+
+    public Article getArticleFromOshArticleDTO() {
+        Article article = new Article();
+        //article.setId(getId());
+        article.setName(getName());
+        article.setDesc(getDesc());
+        article.setStatus(getStatus());
+        article.addTime(getAddTime());
+        article.setPrice(getPrice());
+        article.setMainImage(getMainImage());
+        article.setRentPeriod(getRentPeriod());
+        article.setCurrency(getCurrency());
+        return article;
+    }
+
+    public Location getLocationFromOshArticleDTO() {
+
+        Location location = new Location();
+        location.setStreetAddress(getStreetAddress());
+        location.setPostalCode(getPostalCode());
+        location.setCity(getCity());
+        location.setStateProvince(getStateProvince());
+        location.setLat(getLat());
+        location.setLon(getLon());
+        return location;
     }
 
     public Long getId() {
