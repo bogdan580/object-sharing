@@ -58,6 +58,7 @@ public class OshArticlesResource {
     @PostMapping("/articles/add")
     public ResponseEntity<OshArticleDTO> addArticle(@Valid @RequestBody OshArticleDTO newArticle) throws URISyntaxException {
 
+        resourcesFacede.getArticleResource().createArticle(newArticle.getArticleFromOshArticleDTO());
         return ResponseEntity.created(new URI("/api/articles/" + "must be result.id"))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, "must be article name"))
             .body(null);

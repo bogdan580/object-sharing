@@ -72,7 +72,7 @@ public class OshArticleDTO implements Serializable {
 
     public Article getArticleFromOshArticleDTO() {
         Article article = new Article();
-        article.setId(getId());
+        //article.setId(getId());
         article.setName(getName());
         article.setDesc(getDesc());
         article.setStatus(getStatus());
