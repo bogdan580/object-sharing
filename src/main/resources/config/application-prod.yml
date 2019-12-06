@@ -33,9 +33,9 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/object_sharing
-    username: object_sharing
-    password:
+    url: jdbc:postgresql://172.17.0.1:5432/oshdb
+    username: osh
+    password: Student213B
     hikari:
       poolName: Hikari
       auto-commit: false

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -13,12 +13,14 @@ export class CalendarComponent implements OnInit {
   @Input()
   events: any[];
   options: any;
-  myEvent: any;
+  @Output()
+  selectEvent: EventEmitter<any>;
   constructor() {
-    this.myEvent = {title: "My reservation"}
+    this.selectEvent = new EventEmitter<any>();
   }
 
   ngOnInit() {
+    const selectEvent = this.selectEvent;
     this.options = {
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       defaultDate: '2016-01-01',
@@ -34,28 +36,12 @@ export class CalendarComponent implements OnInit {
         // alert('clicked ' + e.dateStr);
       },
       select(e) {
-        console.log(e);
-        alert('selected ' + e.startStr + ' to ' + e.endStr);
+        // console.log(e);
+        selectEvent.emit({start: e.startStr, end: e.endStr, title: 'My reservation'});
+      },
+      unselect(e) {
+        // x.selectEvent.emit(null);
       }
     };
   }
-
-  printst(e: any) {
-    console.log('e', e);
-  }
-
-  addReserve(start: string, end: string = null) {
-    console.log('start ', start);
-    console.log('end ', end);
-    this.myEvent.start = start;
-    if (end) {
-      this.myEvent.end = end;
-      this.events = [...this.events, this.myEvent];
-    }
-  }
-
-  reserve(){
-    this.addReserve('2016-01-21','2016-01-23');
-  }
-
 }

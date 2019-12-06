@@ -7,6 +7,7 @@ import {
   IOshArticleInfoDTO
 } from 'app/shared/model/osh/articles.model';
 import { SearchListService } from 'app/osh-core/search-list/shared/services/search-list.service';
+import { JhiAlertService } from 'ng-jhipster';
 
 @Component({
   selector: 'jhi-articles',
@@ -19,8 +20,10 @@ export class SearchListComponent implements OnInit {
   selectedArticleInfo: IOshArticleInfoDTO;
   filter: IArticlesFilter;
   events: any[];
+  selectedDays: any;
 
-  constructor(protected searchListService: SearchListService) {
+  constructor(protected searchListService: SearchListService, private alertService: JhiAlertService) {
+    this.selectedDays = null;
     // debug
     this.filter = new ArticlesFilter();
     this.filter.category = 'Sport';
@@ -44,26 +47,27 @@ export class SearchListComponent implements OnInit {
   ngOnInit() {
     this.events = [
       {
-        "title": "All Day Event",
-        "start": "2016-01-01"
+        'title': 'All Day Event',
+        'start': '2016-01-01',
+        'rendering': 'background'
       },
       {
-        "title": "Long Event",
-        "start": "2016-01-07",
-        "end": "2016-01-10"
+        'title': 'Long Event',
+        'start': '2016-01-07',
+        'end': '2016-01-10'
       },
       {
-        "title": "Repeating Event",
-        "start": "2016-01-09T16:00:00"
+        'title': 'Repeating Event',
+        'start': '2016-01-09T16:00:00'
       },
       {
-        "title": "Repeating Event",
-        "start": "2016-01-16T16:00:00"
+        'title': 'Repeating Event',
+        'start': '2016-01-16T16:00:00'
       },
       {
-        "title": "Conference",
-        "start": "2016-01-11",
-        "end": "2016-01-13"
+        'title': 'Conference',
+        'start': '2016-01-11',
+        'end': '2016-01-13'
       }
     ];
   }
@@ -86,6 +90,85 @@ export class SearchListComponent implements OnInit {
       console.log(r.body);
       this.selectedArticleInfo = r.body;
     });*/
+  }
+
+  onReserve(event: any) {
+    console.log('reserve', event);
+    this.selectedDays = event;
+  }
+
+  addReserve() {
+    if (!this.isDateReserved()) {
+      this.events = [...this.events, this.selectedDays];
+      this.selectedDays = null;
+      this.alertService.success('Article was reserved');
+    } else {
+      this.alertService.warning('This article is reserved in selected period');
+    }
+  }
+
+  isDateReserved() {
+    let reserved = false;
+    this.events.forEach( e => {
+      const start = Date.parse(e.start);
+      const end = Date.parse(e.end);
+      const checkStart = Date.parse(this.selectedDays.start);
+      const checkEnd = Date.parse(this.selectedDays.end);
+      // console.log('------------------');
+      // console.log('event: ' + e.start + ' ' + e.end);
+      // console.log('selectedDays: ' + this.selectedDays.start + ' ' + this.selectedDays.end);
+      if (e.end) {
+        // console.log('isn\'t single day event');
+       /* console.log('between: ', checkStart <= start && end <= checkEnd);
+        console.log('inside: ', start <= checkStart && checkEnd <= end);
+        console.log('cross start: ', checkStart <= start && start < checkEnd && checkEnd <= end);
+        console.log('cross end: ', start <=  checkStart && checkStart < end && end <= checkEnd);*/
+        if ((checkStart <= start && end <= checkEnd) ||
+            (start <= checkStart && checkEnd <= end) ||
+            (checkStart <= start && start < checkEnd && checkEnd <= end) ||
+            (start <=  checkStart && checkStart < end && end <= checkEnd)) {
+          reserved = true;
+          return;
+        }
+      } else {
+        // console.log('is single day event');
+        // console.log('between:', checkStart <= start && start < checkEnd);
+        if (checkStart <= start && start < checkEnd) {
+          reserved = true;
+          return;
+        }
+      }
+      // console.log('------------------');
+    });
+    return reserved;
+  }
+
+  refresh() { // for debug
+    this.events = [
+      {
+        'title': 'All Day Event',
+        'start': '2016-01-01',
+        'rendering': 'background'
+      },
+      {
+        'title': 'Long Event',
+        'start': '2016-01-07',
+        'end': '2016-01-10'
+      },
+      {
+        'title': 'Repeating Event',
+        'start': '2016-01-09T16:00:00'
+      },
+      {
+        'title': 'Repeating Event',
+        'start': '2016-01-16T16:00:00'
+      },
+      {
+        'title': 'Conference',
+        'start': '2016-01-11',
+        'end': '2016-01-13'
+      }
+    ];
   }
 }
 

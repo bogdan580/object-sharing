@@ -42,9 +42,11 @@
                     </div>
                 </div>
                 <div class="article-calendar">
-                    <jhi-calendar #calendar id="calendar" [events]="events"></jhi-calendar>
+                    <jhi-calendar id="calendar" [events]="events" (selectEvent)="onReserve($event)"></jhi-calendar>
                     <div class="calendar-action">
-                        <button (click)="calendar.reserve()"
+                        <a (click)="refresh()" class="reserve-article" style="right: 7em;">Refresh</a>
+                        <button (click)="addReserve()"
+                                [disabled]="!selectedDays"
                                 class="btn btn-success float-right reserve-article">
                             <fa-icon [icon]="'check'"></fa-icon>
                             <span>

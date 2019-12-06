@@ -1,4 +1,4 @@
-id;street_address;postal_code;city;state_province;lat;lon
-1;aleja Tysiąclecia Państwa Polskiego 11;25-314;Kielce;Świętokrzyskie;50.878336;20.643551
-2;ul Zapłotek 18;25-314;Kielce;Świętokrzyskie;50.881609;20.64118
-3;ul Wojowódzka 9;25-536;Kielce;Świętokrzyskie;50.88259;20.635892
+ID;STREET_ADDRESS;POSTAL_CODE;CITY;STATE_PROVINCE;LAT;LON;USER_ID
+1;aleja Tysiąclecia Państwa Polskiego 11;25-314;Kielce;Świętokrzyskie;50.878336;20.643551;5
+2;ul Zapłotek 18;25-314;Kielce;Świętokrzyskie;50.881609;20.64118;6
+3;ul Wojowódzka 9;25-536;Kielce;Świętokrzyskie;50.88259;20.635892;7
