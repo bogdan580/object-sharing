@@ -86,7 +86,11 @@
         </div>
         <div class="right-sidebar" [ngClass]="{'minimal' : !selectedArticle}">
             <div class="card search-map" [ngClass]="{'minimal' : !selectedArticle}">
-                Maps
+                <jhi-leaflet-map
+                    [latitude]="lat"
+                    [longitude]="lng"
+                    [zoom]="zoom">
+                </jhi-leaflet-map>
             </div>
             <div class="card search-list table-responsive" [ngClass]="{'minimal' : !selectedArticle}">
                 <div class="alert alert-warning" *ngIf="searchedArticles?.length === 0">

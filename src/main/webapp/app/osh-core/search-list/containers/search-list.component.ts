@@ -26,7 +26,9 @@ export class SearchListComponent implements OnInit {
   events: any[];
   selectedDays: any;
   categories: ICategory[];
-
+  lat = 50.880145;
+  lng = 20.646798;
+  zoom = 13;
   constructor(protected searchListService: SearchListService,
               private alertService: JhiAlertService,
               protected categoryService: CategoryService) {
