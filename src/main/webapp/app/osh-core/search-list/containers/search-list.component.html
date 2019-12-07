@@ -3,30 +3,53 @@
     <jhi-alert></jhi-alert>
     <h2 id="page-heading">
         <span jhiTranslate="osh.searchList.title">Search list</span>
-        <input style="font-size: medium" [(ngModel)]="filter.text" placeholder="Article">
-        <input style="font-size: medium;width: 130px;" [(ngModel)]="filter.category" placeholder="category">
-        <input style="font-size: medium" [(ngModel)]="filter.city" placeholder="city, postal">
-        <input style="font-size: medium;width: 40px;" type="number" [(ngModel)]="filter.page" placeholder="page">
-        <input style="font-size: medium;width: 40px;" type="number" [(ngModel)]="filter.items" placeholder="items">
-        <select [(ngModel)]="filter.sort">
-            <option value="ADDTIME_ASK">ADDTIME_ASK</option>
-            <option value="ADDTIME_DESK">ADDTIME_DESK</option>
-            <option value="PRISE_ASC">PRISE_ASC</option>
-            <option value="PRISE_DESK">PRISE_DESK</option>
-        </select>
-        <button (click)="search()"
-                class="btn btn-primary float-right jh-create-entity create-location">
-            <fa-icon [icon]="'search'"></fa-icon>
-            <span>
-            Search
-            </span>
-        </button>
+        <form name="addArticleForm" role="form" (ngSubmit)="search()">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <input class="form-control" [(ngModel)]="filter.text" placeholder="Article" name="article">
+                    </div>
+                    <div class="col">
+                        <select class="form-control" id="category" name="category" [(ngModel)]="filter.category">
+                            <option disabled [value]="'Wybierz kategorie'" selected>Wybierz kategorie</option>
+                            <option *ngFor="let category of categories"
+                                    [value]="category.categoryName">{{category.categoryName}}</option>
+                        </select>
+                    </div>
+                    <div class="col-2">
+                        <input class="form-control" [(ngModel)]="filter.city" placeholder="City or postal" name="city">
+                    </div>
+                    <!--<div class="col-1">
+                        <input class="form-control" type="number" [(ngModel)]="filter.page" placeholder="page"
+                               name="page">
+                    </div>
+                    <div class="col-1">
+                        &lt;!&ndash; <input class="form-control" type="number" [(ngModel)]="filter.items" placeholder="items" name="items"> &ndash;&gt;
+                        <select class="form-control" [(ngModel)]="filter.items" name="items">
+                            <option [value]="10">10</option>
+                            <option [value]="20">20</option>
+                            <option [value]="50">50</option>
+                        </select>
+                    </div>-->
+                    <div class="col-2">
+                        <select class="form-control" [(ngModel)]="filter.sort" name="sort">
+                            <option value="ADDTIME_ASK">ADDTIME_ASK</option>
+                            <option value="ADDTIME_DESK">ADDTIME_DESK</option>
+                            <option value="PRISE_ASC">PRISE_ASC</option>
+                            <option value="PRISE_DESK">PRISE_DESK</option>
+                        </select>
+                    </div>
+                    <div class="col-1">
+                        <button type="submit" class="btn btn-primary float-right jh-create-entity create-location"
+                                name="items">
+                            <fa-icon [icon]="'search'"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </h2>
-    <br/>
-    <div class="alert alert-warning" *ngIf="searchedArticles?.length === 0">
-        <span jhiTranslate="objectSharingApp.article.home.notFound">No articles found</span>
-    </div>
-    <div class="page-body" *ngIf="searchedArticles?.length > 0">
+    <div class="page-body">
         <div class="card article-details-block" *ngIf="selectedArticle">
             <div class="card-body" style="display: flex; flex-direction: column;">
                 <div class="article-details">
@@ -34,7 +57,11 @@
                         <span class="hipster img-fluid rounded"></span>
                     </div>
                     <div class="article-info">
-                        <h4>{{selectedArticle.name}}</h4>
+                        <h4>
+                            {{selectedArticle.name}}
+                            <fa-icon [icon]="'times'" class="icon-x float-right" (click)="closeArticleInfo()">
+                            </fa-icon>
+                        </h4>
                         <h6>{{selectedArticle.price}} {{selectedArticle.currency}}</h6>
                         {{selectedArticle.city}} {{selectedArticle.postalCode}}
                         <hr>
@@ -44,7 +71,7 @@
                 <div class="article-calendar">
                     <jhi-calendar id="calendar" [events]="events" (selectEvent)="onReserve($event)"></jhi-calendar>
                     <div class="calendar-action">
-                        <a (click)="refresh()" class="reserve-article" style="right: 7em;">Refresh</a>
+<!--                        <a (click)="refresh()" class="reserve-article" style="right: 7em;">Refresh</a>-->
                         <button (click)="addReserve()"
                                 [disabled]="!selectedDays"
                                 class="btn btn-success float-right reserve-article">
@@ -62,16 +89,30 @@
                 Maps
             </div>
             <div class="card search-list table-responsive" [ngClass]="{'minimal' : !selectedArticle}">
-                <table class="table table-striped" aria-describedby="page-heading">
-                    <tbody>
-                    <tr *ngFor="let artcl of searchedArticles ;trackBy: trackId">
-                        <td (click)="selectArticle(artcl)">
-                            {{artcl.id}} {{artcl.addTime}} {{artcl.name}} {{artcl.city}} {{artcl.postalCode}}
-                            {{artcl.price}}
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="alert alert-warning" *ngIf="searchedArticles?.length === 0">
+                    <span jhiTranslate="objectSharingApp.article.home.notFound">No articles found</span>
+                </div>
+                <div style="overflow-y: auto;">
+                    <table class="table table-striped" *ngIf="searchedArticles?.length > 0"
+                           aria-describedby="page-heading">
+                        <tbody>
+                        <tr *ngFor="let artcl of searchedArticles ;trackBy: trackId">
+                            <td (click)="selectArticle(artcl)">
+                                {{artcl.id}} {{artcl.addTime}} {{artcl.name}} {{artcl.city}} {{artcl.postalCode}}
+                                {{artcl.price}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paging" [ngClass]="{'minimal' : !selectedArticle}">
+                    <input class="form-control" style="width: 300px; margin: 3px auto" type="number" [(ngModel)]="filter.page" placeholder="page" name="page">
+                    <select class="form-control" style="float: right; width: 100px; margin-top: 3px ;" [(ngModel)]="filter.items" name="items">
+                        <option [value]="10">10</option>
+                        <option [value]="20">20</option>
+                        <option [value]="50">50</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>

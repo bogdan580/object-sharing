@@ -1,6 +1,18 @@
 @import '~bootstrap/scss/variables';
-.footer {
-  display: none;
+
+html,
+body,
+jhi-articles,
+.page{
+  height: 100%;
+}
+.container-fluid,
+.page-body {
+  height: calc(100% - 62px);
+}
+.card.jh-card {
+  margin-top: 0;
+  height: 100%;
 }
 /* ==========================================================================
 Navbar
@@ -25,6 +37,9 @@ Navbar
     color: white;
   }
 }
+.logo-img {
+  background-image: url('../images/logo.png')!important;
+}
 /* ==========================================================================
 Page heading
 ========================================================================== */
@@ -48,4 +63,15 @@ Page heading
     display: flex;
     flex-direction: column;
   }
+}
+/* ==========================================================================
+Icons
+========================================================================== */
+.icon-x {
+  padding-right: .5rem;
+  cursor: pointer;
+  color: $primary;
+}
+.icon-x :hover {
+  color: $danger;
 }

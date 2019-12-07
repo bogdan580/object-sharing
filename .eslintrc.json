@@ -12,6 +12,7 @@
       }
     ],
     "no-console": "off",
+    "no-namespace": "off",
     "no-this-alias": 0,
     "no-restricted-syntax": [
       "error",

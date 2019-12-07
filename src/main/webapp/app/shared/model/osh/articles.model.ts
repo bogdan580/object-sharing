@@ -17,7 +17,7 @@ export interface IArticlesFilter {
   items: number;
   sort: Sorting;
   text: string;
-  category?: string;
+  category: string;
   postalCode?: string;
   city?: string;
 }
@@ -28,7 +28,7 @@ export class ArticlesFilter implements IArticlesFilter {
     public items = 20,
     public sort = Sorting.ADDTIME_DESK,
     public text = '',
-    public category?: string,
+    public category = 'Wybierz kategorie',
     public postalCode?: string,
     public city?: string
   ) {

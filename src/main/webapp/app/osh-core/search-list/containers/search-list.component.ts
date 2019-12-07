@@ -8,6 +8,10 @@ import {
 } from 'app/shared/model/osh/articles.model';
 import { SearchListService } from 'app/osh-core/search-list/shared/services/search-list.service';
 import { JhiAlertService } from 'ng-jhipster';
+import { ICategory } from 'app/shared/model/category.model';
+import { CategoryService } from 'app/entities/category/category.service';
+import { filter, map } from 'rxjs/operators';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'jhi-articles',
@@ -21,12 +25,14 @@ export class SearchListComponent implements OnInit {
   filter: IArticlesFilter;
   events: any[];
   selectedDays: any;
+  categories: ICategory[];
 
-  constructor(protected searchListService: SearchListService, private alertService: JhiAlertService) {
+  constructor(protected searchListService: SearchListService,
+              private alertService: JhiAlertService,
+              protected categoryService: CategoryService) {
     this.selectedDays = null;
     // debug
     this.filter = new ArticlesFilter();
-    this.filter.category = 'Sport';
     this.searchedArticles = [
       { id: 1, name: 'Article 1' },
       { id: 2, name: 'Article 2' },
@@ -41,7 +47,8 @@ export class SearchListComponent implements OnInit {
       { id: 11, name: 'Article 5' },
       { id: 12, name: 'Article 6' }
     ];
-    this.selectedArticle = this.searchedArticles[0];
+    this.selectedArticle = null;
+    // this.selectedArticle = this.searchedArticles[0];
   }
 
   ngOnInit() {
@@ -70,6 +77,15 @@ export class SearchListComponent implements OnInit {
         'end': '2016-01-13'
       }
     ];
+    this.categoryService
+      .query()
+      .pipe(
+        filter((res: HttpResponse<ICategory[]>) => res.ok),
+        map((res: HttpResponse<ICategory[]>) => res.body)
+      )
+      .subscribe((res: ICategory[]) => {
+        this.categories = res;
+      });
   }
 
   trackId(index: number, item: IArticle) {
@@ -78,6 +94,7 @@ export class SearchListComponent implements OnInit {
 
   search() {
     // console.log(this.filter);
+    this.filter.items = +this.filter.items;
     this.searchListService.searchArticles(this.filter).subscribe(r => {
       // console.log(r.body);
       this.searchedArticles = r.body;
@@ -169,6 +186,10 @@ export class SearchListComponent implements OnInit {
         'end': '2016-01-13'
       }
     ];
+  }
+
+  closeArticleInfo() {
+    this.selectedArticle = null;
   }
 }
 

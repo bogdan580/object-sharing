@@ -45,6 +45,59 @@
             <div class="card add-panel">
                 <div class="card-body">
                     <h4 style="text-align: center">Dodaj nowy</h4>
+                    <form name="addArticleForm" role="form" (ngSubmit)="saveArticle()" [formGroup]="articleForm">
+                        <div class="form-group">
+                            <label class="form-control-label" for="articleName">Article</label>
+                            <input type="text" class="form-control" id="articleName" name="articleName" placeholder="Article"
+                                   formControlName="name">
+                            <div *ngIf="articleForm.get('name').invalid && (articleForm.get('name').dirty || articleForm.get('name').touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="articleForm.get('name').errors.required" jhiTranslate="settings.messages.validate.firstname.required">
+                                    Your first name is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       *ngIf="articleForm.get('name').errors.minlength" jhiTranslate="settings.messages.validate.firstname.minlength">
+                                    Your first name is required to be at least 1 character.
+                                </small>
+                                <small class="form-text text-danger"
+                                       *ngIf="articleForm.get('name').errors.maxlength" jhiTranslate="settings.messages.validate.firstname.maxlength">
+                                    Your first name cannot be longer than 50 characters.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" for="articleDesc">Desc</label>
+                            <textarea type="text" class="form-control" id="articleDesc" name="articleDesc" placeholder="Desc (optional)"
+                                      formControlName="desc"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" for="articleImage">Image</label>
+                            <input type="text" class="form-control" id="articleImage" name="articleImage" placeholder="Image URL"
+                                   formControlName="mainImage">
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="form-control-label" for="articlePrice">Price</label>
+                                    <input type="number" class="form-control" id="articlePrice" name="articlePrice" placeholder="Price"
+                                           formControlName="price">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-control-label" for="articleCurrency">Currency</label>
+                                    <select class="form-control" id="articleCurrency" name="articleCurrency"
+                                            formControlName="currency">
+                                        <option *ngFor="let value of currency.values()" [value]="value">{{value}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" for="articleCategory">Category</label>
+                            <input type="text" class="form-control" id="articleCategory" name="articleCategory" placeholder="Category"
+                                   formControlName="categoryName">
+                        </div>
+                        <button type="submit" [disabled]="articleForm.invalid" class="btn btn-primary float-right" jhiTranslate="settings.form.button">Save</button>
+                    </form>
                 </div>
             </div>
         </div>

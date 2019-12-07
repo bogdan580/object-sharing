@@ -16,7 +16,11 @@
 .page select {
   font-size: 1rem;
 }
-
+#page-heading{
+  display: flex;
+  span {flex: 1}
+  form {flex: 3}
+}
 // full view right sidebar
 .right-sidebar {
   .search-map {
@@ -30,22 +34,35 @@
     flex: 1;
   }
 }
+// search list
+.paging {
+  min-height: 50px;
+  display: inline-flex;
+  border-top: 1px solid lightgray;
+  //position: absolute;
+  bottom: 0;
+  width: 100%;
+}
 
 // minimal view
 .right-sidebar.minimal {
   display: flex;
+  flex-direction: row;
   .search-map.minimal {
     flex: 0.5;
     margin-bottom: 0;
   }
   .search-list.minimal {
     flex: 1;
-    height: 460px;
+    .paging.minimal {
+      position: absolute;
+    }
   }
 }
 
 // article details block
 .article-details-block {
+  height: min-content;
   .article-details {
     display: flex;
     min-height: 150px;
