@@ -14,6 +14,18 @@ jhi-leaflet-map,
 .card.jh-card {
   margin-top: 0;
   height: 100%;
+  padding: 1%;
+}
+
+jhi-alert-error,
+jhi-alert {
+  position: absolute;
+  z-index: 1001;
+  right: 0;
+}
+hr {
+  margin-top: 2px;
+  margin-bottom: 5px;
 }
 /* ==========================================================================
 Navbar

@@ -1,7 +1,7 @@
 .hipster {
   display: inline-block;
   width: 260px;
-  height: 210px;
+  height: 170px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin-right: 25px;
   background: url('../../../../content/images/jhipster_family_member_0_head-384.png') no-repeat center top;
@@ -18,6 +18,7 @@
 }
 #page-heading{
   display: flex;
+  margin-bottom: 0;
   span {flex: 1}
   form {flex: 3}
 }
@@ -36,7 +37,7 @@
 }
 // search list
 .paging {
-  min-height: 52px;
+  flex: 0.1;
   display: inline-flex;
   border-top: 1px solid lightgray;
   //position: absolute;
@@ -62,7 +63,7 @@
 
 // article details block
 .article-details-block {
-  height: min-content;
+  height: auto;
   .article-details {
     display: flex;
     min-height: 150px;

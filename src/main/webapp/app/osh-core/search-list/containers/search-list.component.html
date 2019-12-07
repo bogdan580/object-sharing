@@ -96,7 +96,7 @@
                 <div class="alert alert-warning" *ngIf="searchedArticles?.length === 0">
                     <span jhiTranslate="objectSharingApp.article.home.notFound">No articles found</span>
                 </div>
-                <div style="overflow-y: auto;">
+                <div style="overflow-y: auto;flex: 1;">
                     <table class="table table-striped" *ngIf="searchedArticles?.length > 0"
                            aria-describedby="page-heading">
                         <tbody>
