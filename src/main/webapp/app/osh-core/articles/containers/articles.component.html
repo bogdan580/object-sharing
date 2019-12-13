@@ -11,31 +11,53 @@
                     <p-tabPanel header="Mój sprzęt">
                         <p-panel header="Wyporzyczone">
                             <table class="table table-striped" aria-describedby="page-heading">
-                                <tbody>
-                                <tr><td>1</td></tr>
-                                <tr><td>2</td></tr>
-                                <tr><td>3</td></tr>
-                                <tr><td>4</td></tr>
-                                <tr><td>5</td></tr>
+                                <span class="not-found" *ngIf="a_in_rent.length === 0" jhiTranslate="osh.articles.404"></span>
+                                <tbody *ngIf="a_in_rent.length > 0">
+                                <tr *ngFor="let arnt of a_in_rent"><td>{{arnt.name}}</td></tr>
                                 </tbody>
                             </table>
                         </p-panel>
                         <p-panel header="Zarezerwowane">
-                            Content
+                            <table class="table table-striped" aria-describedby="page-heading">
+                                <span class="not-found" *ngIf="a_reserved.length === 0" jhiTranslate="osh.articles.404"></span>
+                                <tbody *ngIf="a_reserved.length > 0">
+                                <tr *ngFor="let ares of a_reserved"><td>{{ares.name}}</td></tr>
+                                </tbody>
+                            </table>
                         </p-panel>
                         <p-panel header="Aktywne">
-                            Content
+                            <table class="table table-striped" aria-describedby="page-heading">
+                                <span class="not-found" *ngIf="a_active.length === 0" jhiTranslate="osh.articles.404"></span>
+                                <tbody *ngIf="a_active.length > 0">
+                                <tr *ngFor="let aatv of a_active"><td>{{aatv.name}}</td></tr>
+                                </tbody>
+                            </table>
                         </p-panel>
                         <p-panel header="Nieaktywne">
-                            Content
+                            <table class="table table-striped" aria-describedby="page-heading">
+                                <span class="not-found" *ngIf="a_disabled.length === 0" jhiTranslate="osh.articles.404"></span>
+                                <tbody *ngIf="a_disabled.length > 0">
+                                <tr *ngFor="let adis of a_disabled"><td>{{adis.name}}</td></tr>
+                                </tbody>
+                            </table>
                         </p-panel>
                     </p-tabPanel>
-                    <p-tabPanel header="Moje wypożyczenia">
-                        <p-panel header="Wypożyczone">
-                            Content
+                    <p-tabPanel header="Moje wypożyczenia i rezerwacje">
+                        <p-panel header="Wypożyczenia">
+                            <table class="table table-striped" aria-describedby="page-heading">
+                                <span class="not-found" *ngIf="myRentings.length === 0" jhiTranslate="osh.articles.404"></span>
+                                <tbody *ngIf="myRentings.length > 0">
+                                <tr *ngFor="let rents of myRentings"><td>{{rents.article.name}}</td></tr>
+                                </tbody>
+                            </table>
                         </p-panel>
-                        <p-panel header="Zarezerwowane">
-                            Content
+                        <p-panel header="Rezerwacje">
+                            <table class="table table-striped" aria-describedby="page-heading">
+                                <span class="not-found" *ngIf="myReservations.length === 0" jhiTranslate="osh.articles.404"></span>
+                                <tbody *ngIf="myReservations.length > 0">
+                                <tr *ngFor="let resrv of myReservations"><td>{{resrv.article.name}}</td></tr>
+                                </tbody>
+                            </table>
                         </p-panel>
                     </p-tabPanel>
                 </p-tabView>

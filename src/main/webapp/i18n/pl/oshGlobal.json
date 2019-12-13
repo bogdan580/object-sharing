@@ -1,7 +1,8 @@
 {
   "osh": {
     "articles": {
-      "title": "Artykuły"
+      "title": "Artykuły",
+      "404": "Brak danych"
     },
     "profile": {
       "title": "Moje konto"

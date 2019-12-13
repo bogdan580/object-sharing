@@ -1,5 +1,9 @@
 package com.mbohdan.projects.osharing.service.osh;
 
+import com.mbohdan.projects.osharing.domain.Renting;
+import com.mbohdan.projects.osharing.domain.Reservation;
+import com.mbohdan.projects.osharing.repository.RentingRepository;
+import com.mbohdan.projects.osharing.repository.ReservationRepository;
 import com.mbohdan.projects.osharing.repository.osh.OshArticlesRepository;
 import com.mbohdan.projects.osharing.service.dto.osh.ArticlesFilterDTO;
 import com.mbohdan.projects.osharing.service.dto.osh.OshArticleDTO;
@@ -25,14 +29,19 @@ import java.util.regex.Pattern;
 public class OshArticlesService {
     private final Logger log = LoggerFactory.getLogger(OshArticlesService.class);
     private final OshArticlesRepository oshArticlesRepository;
+    private final ReservationRepository reservationRepository;
+    private final RentingRepository rentingRepository;
     private final RestTemplate restTemplate;
-    public OshArticlesService(OshArticlesRepository oshArticlesRepository) {
+    public OshArticlesService(OshArticlesRepository oshArticlesRepository, ReservationRepository reservationRepository,
+                              RentingRepository rentingRepository) {
         ClientHttpRequestFactory factory = new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
         this.restTemplate = new RestTemplate(factory);
         this.restTemplate.getMessageConverters().add(new ByteArrayHttpMessageConverter());
         this.restTemplate.setInterceptors(Collections.singletonList(new RequestResponseLoggingInterceptor()));
 
         this.oshArticlesRepository = oshArticlesRepository;
+        this.reservationRepository = reservationRepository;
+        this.rentingRepository = rentingRepository;
     }
 
     public List<OshArticleDTO> searchArticles(ArticlesFilterDTO filterDTO) {
@@ -80,5 +89,17 @@ public class OshArticlesService {
             city,
             pagebleSortParam
         );
+    }
+
+    public List<OshArticleDTO> getUserArticles() {
+        return this.oshArticlesRepository.findByUserIsCurrentUser();
+    }
+
+    public List<Reservation> getUserReservations() {
+        return this.reservationRepository.findByUserIsCurrentUser();
+    }
+
+    public List<Renting> getUserRentings() {
+        return this.rentingRepository.findByUserIsCurrentUser();
     }
 }

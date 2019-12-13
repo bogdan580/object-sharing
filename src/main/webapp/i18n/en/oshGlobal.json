@@ -1,7 +1,8 @@
 {
   "osh": {
     "articles": {
-      "title": "Articles"
+      "title": "Articles",
+      "404": "Not found"
     },
     "profile": {
       "title": "Profile"

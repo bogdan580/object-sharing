@@ -88,3 +88,22 @@ Icons
 .icon-x :hover {
   color: $danger;
 }
+
+/* ==========================================================================
+Table
+========================================================================== */
+body .ui-panel .ui-panel-titlebar {
+  background-color: #4582ec5e;
+}
+body .ui-panel .ui-panel-content {
+  padding: 0;
+  max-height: 30vh;
+  overflow-y: auto;
+}
+body .ui-tabview .ui-tabview-panels {
+  padding: 0;
+}
+table .not-found {
+  padding: 8px 8px 0;
+  display: block;
+}

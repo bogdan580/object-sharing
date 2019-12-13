@@ -27,4 +27,11 @@ public interface OshArticlesRepository extends JpaRepository<Article, Long> {
         Pageable pageable
     );
 
+    @Query("SELECT new com.mbohdan.projects.osharing.service.dto.osh.OshArticleDTO("
+                            + "a.id, a.name, a.desc, a.status, a.addTime, a.price, a.mainImage, a.rentPeriod,"
+                            + "a.currency, a.user.id, c.categoryName, l.streetAddress, l.postalCode, l.city, l.stateProvince,"
+                            + "l.lat, l.lon)"
+        + "FROM Article a JOIN a.category c INNER JOIN a.location l "
+        + "WHERE a.user.login = ?#{principal.username} ORDER BY a.status")
+    List<OshArticleDTO> findByUserIsCurrentUser();
 }
