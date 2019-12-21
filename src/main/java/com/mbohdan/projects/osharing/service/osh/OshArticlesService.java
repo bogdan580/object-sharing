@@ -1,10 +1,14 @@
 package com.mbohdan.projects.osharing.service.osh;
 
-import com.mbohdan.projects.osharing.domain.Renting;
-import com.mbohdan.projects.osharing.domain.Reservation;
+import com.mbohdan.projects.osharing.domain.*;
+import com.mbohdan.projects.osharing.domain.enumeration.ObjectStatus;
+import com.mbohdan.projects.osharing.repository.ArticleRepository;
+import com.mbohdan.projects.osharing.repository.LocationRepository;
 import com.mbohdan.projects.osharing.repository.RentingRepository;
 import com.mbohdan.projects.osharing.repository.ReservationRepository;
 import com.mbohdan.projects.osharing.repository.osh.OshArticlesRepository;
+import com.mbohdan.projects.osharing.repository.osh.OshReservationRepository;
+import com.mbohdan.projects.osharing.repository.osh.OshUserRepository;
 import com.mbohdan.projects.osharing.service.dto.osh.ArticlesFilterDTO;
 import com.mbohdan.projects.osharing.service.dto.osh.OshArticleDTO;
 import com.mbohdan.projects.osharing.service.util.osh.RequestResponseLoggingInterceptor;
@@ -29,19 +33,26 @@ import java.util.regex.Pattern;
 public class OshArticlesService {
     private final Logger log = LoggerFactory.getLogger(OshArticlesService.class);
     private final OshArticlesRepository oshArticlesRepository;
-    private final ReservationRepository reservationRepository;
+    private final ArticleRepository articleRepository;
+    private final OshReservationRepository oshReservationRepository;
     private final RentingRepository rentingRepository;
-    private final RestTemplate restTemplate;
-    public OshArticlesService(OshArticlesRepository oshArticlesRepository, ReservationRepository reservationRepository,
-                              RentingRepository rentingRepository) {
+    private final OshUserRepository oshUserRepository;
+    private final LocationRepository locationRepository;
+
+    public OshArticlesService(OshArticlesRepository oshArticlesRepository, ArticleRepository articleRepository,
+                              OshReservationRepository oshReservationRepository, RentingRepository rentingRepository,
+                              OshUserRepository oshUserRepository, LocationRepository locationRepository) {
         ClientHttpRequestFactory factory = new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
-        this.restTemplate = new RestTemplate(factory);
-        this.restTemplate.getMessageConverters().add(new ByteArrayHttpMessageConverter());
-        this.restTemplate.setInterceptors(Collections.singletonList(new RequestResponseLoggingInterceptor()));
+        RestTemplate restTemplate = new RestTemplate(factory);
+        restTemplate.getMessageConverters().add(new ByteArrayHttpMessageConverter());
+        restTemplate.setInterceptors(Collections.singletonList(new RequestResponseLoggingInterceptor()));
 
         this.oshArticlesRepository = oshArticlesRepository;
-        this.reservationRepository = reservationRepository;
+        this.articleRepository = articleRepository;
+        this.oshReservationRepository = oshReservationRepository;
         this.rentingRepository = rentingRepository;
+        this.oshUserRepository = oshUserRepository;
+        this.locationRepository = locationRepository;
     }
 
     public List<OshArticleDTO> searchArticles(ArticlesFilterDTO filterDTO) {
@@ -91,15 +102,38 @@ public class OshArticlesService {
         );
     }
 
-    public List<OshArticleDTO> getUserArticles() {
-        return this.oshArticlesRepository.findByUserIsCurrentUser();
+    public List<Article> getUserArticles() {
+        return this.articleRepository.findByUserIsCurrentUser();
     }
 
     public List<Reservation> getUserReservations() {
-        return this.reservationRepository.findByUserIsCurrentUser();
+        return this.oshReservationRepository.findByUserIsCurrentUser();
+    }
+
+    public List<Reservation> getActiveReservesByArticleOwner() {
+        Long currentTime = System.currentTimeMillis();
+        log.debug("currentTime: " + currentTime);
+        return this.oshReservationRepository.findActiveReservesByArticleOwner(currentTime.toString());
     }
 
     public List<Renting> getUserRentings() {
         return this.rentingRepository.findByUserIsCurrentUser();
+    }
+
+    public Article saveArticle(Article article) {
+        article.setStatus(ObjectStatus.ACTIVE);
+        article.setAddTime(System.currentTimeMillis());
+        if (article.getUser() == null) {
+            User current_user = oshUserRepository.findByUserIsCurrentUser();
+            log.debug("Current user: {}", current_user);
+            article.setUser(current_user);
+        }
+        if (article.getLocation() == null) {
+            Location user_location =  locationRepository.findByUserIsCurrentUser().get(0);
+            log.debug("User Location: {}", user_location);
+            article.setLocation(user_location);
+        };
+        log.debug("Article: {}", article);
+        return oshArticlesRepository.save(article);
     }
 }

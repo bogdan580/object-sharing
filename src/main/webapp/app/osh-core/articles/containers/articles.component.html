@@ -7,6 +7,8 @@
     <div class="page-body">
         <div class="card" style="flex: 1">
             <div class="card-body">
+                <button type="button" class="btn btn-primary add-article"
+                        jhiTranslate="osh.add" (click)="updateForm(null)">Add</button>
                 <p-tabView>
                     <p-tabPanel header="Mój sprzęt">
                         <p-panel header="Wyporzyczone">
@@ -21,7 +23,12 @@
                             <table class="table table-striped" aria-describedby="page-heading">
                                 <span class="not-found" *ngIf="a_reserved.length === 0" jhiTranslate="osh.articles.404"></span>
                                 <tbody *ngIf="a_reserved.length > 0">
-                                <tr *ngFor="let ares of a_reserved"><td>{{ares.name}}</td></tr>
+                                <tr *ngFor="let ares of a_reserved">
+                                    <td>{{ares.article.name}} - {{ares.user.login}}
+                                        <span>{{(ares.startTime * 1000 | date: 'd/MM/yy')}}</span> -
+                                        <span>{{(ares.endTime * 1000 | date: 'd/MM/yy')}}</span>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                         </p-panel>
@@ -29,15 +36,15 @@
                             <table class="table table-striped" aria-describedby="page-heading">
                                 <span class="not-found" *ngIf="a_active.length === 0" jhiTranslate="osh.articles.404"></span>
                                 <tbody *ngIf="a_active.length > 0">
-                                <tr *ngFor="let aatv of a_active"><td>{{aatv.name}}</td></tr>
+                                <tr *ngFor="let aactv of a_active" (click)="updateForm(aactv)"><td>{{aactv.name}}</td></tr>
                                 </tbody>
                             </table>
                         </p-panel>
                         <p-panel header="Nieaktywne">
                             <table class="table table-striped" aria-describedby="page-heading">
-                                <span class="not-found" *ngIf="a_disabled.length === 0" jhiTranslate="osh.articles.404"></span>
-                                <tbody *ngIf="a_disabled.length > 0">
-                                <tr *ngFor="let adis of a_disabled"><td>{{adis.name}}</td></tr>
+                                <span class="not-found" *ngIf="a_disactive.length === 0" jhiTranslate="osh.articles.404"></span>
+                                <tbody *ngIf="a_disactive.length > 0">
+                                <tr *ngFor="let adis of a_disactive" (click)="updateForm(adis)"><td>{{adis.name}}</td></tr>
                                 </tbody>
                             </table>
                         </p-panel>
@@ -66,7 +73,8 @@
         <div class="right-sidebar">
             <div class="card add-panel">
                 <div class="card-body">
-                    <h4 style="text-align: center">Dodaj nowy</h4>
+                    <h4 style="text-align: center" *ngIf="!articleForm.get('id').value">Dodaj nowy</h4>
+                    <h4 style="text-align: center" *ngIf="articleForm.get('id').value">Zmodyfikuj</h4>
                     <form name="addArticleForm" role="form" (ngSubmit)="saveArticle()" [formGroup]="articleForm">
                         <div class="form-group">
                             <label class="form-control-label" for="articleName">Article</label>
@@ -99,26 +107,40 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <label class="form-control-label" for="articlePrice">Price</label>
                                     <input type="number" class="form-control" id="articlePrice" name="articlePrice" placeholder="Price"
                                            formControlName="price">
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                     <label class="form-control-label" for="articleCurrency">Currency</label>
                                     <select class="form-control" id="articleCurrency" name="articleCurrency"
                                             formControlName="currency">
                                         <option *ngFor="let value of currency.values()" [value]="value">{{value}}</option>
                                     </select>
                                 </div>
+                                <div class="col-4">
+                                    <label class="form-control-label" for="articleRentPeriod">Rent Period</label>
+                                    <select class="form-control" id="articleRentPeriod" name="articleRentPeriod"
+                                            formControlName="rentPeriod">
+                                        <option *ngFor="let value of rentPeriod.values()" [value]="value">{{value}}</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label" for="articleCategory">Category</label>
-                            <input type="text" class="form-control" id="articleCategory" name="articleCategory" placeholder="Category"
-                                   formControlName="categoryName">
+<!--                            <input type="text" class="form-control" id="articleCategory" name="articleCategory" placeholder="Category"-->
+<!--                                   formControlName="categoryName">-->
+                            <select class="form-control" id="articleCategory" name="articleCategory" formControlName="category">
+                                <option [ngValue]="categoryOption.id === articleForm.get('category').value?.id ? articleForm.get('category').value : categoryOption"
+                                        *ngFor="let categoryOption of categories; trackBy: trackCategoryById"
+                                        [selected]="categoryOption.id === articleForm.get('category').value?.id">
+                                    {{categoryOption.categoryName}}
+                                </option>
+                            </select>
                         </div>
-                        <button type="submit" [disabled]="articleForm.invalid" class="btn btn-primary float-right" jhiTranslate="settings.form.button">Save</button>
+                        <button type="submit" [disabled]="articleForm.invalid || isSaving" class="btn btn-success float-right" jhiTranslate="settings.form.button">Save</button>
                     </form>
                 </div>
             </div>

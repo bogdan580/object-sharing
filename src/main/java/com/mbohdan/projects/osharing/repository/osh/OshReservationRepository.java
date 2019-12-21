@@ -1,0 +1,24 @@
+package com.mbohdan.projects.osharing.repository.osh;
+
+import com.mbohdan.projects.osharing.domain.Reservation;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+/**
+ * Spring Data  repository for the Reservation entity.
+ */
+@SuppressWarnings("unused")
+@Repository
+public interface OshReservationRepository extends JpaRepository<Reservation, Long> {
+
+    @Query("select reservation from Reservation reservation where reservation.user.login = ?#{principal.username}")
+    List<Reservation> findByUserIsCurrentUser();
+
+    @Query("select reservation from Reservation reservation where reservation.endTime > :cur_time  AND reservation.article.user.login = ?#{principal.username}")
+    List<Reservation> findActiveReservesByArticleOwner(@Param("cur_time") String cur_time);
+
+}

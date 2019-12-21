@@ -1,4 +1,5 @@
 package com.mbohdan.projects.osharing.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -67,10 +68,12 @@ public class Article implements Serializable {
     private Set<Image> images = new HashSet<>();
 
     @OneToMany(mappedBy = "article")
+    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Renting> rentings = new HashSet<>();
 
     @OneToMany(mappedBy = "article")
+    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Reservation> reservations = new HashSet<>();
 
@@ -79,13 +82,13 @@ public class Article implements Serializable {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "location_id", insertable = false, updatable = true)
+    @JoinColumn(name = "location_id")
     @Fetch(FetchMode.JOIN)
     @JsonIgnoreProperties("articles")
     private Location location;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", insertable = false, updatable = true)
+    @JoinColumn(name = "category_id")
     @Fetch(FetchMode.JOIN)
     @JsonIgnoreProperties("articles")
     private Category category;
