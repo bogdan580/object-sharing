@@ -23,7 +23,7 @@ export class CalendarComponent implements OnInit {
     const selectEvent = this.selectEvent;
     this.options = {
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-      defaultDate: '2016-01-01',
+      // defaultDate: '2016-01-01',
       header: {
         // left: 'prev,next',
         left: 'title',

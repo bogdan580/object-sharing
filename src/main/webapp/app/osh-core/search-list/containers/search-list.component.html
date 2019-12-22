@@ -54,7 +54,7 @@
             <div class="card-body" style="display: flex; flex-direction: column;">
                 <div class="article-details">
                     <div class="article-img">
-                        <span class="hipster img-fluid rounded"></span>
+                        <span class="hipster img-fluid rounded" [style.backgroundImage]="'url('+ selectedArticle.mainImage +')'"></span>
                     </div>
                     <div class="article-info">
                         <h4>
@@ -87,8 +87,9 @@
         <div class="right-sidebar" [ngClass]="{'minimal' : !selectedArticle}">
             <div class="card search-map" [ngClass]="{'minimal' : !selectedArticle}">
                 <jhi-leaflet-map
-                    [latitude]="lat"
-                    [longitude]="lng"
+                    [points]="points"
+                    [startPoint]="startPoint"
+                    [stopPoint]="stopPoint"
                     [zoom]="zoom">
                 </jhi-leaflet-map>
             </div>

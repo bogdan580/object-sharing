@@ -25,7 +25,7 @@ const routes: Routes = [
     path: 'search-list',
     loadChildren: () => import('./search-list/search-list.module').then(s => s.SearchListModule),
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [],
       pageTitle: 'osh.searchList.title'
     },
     canActivate: [UserRouteAccessService]

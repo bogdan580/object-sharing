@@ -58,7 +58,7 @@ export interface IOshArticleDTO {
 
 export interface IOshArticleInfoDTO {
   userInfo?: UserInfo;
-  reserves?: Reservation[];
-  rents?: Renting[];
+  reservations?: Reservation[];
+  rentings?: Renting[];
   images?: Image[];
 }

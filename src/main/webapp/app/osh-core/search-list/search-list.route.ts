@@ -7,7 +7,7 @@ export const searchListRoute: Routes = [
     path: '',
     component: SearchListComponent,
     data: {
-      authorities: ['ROLE_USER']
+      authorities: []
     },
     canActivate: [UserRouteAccessService]
   }

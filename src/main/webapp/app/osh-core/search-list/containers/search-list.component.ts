@@ -12,6 +12,8 @@ import { ICategory } from 'app/shared/model/category.model';
 import { CategoryService } from 'app/entities/category/category.service';
 import { filter, map } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
+import { formatDate } from '@angular/common';
+import { Point } from 'leaflet';
 
 @Component({
   selector: 'jhi-articles',
@@ -26,58 +28,25 @@ export class SearchListComponent implements OnInit {
   events: any[];
   selectedDays: any;
   categories: ICategory[];
-  lat = 50.880145;
-  lng = 20.646798;
+  points: Point[];
+  startPoint: Point;
+  stopPoint: Point;
   zoom = 13;
+
   constructor(protected searchListService: SearchListService,
               private alertService: JhiAlertService,
               protected categoryService: CategoryService) {
     this.selectedDays = null;
     // debug
     this.filter = new ArticlesFilter();
-    this.searchedArticles = [
-      { id: 1, name: 'Article 1' },
-      { id: 2, name: 'Article 2' },
-      { id: 3, name: 'Article 3' },
-      { id: 4, name: 'Article 4' },
-      { id: 5, name: 'Article 5' },
-      { id: 6, name: 'Article 6' },
-      { id: 7, name: 'Article 1' },
-      { id: 8, name: 'Article 2' },
-      { id: 9, name: 'Article 3' },
-      { id: 10, name: 'Article 4' },
-      { id: 11, name: 'Article 5' },
-      { id: 12, name: 'Article 6' }
-    ];
     this.selectedArticle = null;
+    this.points = [];
+    this.startPoint = null;
+    this.stopPoint = null;
   }
 
   ngOnInit() {
-    this.events = [
-      {
-        'title': 'All Day Event',
-        'start': '2016-01-01',
-        'rendering': 'background'
-      },
-      {
-        'title': 'Long Event',
-        'start': '2016-01-07',
-        'end': '2016-01-10'
-      },
-      {
-        'title': 'Repeating Event',
-        'start': '2016-01-09T16:00:00'
-      },
-      {
-        'title': 'Repeating Event',
-        'start': '2016-01-16T16:00:00'
-      },
-      {
-        'title': 'Conference',
-        'start': '2016-01-11',
-        'end': '2016-01-13'
-      }
-    ];
+    this.refresh(); // for debug
     this.categoryService
       .query()
       .pipe(
@@ -99,14 +68,37 @@ export class SearchListComponent implements OnInit {
     this.searchListService.searchArticles(this.filter).subscribe(r => {
       // console.log(r.body);
       this.searchedArticles = r.body;
+      this.points = [];
+      r.body.forEach(a => {
+        this.points.push(new Point(a.lat, a.lon));
+      });
     });
   }
 
   selectArticle(article: IOshArticleDTO) {
     this.selectedArticle = article;
-     this.searchListService.getArticleInfo(article.id).subscribe(r => {
+    this.stopPoint = new Point(article.lat, article.lon);
+    this.searchListService.getArticleInfo(article.id).subscribe(r => {
       console.log('articleInfo', r.body);
       this.selectedArticleInfo = r.body;
+      this.events = [];
+      this.selectedArticleInfo.rentings.forEach(rents => {
+        this.events.push({
+            'title': 'Renting',
+            'start': formatDate(rents.startTime, 'yyyy-MM-dd', 'PL'),
+            'end': formatDate(rents.endTime, 'yyyy-MM-dd', 'PL'),
+            'rendering': 'background'
+          }
+        );
+      });
+
+      this.selectedArticleInfo.reservations.forEach(resrv => {
+        this.events.push({
+          'title': 'Reservation',
+          'start': formatDate(resrv.startTime, 'yyyy-MM-dd', 'PL'),
+          'end': formatDate(resrv.endTime, 'yyyy-MM-dd', 'PL')
+        });
+      });
     });
   }
 
@@ -116,18 +108,29 @@ export class SearchListComponent implements OnInit {
   }
 
   addReserve() {
-    if (!this.isDateReserved()) {
+    if (this.isPastDate()) {
+      this.alertService.warning('Start date cannot be from the past');
+    } else if (this.isDateReserved()) {
+      this.alertService.warning('This article is reserved in selected period');
+    } else {
       this.events = [...this.events, this.selectedDays];
       this.selectedDays = null;
       this.alertService.success('Article was reserved');
-    } else {
-      this.alertService.warning('This article is reserved in selected period');
     }
+  }
+
+  isPastDate() {
+    const date = new Date();
+    // console.log(formatDate(date, 'yyyy-MM-dd', 'PL'));
+    // console.log(date.getTime());
+    // console.log(this.selectedDays.start);
+    // console.log(Date.parse(this.selectedDays.start).valueOf());
+    return date.getTime() > Date.parse(this.selectedDays.start).valueOf();
   }
 
   isDateReserved() {
     let reserved = false;
-    this.events.forEach( e => {
+    this.events.forEach(e => {
       const start = Date.parse(e.start);
       const end = Date.parse(e.end);
       const checkStart = Date.parse(this.selectedDays.start);
@@ -137,14 +140,14 @@ export class SearchListComponent implements OnInit {
       // console.log('selectedDays: ' + this.selectedDays.start + ' ' + this.selectedDays.end);
       if (e.end) {
         // console.log('isn\'t single day event');
-       /* console.log('between: ', checkStart <= start && end <= checkEnd);
-        console.log('inside: ', start <= checkStart && checkEnd <= end);
-        console.log('cross start: ', checkStart <= start && start < checkEnd && checkEnd <= end);
-        console.log('cross end: ', start <=  checkStart && checkStart < end && end <= checkEnd);*/
+        /* console.log('between: ', checkStart <= start && end <= checkEnd);
+         console.log('inside: ', start <= checkStart && checkEnd <= end);
+         console.log('cross start: ', checkStart <= start && start < checkEnd && checkEnd <= end);
+         console.log('cross end: ', start <=  checkStart && checkStart < end && end <= checkEnd);*/
         if ((checkStart <= start && end <= checkEnd) ||
-            (start <= checkStart && checkEnd <= end) ||
-            (checkStart <= start && start < checkEnd && checkEnd <= end) ||
-            (start <=  checkStart && checkStart < end && end <= checkEnd)) {
+          (start <= checkStart && checkEnd <= end) ||
+          (checkStart <= start && start < checkEnd && checkEnd <= end) ||
+          (start <= checkStart && checkStart < end && end <= checkEnd)) {
           reserved = true;
           return;
         }
@@ -162,35 +165,50 @@ export class SearchListComponent implements OnInit {
   }
 
   refresh() { // for debug
+    this.searchedArticles = [
+      { id: 1, name: 'Article 1' },
+      { id: 2, name: 'Article 2' },
+      { id: 3, name: 'Article 3' },
+      { id: 4, name: 'Article 4' },
+      { id: 5, name: 'Article 5' },
+      { id: 6, name: 'Article 6' },
+      { id: 7, name: 'Article 1' },
+      { id: 8, name: 'Article 2' },
+      { id: 9, name: 'Article 3' },
+      { id: 10, name: 'Article 4' },
+      { id: 11, name: 'Article 5' },
+      { id: 12, name: 'Article 6' }
+    ];
     this.events = [
       {
         'title': 'All Day Event',
-        'start': '2016-01-01',
+        'start': '2020-01-01',
         'rendering': 'background'
       },
       {
         'title': 'Long Event',
-        'start': '2016-01-07',
-        'end': '2016-01-10'
+        'start': '2020-01-07',
+        'end': '2020-01-10'
       },
       {
         'title': 'Repeating Event',
-        'start': '2016-01-09T16:00:00'
+        'start': '2020-01-09T16:00:00'
       },
       {
         'title': 'Repeating Event',
-        'start': '2016-01-16T16:00:00'
+        'start': '2020-01-16T16:00:00'
       },
       {
         'title': 'Conference',
-        'start': '2016-01-11',
-        'end': '2016-01-13'
+        'start': '2020-01-11',
+        'end': '2020-01-13'
       }
     ];
   }
 
   closeArticleInfo() {
     this.selectedArticle = null;
+    this.stopPoint = null;
   }
 }
 
