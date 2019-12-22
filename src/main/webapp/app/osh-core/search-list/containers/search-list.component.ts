@@ -50,7 +50,6 @@ export class SearchListComponent implements OnInit {
       { id: 12, name: 'Article 6' }
     ];
     this.selectedArticle = null;
-    // this.selectedArticle = this.searchedArticles[0];
   }
 
   ngOnInit() {
@@ -105,10 +104,10 @@ export class SearchListComponent implements OnInit {
 
   selectArticle(article: IOshArticleDTO) {
     this.selectedArticle = article;
-    /* this.searchListService.getArticleInfo(article.id).subscribe(r => {
-      console.log(r.body);
+     this.searchListService.getArticleInfo(article.id).subscribe(r => {
+      console.log('articleInfo', r.body);
       this.selectedArticleInfo = r.body;
-    });*/
+    });
   }
 
   onReserve(event: any) {

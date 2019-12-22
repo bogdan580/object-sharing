@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(ReservationService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Reservation(0, 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new Reservation(0, 0, 0);
     });
 
     describe('Service methods', () => {
@@ -56,8 +56,8 @@ describe('Service Tests', () => {
       it('should update a Reservation', () => {
         const returnedFromService = Object.assign(
           {
-            startTime: 'BBBBBB',
-            endTime: 'BBBBBB'
+            startTime: 1,
+            endTime: 1
           },
           elemDefault
         );
@@ -75,8 +75,8 @@ describe('Service Tests', () => {
       it('should return a list of Reservation', () => {
         const returnedFromService = Object.assign(
           {
-            startTime: 'BBBBBB',
-            endTime: 'BBBBBB'
+            startTime: 1,
+            endTime: 1
           },
           elemDefault
         );

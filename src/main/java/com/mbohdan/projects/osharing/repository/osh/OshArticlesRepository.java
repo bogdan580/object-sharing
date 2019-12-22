@@ -33,5 +33,10 @@ public interface OshArticlesRepository extends JpaRepository<Article, Long> {
                             + "l.lat, l.lon)"
         + "FROM Article a JOIN a.category c INNER JOIN a.location l "
         + "WHERE a.user.login = ?#{principal.username} ORDER BY a.status")
-    List<OshArticleDTO> findByUserIsCurrentUser();
+    List<OshArticleDTO> findByCurrentUser();
+
+    Article findArticleById(@Param("id") Long id);
+
+    @Query("select article from Article article where article.user.login = ?#{principal.username}")
+    List<Article> findByUserIsCurrentUser();
 }

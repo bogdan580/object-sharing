@@ -23,10 +23,10 @@ public class Reservation implements Serializable {
     private Long id;
 
     @Column(name = "start_time")
-    private String startTime;
+    private Long startTime;
 
     @Column(name = "end_time")
-    private String endTime;
+    private Long endTime;
 
     @ManyToOne
     @JsonIgnoreProperties("reservations")
@@ -45,29 +45,29 @@ public class Reservation implements Serializable {
         this.id = id;
     }
 
-    public String getStartTime() {
+    public Long getStartTime() {
         return startTime;
     }
 
-    public Reservation startTime(String startTime) {
+    public Reservation startTime(Long startTime) {
         this.startTime = startTime;
         return this;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(Long startTime) {
         this.startTime = startTime;
     }
 
-    public String getEndTime() {
+    public Long getEndTime() {
         return endTime;
     }
 
-    public Reservation endTime(String endTime) {
+    public Reservation endTime(Long endTime) {
         this.endTime = endTime;
         return this;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(Long endTime) {
         this.endTime = endTime;
     }
 
@@ -118,8 +118,8 @@ public class Reservation implements Serializable {
     public String toString() {
         return "Reservation{" +
             "id=" + getId() +
-            ", startTime='" + getStartTime() + "'" +
-            ", endTime='" + getEndTime() + "'" +
+            ", startTime=" + getStartTime() +
+            ", endTime=" + getEndTime() +
             "}";
     }
 }

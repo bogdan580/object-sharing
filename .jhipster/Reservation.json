@@ -3,11 +3,11 @@
     "fields": [
         {
             "fieldName": "startTime",
-            "fieldType": "String"
+            "fieldType": "Long"
         },
         {
             "fieldName": "endTime",
-            "fieldType": "String"
+            "fieldType": "Long"
         }
     ],
     "relationships": [

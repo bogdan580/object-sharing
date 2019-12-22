@@ -5,6 +5,7 @@ import com.mbohdan.projects.osharing.domain.Renting;
 import com.mbohdan.projects.osharing.domain.Reservation;
 import com.mbohdan.projects.osharing.service.dto.osh.ArticlesFilterDTO;
 import com.mbohdan.projects.osharing.service.dto.osh.OshArticleDTO;
+import com.mbohdan.projects.osharing.service.dto.osh.OshArticleInfoDTO;
 import com.mbohdan.projects.osharing.service.osh.OshArticlesService;
 import com.mbohdan.projects.osharing.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
@@ -27,10 +28,10 @@ public class OshArticlesResource {
     private static final String ENTITY_NAME = "article";
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-    private final OshArticlesService articlesService;
+    private final OshArticlesService oshArticlesService;
 
-    public OshArticlesResource(OshArticlesService articlesService) {
-        this.articlesService = articlesService;
+    public OshArticlesResource(OshArticlesService oshArticlesService) {
+        this.oshArticlesService = oshArticlesService;
     }
 
     /**
@@ -46,38 +47,48 @@ public class OshArticlesResource {
         if (filterDTO.getPage() == null || filterDTO.getItems() == null) {
             throw new BadRequestAlertException("A search parameters are wrong", ENTITY_NAME, "request error");
         }
-        List<OshArticleDTO> results = articlesService.searchArticles(filterDTO);
+        List<OshArticleDTO> results = oshArticlesService.searchArticles(filterDTO);
         log.debug("OshArticlesService.searchArticles() {}", results);
         return ResponseEntity.ok(results);
     }
 
-    // TODO get userInfo, images, active reserves and renting for selected article
+    @GetMapping("/articles/{id}/info")
+    public ResponseEntity<OshArticleInfoDTO> getArticleInfo(@PathVariable("id") Long id) {
+        log.debug("REST request to get userInfo, images, active reserves and renting for selected article id: ", id);
+        if (id == null ) {
+            throw new BadRequestAlertException("ID is NULL", ENTITY_NAME, "request error");
+        }
+        OshArticleInfoDTO oshArticleInfoDTO = oshArticlesService.getArticleInfo(id);
+        log.debug("OshArticlesService.getArticleInfo() {}", oshArticleInfoDTO);
+        return ResponseEntity.ok(oshArticleInfoDTO);
+    }
+
 
     @GetMapping("/articles/my")
     public ResponseEntity<List<Article>> getMyArticles() throws URISyntaxException {
         log.debug("REST request to get My Articles");
-        List<Article> results = articlesService.getUserArticles();
+        List<Article> results = oshArticlesService.getUserArticles();
         return ResponseEntity.ok(results);
     }
 
     @GetMapping("/articles/my/reserves")
     public ResponseEntity<List<Reservation>> getMyReservedArticles() throws URISyntaxException {
         log.debug("REST request to get My Reservations");
-        List<Reservation> results = articlesService.getUserReservations();
+        List<Reservation> results = oshArticlesService.getUserReservations();
         return ResponseEntity.ok(results);
     }
 
     @GetMapping("/reserves/myarticles")
     public ResponseEntity<List<Reservation>> getActiveReservesByArticleOwner() throws URISyntaxException {
         log.debug("REST request to get My Article reserves");
-        List<Reservation> results = articlesService.getActiveReservesByArticleOwner();
+        List<Reservation> results = oshArticlesService.getActiveReservesByArticleOwner();
         return ResponseEntity.ok(results);
     }
 
     @GetMapping("/articles/my/rented")
     public ResponseEntity<List<Renting>> getMyRentedArticles() throws URISyntaxException {
         log.debug("REST request to get My Rented Articles");
-        List<Renting> results = articlesService.getUserRentings();
+        List<Renting> results = oshArticlesService.getUserRentings();
         return ResponseEntity.ok(results);
     }
 
@@ -88,7 +99,7 @@ public class OshArticlesResource {
         } else{
             log.debug("REST update Article: {}", article);
         }
-        Article result = articlesService.saveArticle(article);
+        Article result = oshArticlesService.saveArticle(article);
         return ResponseEntity.created(new URI("/api/articles/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);

@@ -39,8 +39,8 @@ entity Renting {
   currency Currency
 }
 entity Reservation {
-  startTime String,
-  endTime String
+  startTime Long,
+  endTime Long
 }
 entity UserInfo {
   tel Integer,

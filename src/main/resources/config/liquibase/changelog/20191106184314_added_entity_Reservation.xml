@@ -15,10 +15,10 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="start_time" type="varchar(255)">
+            <column name="start_time" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="end_time" type="varchar(255)">
+            <column name="end_time" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="user_id" type="bigint">
@@ -50,8 +50,8 @@
                   separator=";"
                   tableName="reservation">
             <column name="id" type="numeric"/>
-            <column name="start_time" type="string"/>
-            <column name="end_time" type="string"/>
+            <column name="start_time" type="numeric"/>
+            <column name="end_time" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

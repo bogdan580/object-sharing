@@ -33,11 +33,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = ObjectSharingApp.class)
 public class ReservationResourceIT {
 
-    private static final String DEFAULT_START_TIME = "AAAAAAAAAA";
-    private static final String UPDATED_START_TIME = "BBBBBBBBBB";
+    private static final Long DEFAULT_START_TIME = 1L;
+    private static final Long UPDATED_START_TIME = 2L;
 
-    private static final String DEFAULT_END_TIME = "AAAAAAAAAA";
-    private static final String UPDATED_END_TIME = "BBBBBBBBBB";
+    private static final Long DEFAULT_END_TIME = 1L;
+    private static final Long UPDATED_END_TIME = 2L;
 
     @Autowired
     private ReservationRepository reservationRepository;
@@ -153,10 +153,10 @@ public class ReservationResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(reservation.getId().intValue())))
-            .andExpect(jsonPath("$.[*].startTime").value(hasItem(DEFAULT_START_TIME)))
-            .andExpect(jsonPath("$.[*].endTime").value(hasItem(DEFAULT_END_TIME)));
+            .andExpect(jsonPath("$.[*].startTime").value(hasItem(DEFAULT_START_TIME.intValue())))
+            .andExpect(jsonPath("$.[*].endTime").value(hasItem(DEFAULT_END_TIME.intValue())));
     }
-    
+
     @Test
     @Transactional
     public void getReservation() throws Exception {
@@ -168,8 +168,8 @@ public class ReservationResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(reservation.getId().intValue()))
-            .andExpect(jsonPath("$.startTime").value(DEFAULT_START_TIME))
-            .andExpect(jsonPath("$.endTime").value(DEFAULT_END_TIME));
+            .andExpect(jsonPath("$.startTime").value(DEFAULT_START_TIME.intValue()))
+            .andExpect(jsonPath("$.endTime").value(DEFAULT_END_TIME.intValue()));
     }
 
     @Test

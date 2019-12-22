@@ -4,6 +4,7 @@ import { Currency } from 'app/shared/model/enumerations/currency.model';
 import { Reservation } from 'app/shared/model/reservation.model';
 import { Renting } from 'app/shared/model/renting.model';
 import { Image } from 'app/shared/model/image.model';
+import { UserInfo } from 'app/shared/model/user-info.model';
 
 export const enum Sorting {
   PRISE_ASC = 'PRISE_ASC',
@@ -56,12 +57,7 @@ export interface IOshArticleDTO {
 }
 
 export interface IOshArticleInfoDTO {
-  login?: string;
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  langKey?: string;
-  createdDate?: Date;
+  userInfo?: UserInfo;
   reserves?: Reservation[];
   rents?: Renting[];
   images?: Image[];

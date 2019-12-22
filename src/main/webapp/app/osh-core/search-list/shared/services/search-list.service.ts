@@ -15,6 +15,6 @@ export class SearchListService {
   }
 
   getArticleInfo(id: number): Observable<any>  {
-    return this.http.get(`${this.resourceUrl}/articles/${id}`,{ observe: 'response' });
+    return this.http.get(`${this.resourceUrl}/articles/${id}/info`,{ observe: 'response' });
   }
 }
