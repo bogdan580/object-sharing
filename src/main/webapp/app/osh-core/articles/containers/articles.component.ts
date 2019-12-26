@@ -71,68 +71,61 @@ export class ArticlesComponent implements OnInit {
     });
   }
 
+  updateArtData(a: IArticle, newA: IArticle) {
+    a.name = newA.name;
+    a.desc = newA.desc;
+    a.status = newA.status;
+    a.price = newA.price;
+    a.mainImage = newA.mainImage;
+    a.rentPeriod = newA.rentPeriod;
+    a.currency = newA.currency;
+    a.category = newA.category;
+  }
+
   updateArticleTable(a: IArticle) {
-    let updateArt = null;
-    switch (a.status) {
-      case ObjectStatus.ACTIVE:
-        updateArt = this.a_active.find(art => art.id === a.id);
-        if (updateArt) {
-          this.a_active.forEach(art => {
-            if (art.id === a.id) {
-              art.name = a.name;
-              art.desc = a.desc;
-              art.status = a.status;
-              art.price = a.price;
-              art.mainImage = a.mainImage;
-              art.rentPeriod = a.rentPeriod;
-              art.currency = a.currency;
-              art.category = a.category;
-            }
-          });
-        } else {
-          this.a_active.push(a);
-        }
-        break;
-      case ObjectStatus.DISACTIVE:
-        updateArt = this.a_disactive.find(art => art.id === a.id);
-        if (updateArt) {
-          this.a_disactive.forEach(art => {
-            if (art.id === a.id) {
-              art.name = a.name;
-              art.desc = a.desc;
-              art.status = a.status;
-              art.price = a.price;
-              art.mainImage = a.mainImage;
-              art.rentPeriod = a.rentPeriod;
-              art.currency = a.currency;
-              art.category = a.category;
-            }
-          });
-        } else {
-          this.a_disactive.push(a);
-        }
-        break;
-      case ObjectStatus.INRENT:
-        updateArt = this.a_in_rent.find(art => art.id === a.id);
-        if (updateArt) {
-          this.a_in_rent.forEach(art => {
-            if (art.id === a.id) {
-              art.name = a.name;
-              art.desc = a.desc;
-              art.status = a.status;
-              art.price = a.price;
-              art.mainImage = a.mainImage;
-              art.rentPeriod = a.rentPeriod;
-              art.currency = a.currency;
-              art.category = a.category;
-            }
-          });
-        } else {
-          this.a_in_rent.push(a);
-        }
-        break;
+    let updateAct: Article = this.a_active.find(art => art.id === a.id);
+    let updateDisAct = this.a_disactive.find(art => art.id === a.id);
+    let updateInRent = this.a_in_rent.find(art => art.id === a.id);
+
+    if (updateAct) {
+      if (updateAct.status === a.status) {
+        this.updateArtData(updateAct, a);
+      } else {
+        this.a_active = this.a_active.filter(art => art.id !== a.id);
+        updateAct = null;
+      }
     }
-    this.updateForm(null);
+    if (updateDisAct) {
+      if (updateDisAct.status === a.status) {
+        this.updateArtData(updateDisAct, a);
+      } else {
+        this.a_disactive = this.a_disactive.filter(art => art.id !== a.id);
+        updateDisAct = null;
+      }
+    }
+    if (updateInRent) {
+      if (updateInRent.status === a.status) {
+        this.updateArtData(updateInRent, a);
+      } else {
+        this.a_in_rent = this.a_in_rent.filter(art => art.id !== a.id);
+        updateInRent = null;
+      }
+    }
+
+    if (!updateAct && !updateDisAct && !updateInRent) {
+      switch (a.status) {
+        case ObjectStatus.ACTIVE:
+          this.a_active.push(a);
+          break;
+        case ObjectStatus.DISACTIVE:
+          this.a_disactive.push(a);
+          break;
+        case ObjectStatus.INRENT:
+          this.a_in_rent.push(a);
+          break;
+      }
+      this.updateForm(null);
+    }
   }
 
   updateForm(article: IArticle) {
@@ -212,5 +205,13 @@ export class ArticlesComponent implements OnInit {
       location: this.articleForm.get(['location']).value,
       category: this.articleForm.get(['category']).value
     };
+  }
+
+  changeStatus(id: number, status: string, event: MouseEvent) {
+    this.artService.changeArticleStatus(id, status).subscribe(res => {
+      console.log('res', res);
+      this.updateArticleTable(res.body);
+    });
+    event.stopPropagation();
   }
 }

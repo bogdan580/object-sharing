@@ -1,3 +1,4 @@
+@import "src/main/webapp/content/scss/bootstrap-variables";
 .right-sidebar {
   flex: 0.5;
   margin: 0;
@@ -16,4 +17,11 @@
   float: right;
   right: 2em;
   padding: 3px 15px;
+}
+
+.status-btn {
+  font-size: 1.5em;
+  float: right;
+  color: $p-color;
+  cursor: pointer;
 }

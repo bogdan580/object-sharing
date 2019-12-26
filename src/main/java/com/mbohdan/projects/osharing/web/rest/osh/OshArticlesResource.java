@@ -3,6 +3,7 @@ package com.mbohdan.projects.osharing.web.rest.osh;
 import com.mbohdan.projects.osharing.domain.Article;
 import com.mbohdan.projects.osharing.domain.Renting;
 import com.mbohdan.projects.osharing.domain.Reservation;
+import com.mbohdan.projects.osharing.domain.enumeration.ObjectStatus;
 import com.mbohdan.projects.osharing.service.dto.osh.ArticlesFilterDTO;
 import com.mbohdan.projects.osharing.service.dto.osh.OshArticleDTO;
 import com.mbohdan.projects.osharing.service.dto.osh.OshArticleInfoDTO;
@@ -140,5 +141,13 @@ public class OshArticlesResource {
         return ResponseEntity.created(new URI("/api/articles/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PutMapping("articles/{id}/status/{newStatus}")
+    public ResponseEntity<Article> changeArticleStatus(@PathVariable("id") Long id,
+                                                       @PathVariable("newStatus") String newStatus) {
+        log.debug("REST request to change article:" + id + " status:" + newStatus);
+        Article result = oshArticlesService.changeArticleStatus(id, ObjectStatus.valueOf(newStatus.toUpperCase()));
+        return ResponseEntity.ok(result);
     }
 }

@@ -153,4 +153,10 @@ public class OshArticlesService {
         log.debug("Article: {}", article);
         return oshArticlesRepository.save(article);
     }
+
+    public Article changeArticleStatus(Long id, ObjectStatus newStatus) {
+        Article article = oshArticlesRepository.findArticleById(id);
+        article.setStatus(newStatus);
+        return oshArticlesRepository.save(article);
+    }
 }

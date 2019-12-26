@@ -16,7 +16,9 @@ export class ArticlesService {
     return this.http.get<IArticle[]>(`${this.resourceUrl}/articles/my`, { observe: 'response' });
   }
 
-  //todo get all reservations my articles
+  changeArticleStatus(id: number, status: string): Observable<HttpResponse<Article>> {
+    return this.http.put<Article>(`${this.resourceUrl}/articles/${id}/status/${status}`, null,{ observe: 'response' });
+  }
 
   getActiveReservesByArticleOwner(): Observable<HttpResponse<IReservation[]>> {
     return this.http.get<IReservation[]>(`${this.resourceUrl}/reserves/myarticles`, { observe: 'response' });
