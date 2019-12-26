@@ -52,9 +52,14 @@ public class OshArticlesResource {
         return ResponseEntity.ok(results);
     }
 
+    /**
+     * Get Article info by ID
+     * @param id - article id
+     * @return - OshArticleInfoDTO
+     */
     @GetMapping("/articles/{id}/info")
     public ResponseEntity<OshArticleInfoDTO> getArticleInfo(@PathVariable("id") Long id) {
-        log.debug("REST request to get userInfo, images, active reserves and renting for selected article id: ", id);
+        log.debug("REST request to get userInfo, images, active reserves and renting for selected article id: {}", id);
         if (id == null ) {
             throw new BadRequestAlertException("ID is NULL", ENTITY_NAME, "request error");
         }
@@ -63,7 +68,10 @@ public class OshArticlesResource {
         return ResponseEntity.ok(oshArticleInfoDTO);
     }
 
-
+    /**
+     * Get my active/disactive/rented articles
+     * @return List<Article> - list of articles
+     */
     @GetMapping("/articles/my")
     public ResponseEntity<List<Article>> getMyArticles() throws URISyntaxException {
         log.debug("REST request to get My Articles");
@@ -71,6 +79,10 @@ public class OshArticlesResource {
         return ResponseEntity.ok(results);
     }
 
+    /**
+     * Getting my reservations
+     * @return List<Reservation> - list of reservations
+     */
     @GetMapping("/articles/my/reserves")
     public ResponseEntity<List<Reservation>> getMyReservedArticles() throws URISyntaxException {
         log.debug("REST request to get My Reservations");
@@ -78,6 +90,10 @@ public class OshArticlesResource {
         return ResponseEntity.ok(results);
     }
 
+    /**
+     * Getting active reservations of my articles
+     * @return List<Reservation> - list of reservations
+     */
     @GetMapping("/reserves/myarticles")
     public ResponseEntity<List<Reservation>> getActiveReservesByArticleOwner() throws URISyntaxException {
         log.debug("REST request to get My Article reserves");
@@ -85,6 +101,22 @@ public class OshArticlesResource {
         return ResponseEntity.ok(results);
     }
 
+    /**
+     * Creating new reservation
+     * @param reservation - body of new reservation
+     * @return Reservation - created reservation
+     */
+    @PostMapping("/reserves")
+    public ResponseEntity<Reservation> addReservation(@RequestBody Reservation reservation) {
+        log.debug("REST request to add new reservation");
+        Reservation result = oshArticlesService.addReservation(reservation);
+        return ResponseEntity.ok(result);
+    }
+
+    /**
+     * Getting my rents
+     * @return List<Renting> - list of rents
+     */
     @GetMapping("/articles/my/rented")
     public ResponseEntity<List<Renting>> getMyRentedArticles() throws URISyntaxException {
         log.debug("REST request to get My Rented Articles");
@@ -92,6 +124,11 @@ public class OshArticlesResource {
         return ResponseEntity.ok(results);
     }
 
+    /**
+     * Creating new article
+     * @param article - body of new article
+     * @return Article - created article
+     */
     @PostMapping("/articles/save")
     public ResponseEntity<Article> saveArticle(@RequestBody Article article) throws URISyntaxException {
         if (article.getId() != null) {

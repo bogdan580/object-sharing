@@ -14,6 +14,7 @@ import { filter, map } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { Point } from 'leaflet';
+import { Reservation } from 'app/shared/model/reservation.model';
 
 @Component({
   selector: 'jhi-articles',
@@ -114,8 +115,16 @@ export class SearchListComponent implements OnInit {
       this.alertService.warning('This article is reserved in selected period');
     } else {
       this.events = [...this.events, this.selectedDays];
+      const reservation: Reservation = {
+        article: this.selectedArticle,
+        startTime: Date.parse(this.selectedDays.start),
+        endTime: Date.parse(this.selectedDays.end)
+      };
+      console.log(reservation);
+      this.searchListService.saveReservation(reservation).subscribe(res => {
+        this.alertService.success('Article was reserved');
+      });
       this.selectedDays = null;
-      this.alertService.success('Article was reserved');
     }
   }
 

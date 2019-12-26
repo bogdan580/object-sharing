@@ -151,7 +151,7 @@ export class LeafletMapComponent implements OnInit {
       }
 
 
-      this.onMapReady(this.map);
+      // this.onMapReady(this.map);
     }
 
   }

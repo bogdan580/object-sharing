@@ -17,7 +17,7 @@ public interface OshArticlesRepository extends JpaRepository<Article, Long> {
                            + "a.currency, a.user.id, c.categoryName, l.streetAddress, l.postalCode, l.city, l.stateProvince,"
                            + "l.lat, l.lon) "
           + "FROM Article a JOIN a.category c JOIN a.location l ON (:category IS NULL OR c.categoryName = :category) AND (:postalCode IS NULL OR l.postalCode = :postalCode) AND (:city IS NULL OR l.city = :city) "
-          + "WHERE a.name LIKE :text"
+          + "WHERE a.name LIKE :text AND a.status <> 'DISACTIVE' "
     )
     List<OshArticleDTO> searchArticles(
         @Param("text") String text,

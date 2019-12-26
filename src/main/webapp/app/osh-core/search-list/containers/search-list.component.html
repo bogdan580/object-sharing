@@ -50,7 +50,7 @@
         </form>
     </h2>
     <div class="page-body">
-        <div class="card article-details-block" *ngIf="selectedArticle">
+        <div class="card article-details-block" *ngIf="selectedArticle" style="min-height: 610px">
             <div class="card-body" style="display: flex; flex-direction: column;">
                 <div class="article-details">
                     <div class="article-img">
@@ -62,8 +62,8 @@
                             <fa-icon [icon]="'times'" class="icon-x float-right" (click)="closeArticleInfo()">
                             </fa-icon>
                         </h4>
-                        <h6>{{selectedArticle.price}} {{selectedArticle.currency}}</h6>
-                        {{selectedArticle.city}} {{selectedArticle.postalCode}}
+                        <h6>{{selectedArticle.price}} {{selectedArticle.currency}}/{{selectedArticle.rentPeriod}}</h6>
+                        {{selectedArticle.city}}, {{selectedArticle.postalCode}}, {{selectedArticle.streetAddress}}
                         <hr>
                         {{selectedArticle.desc}}
                     </div>
@@ -84,7 +84,7 @@
                 </div>
             </div>
         </div>
-        <div class="right-sidebar" [ngClass]="{'minimal' : !selectedArticle}">
+        <div class="right-sidebar" [ngClass]="{'minimal' : !selectedArticle}" style="min-height: 610px">
             <div class="card search-map" [ngClass]="{'minimal' : !selectedArticle}">
                 <jhi-leaflet-map
                     [points]="points"
@@ -101,10 +101,12 @@
                     <table class="table table-striped" *ngIf="searchedArticles?.length > 0"
                            aria-describedby="page-heading">
                         <tbody>
-                        <tr *ngFor="let artcl of searchedArticles ;trackBy: trackId">
+                        <tr *ngFor="let artcl of searchedArticles ;trackBy: trackId"
+                            [ngClass]="{'selected': selectedArticle === artcl}">
                             <td (click)="selectArticle(artcl)">
-                                {{artcl.id}} {{artcl.addTime}} {{artcl.name}} {{artcl.city}} {{artcl.postalCode}}
-                                {{artcl.price}}
+                                {{artcl.name}}
+                                <span style="float: right">{{artcl.addTime | date}}</span>
+                                <span style="float: right; margin-right: 50px">{{artcl.price}} {{artcl.currency}}/{{artcl.rentPeriod}}</span>
                             </td>
                         </tr>
                         </tbody>

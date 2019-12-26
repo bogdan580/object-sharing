@@ -126,6 +126,13 @@ public class OshArticlesService {
         return this.oshReservationRepository.findActiveReservesByArticleOwner(currentTime);
     }
 
+    public Reservation addReservation(Reservation reservation) {
+        User current_user = oshUserRepository.findByUserIsCurrentUser();
+        reservation.setUser(current_user);
+        log.debug("Reservation: {}", reservation);
+        return oshReservationRepository.save(reservation);
+    }
+
     public List<Renting> getUserRentings() {
         return this.oshRentingRepository.findByUserIsCurrentUser();
     }

@@ -94,4 +94,7 @@
 // table styles
 .table-striped tbody tr {
   cursor:  pointer;
+  &.selected {
+    background: #f3abab;
+  }
 }

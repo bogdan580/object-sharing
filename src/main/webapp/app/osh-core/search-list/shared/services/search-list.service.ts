@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ArticlesFilter, IOshArticleDTO } from 'app/shared/model/osh/articles.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/index';
 import { SERVER_API_URL } from 'app/app.constants';
+import { Reservation } from 'app/shared/model/reservation.model';
 
 @Injectable({ providedIn: 'root' })
 export class SearchListService {
@@ -16,5 +17,9 @@ export class SearchListService {
 
   getArticleInfo(id: number): Observable<any>  {
     return this.http.get(`${this.resourceUrl}/articles/${id}/info`,{ observe: 'response' });
+  }
+
+  saveReservation(reserve: Reservation): Observable<HttpResponse<Reservation>> {
+    return this.http.post(`${this.resourceUrl}/reserves`, reserve, { observe: 'response' });
   }
 }
