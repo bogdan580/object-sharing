@@ -4,6 +4,8 @@ import com.mbohdan.projects.osharing.domain.Article;
 import com.mbohdan.projects.osharing.domain.Renting;
 import com.mbohdan.projects.osharing.domain.Reservation;
 import com.mbohdan.projects.osharing.domain.enumeration.ObjectStatus;
+import com.mbohdan.projects.osharing.repository.osh.OshReservationRepository;
+import com.mbohdan.projects.osharing.security.SecurityUtils;
 import com.mbohdan.projects.osharing.service.dto.osh.ArticlesFilterDTO;
 import com.mbohdan.projects.osharing.service.dto.osh.OshArticleDTO;
 import com.mbohdan.projects.osharing.service.dto.osh.OshArticleInfoDTO;
@@ -30,9 +32,11 @@ public class OshArticlesResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
     private final OshArticlesService oshArticlesService;
+    private final OshReservationRepository oshReservationRepository;
 
-    public OshArticlesResource(OshArticlesService oshArticlesService) {
+    public OshArticlesResource(OshArticlesService oshArticlesService, OshReservationRepository oshReservationRepository) {
         this.oshArticlesService = oshArticlesService;
+        this.oshReservationRepository = oshReservationRepository;
     }
 
     /**
@@ -103,6 +107,17 @@ public class OshArticlesResource {
     }
 
     /**
+     * Getting active rents of my articles
+     * @return List<Renting> - list of rents
+     */
+    @GetMapping("/rent/myarticles")
+    public ResponseEntity<List<Renting>> getActiveRentByArticleOwner() throws URISyntaxException {
+        log.debug("REST request to get My Article rents");
+        List<Renting> results = oshArticlesService.getActiveRentsByArticleOwner();
+        return ResponseEntity.ok(results);
+    }
+
+    /**
      * Creating new reservation
      * @param reservation - body of new reservation
      * @return Reservation - created reservation
@@ -143,11 +158,69 @@ public class OshArticlesResource {
             .body(result);
     }
 
+    /**
+     * Change article status
+     * @param id - article id
+     * @param newStatus - new status
+     * @return updated article
+     */
     @PutMapping("articles/{id}/status/{newStatus}")
     public ResponseEntity<Article> changeArticleStatus(@PathVariable("id") Long id,
                                                        @PathVariable("newStatus") String newStatus) {
         log.debug("REST request to change article:" + id + " status:" + newStatus);
         Article result = oshArticlesService.changeArticleStatus(id, ObjectStatus.valueOf(newStatus.toUpperCase()));
+        return ResponseEntity.ok(result);
+    }
+
+    /**
+     * Close reservation
+     * @param id - reservation id
+     * @return - Reservation
+     */
+    @PutMapping("/reserves/{id}/close")
+    public ResponseEntity<Reservation> closeReservation(@PathVariable("id") Long id) throws URISyntaxException {
+        log.debug("REST request to close reservation:" + id);
+        Reservation reservation = oshReservationRepository.findByReserveId(id);
+        if (SecurityUtils.getCurrentUserLogin().isPresent() && !reservation.getArticle().getUser().getLogin().equals(SecurityUtils.getCurrentUserLogin().get()))
+            throw new BadRequestAlertException("You do not have access to modify this reservation", ENTITY_NAME, "request error");
+        Reservation result = oshArticlesService.closeReservation(reservation.getId());
+        if (result == null) throw new BadRequestAlertException("Reservation not found", ENTITY_NAME, "request error");
+
+        return ResponseEntity.ok(result);
+    }
+
+    /**
+     * Create rent from active reservation
+     * @param reservation - active reservation
+     * @return Renting
+     */
+    @PostMapping("/rent")
+    public ResponseEntity<Renting> makeRentFromReservation(@RequestBody Reservation reservation)
+        throws URISyntaxException{
+        log.debug("REST request to create rent from reservation:" + reservation.getId());
+        if (SecurityUtils.getCurrentUserLogin().isPresent() && !reservation.getArticle().getUser().getLogin().equals(SecurityUtils.getCurrentUserLogin().get()))
+            throw new BadRequestAlertException("You do not have access to modify this reservation", ENTITY_NAME, "request error");
+        else if (reservation.getArticle().getStatus() == ObjectStatus.INRENT) {
+            throw new BadRequestAlertException("This article actually is in rent", ENTITY_NAME, "article.inrent");
+        }
+
+        Renting result = oshArticlesService.makeRentFromReservation(reservation.getId());
+        if (result == null) throw new BadRequestAlertException("Reservation not found", ENTITY_NAME, "request error");
+
+        return ResponseEntity.ok(result);
+    }
+
+    /**
+     * Close rent
+     * @param id - rent id
+     * @return - Renting
+     */
+    @PutMapping("/rent/{id}/close")
+    public ResponseEntity<Renting> closeRent(@PathVariable("id") Long id) throws URISyntaxException{
+        log.debug("REST request to close rent:" + id);
+        Renting result = oshArticlesService.closeRenting(id);
+        if (result == null) throw new BadRequestAlertException("Renting not found", ENTITY_NAME, "request error");
+
         return ResponseEntity.ok(result);
     }
 }

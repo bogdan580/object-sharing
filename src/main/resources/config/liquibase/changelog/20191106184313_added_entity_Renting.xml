@@ -21,7 +21,7 @@
             <column name="end_time" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="price" type="integer">
+            <column name="price" type="double">
                 <constraints nullable="true" />
             </column>
             <column name="rent_period" type="varchar(255)">

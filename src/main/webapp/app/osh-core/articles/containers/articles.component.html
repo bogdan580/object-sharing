@@ -1,3 +1,8 @@
+<p-confirmDialog
+    [style]="{ width: '50vw' }"
+    rejectLabel="Nie"
+    acceptLabel="Tak"
+></p-confirmDialog>
 <div class="page">
     <jhi-alert-error></jhi-alert-error>
     <jhi-alert></jhi-alert>
@@ -15,7 +20,14 @@
                             <table class="table table-striped" aria-describedby="page-heading">
                                 <span class="not-found" *ngIf="a_in_rent.length === 0" jhiTranslate="osh.articles.404"></span>
                                 <tbody *ngIf="a_in_rent.length > 0">
-                                <tr *ngFor="let arnt of a_in_rent"><td>{{arnt.name}}</td></tr>
+                                <tr *ngFor="let arnt of a_in_rent">
+                                    <td>
+                                        {{arnt.article.name}} - {{arnt.user.login}}
+                                        <span>{{(arnt.startTime | date: 'd/MM/yy')}}</span> -
+                                        <span>{{(arnt.endTime | date: 'd/MM/yy')}}</span>
+                                        <fa-icon class="status-btn" (click)="closeRent(arnt.id, $event)" [icon]="'stop-circle'"></fa-icon>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                         </p-panel>
@@ -27,6 +39,7 @@
                                     <td>{{ares.article.name}} - {{ares.user.login}}
                                         <span>{{(ares.startTime | date: 'd/MM/yy')}}</span> -
                                         <span>{{(ares.endTime | date: 'd/MM/yy')}}</span>
+                                        <fa-icon class="status-btn" (click)="makeRentFromReservation(ares, $event)" [icon]="'play-circle'"></fa-icon>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -64,7 +77,11 @@
                             <table class="table table-striped" aria-describedby="page-heading">
                                 <span class="not-found" *ngIf="myRentings.length === 0" jhiTranslate="osh.articles.404"></span>
                                 <tbody *ngIf="myRentings.length > 0">
-                                <tr *ngFor="let rents of myRentings"><td>{{rents.article.name}}</td></tr>
+                                <tr *ngFor="let rents of myRentings">
+                                    <td>
+                                        {{rents.article.name}}
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                         </p-panel>
@@ -72,7 +89,12 @@
                             <table class="table table-striped" aria-describedby="page-heading">
                                 <span class="not-found" *ngIf="myReservations.length === 0" jhiTranslate="osh.articles.404"></span>
                                 <tbody *ngIf="myReservations.length > 0">
-                                <tr *ngFor="let resrv of myReservations"><td>{{resrv.article.name}}</td></tr>
+                                <tr *ngFor="let resrv of myReservations">
+                                    <td>
+                                        {{resrv.article.name}}  ({{resrv.startTime | date}} - {{resrv.endTime | date}})
+                                        <fa-icon class="status-btn" (click)="closeReservation(resrv.id, $event)" [icon]="'times-circle'"></fa-icon>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                         </p-panel>

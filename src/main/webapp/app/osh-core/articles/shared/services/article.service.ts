@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { SERVER_API_URL } from 'app/app.constants';
 import { Observable } from 'rxjs';
 import { Article, IArticle } from 'app/shared/model/article.model';
-import { IReservation } from 'app/shared/model/reservation.model';
+import { IReservation, Reservation } from 'app/shared/model/reservation.model';
 import { IRenting } from 'app/shared/model/renting.model';
 
 type EntityArrayResponseType = HttpResponse<IArticle[]>;
@@ -24,6 +24,10 @@ export class ArticlesService {
     return this.http.get<IReservation[]>(`${this.resourceUrl}/reserves/myarticles`, { observe: 'response' });
   }
 
+  getActiveRentsByArticleOwner(): Observable<HttpResponse<IRenting[]>> {
+    return this.http.get<IRenting[]>(`${this.resourceUrl}/rent/myarticles`, { observe: 'response' });
+  }
+
   getMyReservedArticles(): Observable<HttpResponse<IReservation[]>> {
     return this.http.get<IReservation[]>(`${this.resourceUrl}/articles/my/reserves`, { observe: 'response' });
   }
@@ -34,5 +38,17 @@ export class ArticlesService {
 
   saveArticle(newArticle: IArticle): Observable<HttpResponse<IArticle>> {
     return this.http.post(`${this.resourceUrl}/articles/save`, newArticle,{ observe: 'response' });
+  }
+
+  closeReservation(id: number): Observable<HttpResponse<IReservation>> {
+    return this.http.put(`${this.resourceUrl}/reserves/${id}/close`, null, { observe: 'response' });
+  }
+
+  makeRentFromReservation(reservation: IReservation): Observable<HttpResponse<IRenting>> {
+    return this.http.post(`${this.resourceUrl}/rent`, reservation, { observe: 'response' });
+  }
+
+  closeRenting(id: number): Observable<HttpResponse<IRenting>> {
+    return this.http.put(`${this.resourceUrl}/rent/${id}/close`, null, { observe: 'response' });
   }
 }

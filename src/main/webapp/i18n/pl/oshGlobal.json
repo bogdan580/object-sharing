@@ -2,7 +2,13 @@
   "osh": {
     "articles": {
       "title": "Artykuły",
-      "404": "Brak danych"
+      "404": "Brak danych",
+      "reservations": {
+        "delete": "Zrezygnować z danej rezerwacji?"
+      },
+      "rent": {
+        "close": "Zamknąć dane wypożyczenie?"
+      }
     },
     "profile": {
       "title": "Moje konto"

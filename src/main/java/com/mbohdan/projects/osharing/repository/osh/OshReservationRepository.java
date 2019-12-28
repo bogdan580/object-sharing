@@ -15,8 +15,11 @@ import java.util.List;
 @Repository
 public interface OshReservationRepository extends JpaRepository<Reservation, Long> {
 
-    @Query("select reservation from Reservation reservation where reservation.user.login = ?#{principal.username}")
-    List<Reservation> findByUserIsCurrentUser();
+//    @Query("select reservation from Reservation reservation where reservation.user.login = ?#{principal.username}")
+//    List<Reservation> findByUserIsCurrentUser();
+
+    @Query("select reservation from Reservation reservation where reservation.startTime < reservation.endTime AND reservation.user.login = ?#{principal.username}")
+    List<Reservation> findActiveReservesByCurrentUser();
 
     @Query("select reservation from Reservation reservation where reservation.endTime > :cur_time  AND reservation.article.user.login = ?#{principal.username}")
     List<Reservation> findActiveReservesByArticleOwner(@Param("cur_time") Long cur_time);
@@ -24,4 +27,10 @@ public interface OshReservationRepository extends JpaRepository<Reservation, Lon
     @Query("select reservation from Reservation reservation where reservation.endTime > :cur_time  AND reservation.article.id = :id")
     List<Reservation> findActiveReservesByArticle(@Param("id") Long id,
                                                   @Param("cur_time") Long cur_time);
+
+    @Query("select reservation from Reservation reservation where reservation.id = :id AND reservation.user.login = ?#{principal.username}")
+    Reservation findByIdAndUser(@Param("id") Long id);
+
+    @Query("select reservation from Reservation reservation where reservation.id = :id")
+    Reservation findByReserveId(@Param("id") Long id);
 }

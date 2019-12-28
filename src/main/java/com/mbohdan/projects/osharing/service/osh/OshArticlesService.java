@@ -117,7 +117,7 @@ public class OshArticlesService {
     }
 
     public List<Reservation> getUserReservations() {
-        return this.oshReservationRepository.findByUserIsCurrentUser();
+        return this.oshReservationRepository.findActiveReservesByCurrentUser();
     }
 
     public List<Reservation> getActiveReservesByArticleOwner() {
@@ -126,11 +126,27 @@ public class OshArticlesService {
         return this.oshReservationRepository.findActiveReservesByArticleOwner(currentTime);
     }
 
+    public List<Renting> getActiveRentsByArticleOwner() {
+        Long currentTime = System.currentTimeMillis();
+        log.debug("currentTime: " + currentTime);
+        return this.oshRentingRepository.findActiveRentsByArticleOwner(currentTime);
+    }
+
     public Reservation addReservation(Reservation reservation) {
         User current_user = oshUserRepository.findByUserIsCurrentUser();
         reservation.setUser(current_user);
         log.debug("Reservation: {}", reservation);
         return oshReservationRepository.save(reservation);
+    }
+
+    public Reservation closeReservation( Long id) {
+        Reservation reservation = oshReservationRepository.findByReserveId(id);
+        if (reservation != null) {
+            reservation.setEndTime(System.currentTimeMillis());
+            oshReservationRepository.save(reservation);
+        }
+        log.debug("Reservation: {}", reservation);
+        return reservation;
     }
 
     public List<Renting> getUserRentings() {
@@ -158,5 +174,28 @@ public class OshArticlesService {
         Article article = oshArticlesRepository.findArticleById(id);
         article.setStatus(newStatus);
         return oshArticlesRepository.save(article);
+    }
+
+    public Renting makeRentFromReservation(Long reservationId) {
+        Reservation reservation = closeReservation(reservationId);
+        Renting newRent = new Renting();
+        newRent.setArticle(changeArticleStatus(reservation.getArticle().getId(),ObjectStatus.INRENT));
+        newRent.setCurrency(reservation.getArticle().getCurrency());
+        newRent.setPrice(reservation.getArticle().getPrice());
+        newRent.setRentPeriod(reservation.getArticle().getRentPeriod());
+        newRent.setUser(reservation.getUser());
+        newRent.setStartTime(System.currentTimeMillis());
+        return oshRentingRepository.save(newRent);
+    }
+
+    public Renting closeRenting(Long id) {
+        Renting rent = oshRentingRepository.findRentByArticleOwner(id);
+        if (rent != null) {
+            rent.setEndTime(System.currentTimeMillis());
+            rent.setArticle(changeArticleStatus(rent.getArticle().getId(),ObjectStatus.ACTIVE));
+            oshRentingRepository.save(rent);
+        }
+        log.debug("Rent: {}", rent);
+        return rent;
     }
 }

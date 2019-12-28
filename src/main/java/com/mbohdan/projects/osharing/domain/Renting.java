@@ -33,7 +33,7 @@ public class Renting implements Serializable {
     private Long endTime;
 
     @Column(name = "price")
-    private Integer price;
+    private Double price;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "rent_period")
@@ -86,16 +86,16 @@ public class Renting implements Serializable {
         this.endTime = endTime;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public Renting price(Integer price) {
+    public Renting price(Double price) {
         this.price = price;
         return this;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

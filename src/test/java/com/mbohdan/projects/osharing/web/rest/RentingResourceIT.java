@@ -41,8 +41,8 @@ public class RentingResourceIT {
     private static final Long DEFAULT_END_TIME = 1L;
     private static final Long UPDATED_END_TIME = 2L;
 
-    private static final Integer DEFAULT_PRICE = 1;
-    private static final Integer UPDATED_PRICE = 2;
+    private static final Double DEFAULT_PRICE = 1D;
+    private static final Double UPDATED_PRICE = 2D;
 
     private static final RentPeriod DEFAULT_RENT_PERIOD = RentPeriod.HOUR;
     private static final RentPeriod UPDATED_RENT_PERIOD = RentPeriod.DAY;
@@ -175,7 +175,7 @@ public class RentingResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(renting.getId().intValue())))
             .andExpect(jsonPath("$.[*].startTime").value(hasItem(DEFAULT_START_TIME.intValue())))
             .andExpect(jsonPath("$.[*].endTime").value(hasItem(DEFAULT_END_TIME.intValue())))
-            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE)))
+            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].rentPeriod").value(hasItem(DEFAULT_RENT_PERIOD.toString())))
             .andExpect(jsonPath("$.[*].currency").value(hasItem(DEFAULT_CURRENCY.toString())));
     }
@@ -193,7 +193,7 @@ public class RentingResourceIT {
             .andExpect(jsonPath("$.id").value(renting.getId().intValue()))
             .andExpect(jsonPath("$.startTime").value(DEFAULT_START_TIME.intValue()))
             .andExpect(jsonPath("$.endTime").value(DEFAULT_END_TIME.intValue()))
-            .andExpect(jsonPath("$.price").value(DEFAULT_PRICE))
+            .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()))
             .andExpect(jsonPath("$.rentPeriod").value(DEFAULT_RENT_PERIOD.toString()))
             .andExpect(jsonPath("$.currency").value(DEFAULT_CURRENCY.toString()));
     }

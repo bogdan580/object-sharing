@@ -34,7 +34,7 @@ entity Location {
 entity Renting {
   startTime Long,
   endTime Long,
-  price Integer,
+  price Double,
   rentPeriod RentPeriod,
   currency Currency
 }

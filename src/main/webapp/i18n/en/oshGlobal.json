@@ -2,7 +2,13 @@
   "osh": {
     "articles": {
       "title": "Articles",
-      "404": "Not found"
+      "404": "Not found",
+      "reservations": {
+        "delete": "Give up this reservation?"
+      },
+      "rent": {
+        "close": "Close this rent?"
+      }
     },
     "profile": {
       "title": "Profile"

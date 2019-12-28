@@ -9,6 +9,8 @@ import { articlesRoute } from 'app/osh-core/articles/articles.route';
 import { ObjectSharingSharedModule } from 'app/shared/shared.module';
 import {TabViewModule} from 'primeng/tabview';
 import { PanelModule } from 'primeng/panel';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 const ARTICLES_ROUTES = [...articlesRoute];
 const CONTAINERS = [ArticlesComponent];
 @NgModule({
@@ -18,11 +20,12 @@ const CONTAINERS = [ArticlesComponent];
     RouterModule.forChild(ARTICLES_ROUTES),
     ObjectSharingSharedModule,
     TabViewModule,
-    PanelModule
+    PanelModule,
+    ConfirmDialogModule
   ],
   exports: [], // need add ui module
   declarations: [...CONTAINERS],
-  providers: [ArticlesService, { provide: JhiLanguageService, useClass: JhiLanguageService }]
+  providers: [ArticlesService, ConfirmationService, { provide: JhiLanguageService, useClass: JhiLanguageService }]
 })
 export class ArticlesModule {
   constructor() {}

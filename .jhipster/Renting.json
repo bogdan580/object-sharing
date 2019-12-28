@@ -11,7 +11,7 @@
         },
         {
             "fieldName": "price",
-            "fieldType": "Integer"
+            "fieldType": "Double"
         },
         {
             "fieldName": "rentPeriod",
