@@ -74,7 +74,7 @@ export class LeafletMapComponent implements OnInit {
     zoomOffset: -1, // ...
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   });
-  wMaps = tileLayer('http://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
+  wMaps = tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
     detectRetina: true,
     tileSize: 1024, // this set map font size
     zoomOffset: -2, // ...

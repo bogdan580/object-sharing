@@ -177,7 +177,7 @@ public class OshArticlesService {
     }
 
     public Renting makeRentFromReservation(Long reservationId) {
-        Reservation reservation = closeReservation(reservationId);
+        Reservation reservation = oshReservationRepository.findByReserveId(reservationId);
         Renting newRent = new Renting();
         newRent.setArticle(changeArticleStatus(reservation.getArticle().getId(),ObjectStatus.INRENT));
         newRent.setCurrency(reservation.getArticle().getCurrency());
@@ -185,6 +185,9 @@ public class OshArticlesService {
         newRent.setRentPeriod(reservation.getArticle().getRentPeriod());
         newRent.setUser(reservation.getUser());
         newRent.setStartTime(System.currentTimeMillis());
+        newRent.setEndTime(reservation.getEndTime());
+        closeReservation(reservationId);
+        updateUserInfoAfterMadeRent(newRent.getUser(), newRent.getArticle().getUser());
         return oshRentingRepository.save(newRent);
     }
 
@@ -197,5 +200,14 @@ public class OshArticlesService {
         }
         log.debug("Rent: {}", rent);
         return rent;
+    }
+
+    private void updateUserInfoAfterMadeRent(User user, User articleOwner) {
+        UserInfo userInfo = oshUserInfoRepository.getOne(user.getId());
+        UserInfo articleOwnerInfo = oshUserInfoRepository.getOne(articleOwner.getId());
+        userInfo.setRentedObjects(userInfo.getRentedObjects()+1);
+        articleOwnerInfo.setProvidedObjects(articleOwnerInfo.getProvidedObjects()+1);
+        oshUserInfoRepository.save(userInfo);
+        oshUserInfoRepository.save(articleOwnerInfo);
     }
 }

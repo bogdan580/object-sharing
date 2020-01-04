@@ -63,7 +63,13 @@
                             </fa-icon>
                         </h4>
                         <h6>{{selectedArticle.price}} {{selectedArticle.currency}}/{{selectedArticle.rentPeriod}}</h6>
-                        {{selectedArticle.city}}, {{selectedArticle.postalCode}}, {{selectedArticle.streetAddress}}
+                        <div>
+                            {{selectedArticle.city}}, {{selectedArticle.postalCode}}, {{selectedArticle.streetAddress}}
+                            <span style="float: right">
+                                {{selectedArticleInfo.userInfo.tel}}
+                                <fa-icon icon="mobile-alt"></fa-icon>
+                            </span>
+                        </div>
                         <hr>
                         {{selectedArticle.desc}}
                     </div>
@@ -93,7 +99,7 @@
                     [zoom]="zoom">
                 </jhi-leaflet-map>
             </div>
-            <div class="card search-list table-responsive" [ngClass]="{'minimal' : !selectedArticle}">
+            <div *ngIf="searchedArticles" class="card search-list table-responsive" [ngClass]="{'minimal' : !selectedArticle}">
                 <div class="alert alert-warning" *ngIf="searchedArticles?.length === 0">
                     <span jhiTranslate="objectSharingApp.article.home.notFound">No articles found</span>
                 </div>

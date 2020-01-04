@@ -47,7 +47,7 @@ export class SearchListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.refresh(); // for debug
+    // this.refresh(); // for debug
     this.categoryService
       .query()
       .pipe(
