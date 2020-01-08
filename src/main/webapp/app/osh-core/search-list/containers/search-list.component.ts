@@ -15,6 +15,8 @@ import { HttpResponse } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { Point } from 'leaflet';
 import { Reservation } from 'app/shared/model/reservation.model';
+import { TranslateService } from '@ngx-translate/core';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-articles',
@@ -36,7 +38,9 @@ export class SearchListComponent implements OnInit {
 
   constructor(protected searchListService: SearchListService,
               private alertService: JhiAlertService,
-              protected categoryService: CategoryService) {
+              private accountService: AccountService,
+              protected categoryService: CategoryService,
+              private translate: TranslateService) {
     this.selectedDays = null;
     // debug
     this.filter = new ArticlesFilter();
@@ -85,7 +89,7 @@ export class SearchListComponent implements OnInit {
       this.events = [];
       this.selectedArticleInfo.rentings.forEach(rents => {
         this.events.push({
-            'title': 'Renting',
+            'title': this.translate.instant('osh.articles.rent.title'),
             'start': formatDate(rents.startTime, 'yyyy-MM-dd', 'PL'),
             'end': formatDate(rents.endTime, 'yyyy-MM-dd', 'PL'),
             'rendering': 'background'
@@ -95,7 +99,7 @@ export class SearchListComponent implements OnInit {
 
       this.selectedArticleInfo.reservations.forEach(resrv => {
         this.events.push({
-          'title': 'Reservation',
+          'title': this.translate.instant('osh.articles.reservations.title'),
           'start': formatDate(resrv.startTime, 'yyyy-MM-dd', 'PL'),
           'end': formatDate(resrv.endTime, 'yyyy-MM-dd', 'PL')
         });
@@ -110,11 +114,12 @@ export class SearchListComponent implements OnInit {
 
   addReserve() {
     if (this.isPastDate()) {
-      this.alertService.warning('Start date cannot be from the past');
+      this.alertService.warning('osh.alerts.date_from_past');
     } else if (this.isDateReserved()) {
-      this.alertService.warning('This article is reserved in selected period');
+      this.alertService.warning('osh.alerts.article_has_reservation');
+    } else if(this.isOwnArticle()) {
+      this.alertService.warning('osh.alerts.block_reserve_own_art');
     } else {
-      this.events = [...this.events, this.selectedDays];
       const reservation: Reservation = {
         article: this.selectedArticle,
         startTime: Date.parse(this.selectedDays.start),
@@ -122,10 +127,18 @@ export class SearchListComponent implements OnInit {
       };
       console.log(reservation);
       this.searchListService.saveReservation(reservation).subscribe(res => {
-        this.alertService.success('Article was reserved');
+        this.alertService.success('osh.alerts.reserved');
+        this.events = [...this.events, this.selectedDays];
       });
       this.selectedDays = null;
     }
+  }
+
+  isOwnArticle() {
+    if (this.accountService.isAuthenticated()) {
+      return this.selectedArticleInfo.userInfo.user.login === this.accountService.getUserLogin();
+    }
+    return false;
   }
 
   isPastDate() {

@@ -1,13 +1,37 @@
 {
   "osh": {
     "articles": {
-      "title": "Artykuły",
+      "one": "Artykuł",
+      "chooseCategory": "Wybierz kategorie",
+      "city_postal": "Miasto lub kod",
+      "title": "Moje Artykuły",
+      "myEquipment": "Mój sprzęt",
+      "resAndRent": "Moje wypożyczenia i rezerwacje",
       "404": "Brak danych",
       "reservations": {
+        "title": "Rezerwacja",
+        "myReservations": "Moje rezerwacje",
+        "make": "Zarezerwuj",
         "delete": "Zrezygnować z danej rezerwacji?"
       },
       "rent": {
+        "title": "Wypożyczenie",
+        "myRents": "Moje wypożyczenia",
         "close": "Zamknąć dane wypożyczenie?"
+      },
+      "rented": "Wyporzyczone",
+      "reserved": "Zarezerwowane",
+      "active": "Aktywne",
+      "disactive": "Nieaktywne",
+      "form": {
+        "addNew": "Dodaj nowy",
+        "update": "Zmodyfikuj",
+        "desc": "Opis",
+        "image": "Zdjęcie",
+        "price": "Cena",
+        "currency": "Waluta",
+        "rentPeriod": "Okres",
+        "category": "Kategoria"
       }
     },
     "profile": {
@@ -16,6 +40,20 @@
     "searchList": {
       "title": "Lista wyszukiwania"
     },
-    "add": "Dodaj"
+    "add": "Dodaj",
+    "alerts": {
+      "articleAdded": "Artykuł został dodany",
+      "reserved": "Artykuł został zarezerwowany",
+      "closeReservation": "Rezerwacja skasowana",
+      "date_from_past": "Data rozpoczęcia nie może pochodzić z przeszłości",
+      "article_has_reservation": "Ten artykuł jest zarezerwowany w wybranym okresie",
+      "block_reserve_own_art": "Nie można zarezerwować własnego artykułu"
+    },
+    "sort": {
+      "ADDTIME_ASK": "po czasie rosnąco",
+      "ADDTIME_DESK": "po czasie malejąco",
+      "PRISE_ASC": "po cenie rosnąco",
+      "PRISE_DESK": "po cenie malejąco"
+    }
   }
 }

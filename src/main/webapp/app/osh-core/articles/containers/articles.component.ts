@@ -171,6 +171,7 @@ export class ArticlesComponent implements OnInit {
 
   protected onSaveSuccess(article: IArticle) {
     this.isSaving = false;
+    this.jhiAlertService.success('osh.alerts.articleAdded');
     this.updateArticleTable(article);
   }
 
@@ -220,6 +221,7 @@ export class ArticlesComponent implements OnInit {
       accept: () => {
         this.artService.closeReservation(id).subscribe(res => {
           console.log('closeReservation res', res);
+          this.jhiAlertService.success('osh.alerts.closeReservation');
           this.myReservations = this.myReservations.filter(art => art.id !== res.body.id);
         });
       },

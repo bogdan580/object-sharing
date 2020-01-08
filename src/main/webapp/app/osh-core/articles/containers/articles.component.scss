@@ -25,3 +25,9 @@
   color: $p-color;
   cursor: pointer;
 }
+
+.article-img {
+  height: 100%;
+  background-image: url('../../../../content/images/default.jpg');
+  background-size: cover;
+}

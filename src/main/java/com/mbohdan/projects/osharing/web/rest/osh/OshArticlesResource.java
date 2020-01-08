@@ -181,7 +181,7 @@ public class OshArticlesResource {
     public ResponseEntity<Reservation> closeReservation(@PathVariable("id") Long id) throws URISyntaxException {
         log.debug("REST request to close reservation:" + id);
         Reservation reservation = oshReservationRepository.findByReserveId(id);
-        if (SecurityUtils.getCurrentUserLogin().isPresent() && !reservation.getArticle().getUser().getLogin().equals(SecurityUtils.getCurrentUserLogin().get()))
+        if (SecurityUtils.getCurrentUserLogin().isPresent() && !reservation.getUser().getLogin().equals(SecurityUtils.getCurrentUserLogin().get()))
             throw new BadRequestAlertException("You do not have access to modify this reservation", ENTITY_NAME, "request error");
         Reservation result = oshArticlesService.closeReservation(reservation.getId());
         if (result == null) throw new BadRequestAlertException("Reservation not found", ENTITY_NAME, "request error");

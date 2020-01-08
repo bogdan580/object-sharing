@@ -1,5 +1,8 @@
 {
   "error": {
+    "http": {
+      "401": "You are not logged"
+    },
     "article": {
       "inrent": "This article actually is in rent"
     }

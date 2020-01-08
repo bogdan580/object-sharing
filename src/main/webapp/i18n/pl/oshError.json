@@ -1,5 +1,8 @@
 {
   "error": {
+    "http": {
+      "401": "Nie jesteś zalogowany"
+    },
     "article": {
       "inrent": "Artykul aktualnie jest wypożyczony!"
     }

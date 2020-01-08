@@ -80,9 +80,10 @@
       flex: 1;
     }
     .calendar-action {
-      flex: 0.3;
+      flex: 0.2;
       .reserve-article {
         position: absolute;
+        font-size: small;
         bottom: 0;
         right: 0;
         margin: 20px;

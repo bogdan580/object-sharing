@@ -1,13 +1,37 @@
 {
   "osh": {
     "articles": {
-      "title": "Articles",
+      "one": "Article",
+      "chooseCategory": "Select category",
+      "city_postal": "City or postal",
+      "title": "My Articles",
+      "myEquipment": "My equipment",
+      "resAndRent": "My reserves and rents",
       "404": "Not found",
       "reservations": {
+        "title": "Reservation",
+        "myReservations": "My reservations",
+        "make": "Reserve",
         "delete": "Give up this reservation?"
       },
       "rent": {
+        "title": "Rent",
+        "myRents": "My rents",
         "close": "Close this rent?"
+      },
+      "rented": "Rented",
+      "reserved": "Reserved",
+      "active": "Active",
+      "disactive": "Not active",
+      "form": {
+        "addNew": "Add new",
+        "update": "Update",
+        "desc": "Description",
+        "image": "Image",
+        "price": "Price",
+        "currency": "Currency",
+        "rentPeriod": "Rent period",
+        "category": "Category"
       }
     },
     "profile": {
@@ -16,6 +40,20 @@
     "searchList": {
       "title": "Search list"
     },
-    "add": "Add"
+    "add": "Add",
+    "alerts": {
+      "articleAdded": "Article was added",
+      "reserved": "Article was reserved",
+      "closeReservation": "Reservation was closed",
+      "date_from_past": "Start date cannot be from the past",
+      "article_has_reservation": "This article is reserved in selected period",
+      "block_reserve_own_art": "You don't reserve your own article"
+    },
+    "sort": {
+      "ADDTIME_ASK": "by time ask",
+      "ADDTIME_DESK": "by time desk",
+      "PRISE_ASC": "by price ask",
+      "PRISE_DESK": "by price desk"
+    }
   }
 }

@@ -15,6 +15,7 @@ export class CalendarComponent implements OnInit {
   options: any;
   @Output()
   selectEvent: EventEmitter<any>;
+  language = 'pl';
   constructor() {
     this.selectEvent = new EventEmitter<any>();
   }
@@ -24,6 +25,7 @@ export class CalendarComponent implements OnInit {
     this.options = {
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       // defaultDate: '2016-01-01',
+      locale: this.language,
       header: {
         // left: 'prev,next',
         left: 'title',

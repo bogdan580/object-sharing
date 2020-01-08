@@ -7,17 +7,18 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col">
-                        <input class="form-control" [(ngModel)]="filter.text" placeholder="Article" name="article">
+                        <input class="form-control" [(ngModel)]="filter.text" [placeholder]="'osh.articles.one' | translate" name="article">
                     </div>
                     <div class="col">
                         <select class="form-control" id="category" name="category" [(ngModel)]="filter.category">
-                            <option disabled [value]="'Wybierz kategorie'" selected>Wybierz kategorie</option>
+                            <option disabled [value]="'osh.articles.chooseCategory' | translate" selected
+                            jhiTranslate="osh.articles.chooseCategory">Select category</option>
                             <option *ngFor="let category of categories"
                                     [value]="category.categoryName">{{category.categoryName}}</option>
                         </select>
                     </div>
                     <div class="col-2">
-                        <input class="form-control" [(ngModel)]="filter.city" placeholder="City or postal" name="city">
+                        <input class="form-control" [(ngModel)]="filter.city" [placeholder]="'osh.articles.city_postal' | translate" name="city">
                     </div>
                     <!--<div class="col-1">
                         <input class="form-control" type="number" [(ngModel)]="filter.page" placeholder="page"
@@ -33,10 +34,10 @@
                     </div>-->
                     <div class="col-2">
                         <select class="form-control" [(ngModel)]="filter.sort" name="sort">
-                            <option value="ADDTIME_ASK">ADDTIME_ASK</option>
-                            <option value="ADDTIME_DESK">ADDTIME_DESK</option>
-                            <option value="PRISE_ASC">PRISE_ASC</option>
-                            <option value="PRISE_DESK">PRISE_DESK</option>
+                            <option value="ADDTIME_ASK" jhiTranslate="osh.sort.ADDTIME_ASK">ADDTIME_ASK</option>
+                            <option value="ADDTIME_DESK" jhiTranslate="osh.sort.ADDTIME_DESK">ADDTIME_DESK</option>
+                            <option value="PRISE_ASC" jhiTranslate="osh.sort.PRISE_ASC">PRISE_ASC</option>
+                            <option value="PRISE_DESK" jhiTranslate="osh.sort.PRISE_DESK">PRISE_DESK</option>
                         </select>
                     </div>
                     <div class="col-1">
@@ -66,7 +67,7 @@
                         <div>
                             {{selectedArticle.city}}, {{selectedArticle.postalCode}}, {{selectedArticle.streetAddress}}
                             <span style="float: right">
-                                {{selectedArticleInfo.userInfo.tel}}
+                                {{selectedArticleInfo?.userInfo.tel}}
                                 <fa-icon icon="mobile-alt"></fa-icon>
                             </span>
                         </div>
@@ -82,7 +83,7 @@
                                 [disabled]="!selectedDays"
                                 class="btn btn-success float-right reserve-article">
                             <fa-icon [icon]="'check'"></fa-icon>
-                            <span>
+                            <span jhiTranslate="osh.articles.reservations.make">
                                 Reserve
                             </span>
                         </button>

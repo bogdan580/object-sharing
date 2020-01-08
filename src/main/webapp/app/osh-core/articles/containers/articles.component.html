@@ -15,8 +15,8 @@
                 <button type="button" class="btn btn-primary add-article"
                         jhiTranslate="osh.add" (click)="updateForm(null)">Add</button>
                 <p-tabView>
-                    <p-tabPanel header="Mój sprzęt">
-                        <p-panel header="Wyporzyczone">
+                    <p-tabPanel [header]="'osh.articles.myEquipment' | translate">
+                        <p-panel [header]="'osh.articles.rented' | translate">
                             <table class="table table-striped" aria-describedby="page-heading">
                                 <span class="not-found" *ngIf="a_in_rent.length === 0" jhiTranslate="osh.articles.404"></span>
                                 <tbody *ngIf="a_in_rent.length > 0">
@@ -32,7 +32,7 @@
                                 </tbody>
                             </table>
                         </p-panel>
-                        <p-panel header="Zarezerwowane">
+                        <p-panel [header]="'osh.articles.reserved' | translate">
                             <table class="table table-striped" aria-describedby="page-heading">
                                 <span class="not-found" *ngIf="a_reserved.length === 0" jhiTranslate="osh.articles.404"></span>
                                 <tbody *ngIf="a_reserved.length > 0">
@@ -48,7 +48,7 @@
                                 </tbody>
                             </table>
                         </p-panel>
-                        <p-panel header="Aktywne">
+                        <p-panel [header]="'osh.articles.active' | translate">
                             <table class="table table-striped" aria-describedby="page-heading">
                                 <span class="not-found" *ngIf="a_active.length === 0" jhiTranslate="osh.articles.404"></span>
                                 <tbody *ngIf="a_active.length > 0">
@@ -61,7 +61,7 @@
                                 </tbody>
                             </table>
                         </p-panel>
-                        <p-panel header="Nieaktywne">
+                        <p-panel [header]="'osh.articles.disactive' | translate">
                             <table class="table table-striped" aria-describedby="page-heading">
                                 <span class="not-found" *ngIf="a_disactive.length === 0" jhiTranslate="osh.articles.404"></span>
                                 <tbody *ngIf="a_disactive.length > 0">
@@ -75,8 +75,8 @@
                             </table>
                         </p-panel>
                     </p-tabPanel>
-                    <p-tabPanel header="Moje wypożyczenia i rezerwacje">
-                        <p-panel header="Wypożyczenia">
+                    <p-tabPanel [header]="'osh.articles.resAndRent' | translate">
+                        <p-panel [header]="'osh.articles.rent.myRents' | translate">
                             <table class="table table-striped" aria-describedby="page-heading">
                                 <span class="not-found" *ngIf="myRentings.length === 0" jhiTranslate="osh.articles.404"></span>
                                 <tbody *ngIf="myRentings.length > 0">
@@ -88,7 +88,7 @@
                                 </tbody>
                             </table>
                         </p-panel>
-                        <p-panel header="Rezerwacje">
+                        <p-panel [header]="'osh.articles.reservations.myReservations' | translate">
                             <table class="table table-striped" aria-describedby="page-heading">
                                 <span class="not-found" *ngIf="myReservations.length === 0" jhiTranslate="osh.articles.404"></span>
                                 <tbody *ngIf="myReservations.length > 0">
@@ -108,11 +108,11 @@
         <div class="right-sidebar">
             <div class="card add-panel">
                 <div class="card-body">
-                    <h4 style="text-align: center" *ngIf="!articleForm.get('id').value">Dodaj nowy</h4>
-                    <h4 style="text-align: center" *ngIf="articleForm.get('id').value">Zmodyfikuj</h4>
+                    <h4 style="text-align: center" *ngIf="!articleForm.get('id').value" jhiTranslate="osh.articles.form.addNew">Add new</h4>
+                    <h4 style="text-align: center" *ngIf="articleForm.get('id').value" jhiTranslate="osh.articles.form.update">Update</h4>
                     <form name="addArticleForm" role="form" (ngSubmit)="saveArticle()" [formGroup]="articleForm">
                         <div class="form-group">
-                            <label class="form-control-label" for="articleName">Article</label>
+                            <label class="form-control-label" for="articleName" jhiTranslate="osh.articles.one">Article</label>
                             <input type="text" class="form-control" id="articleName" name="articleName" placeholder="Article"
                                    formControlName="name">
                             <div *ngIf="articleForm.get('name').invalid && (articleForm.get('name').dirty || articleForm.get('name').touched)">
@@ -131,40 +131,40 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label" for="articleDesc">Desc</label>
+                            <label class="form-control-label" for="articleDesc" jhiTranslate="osh.articles.form.desc">Desc</label>
                             <textarea type="text" class="form-control" id="articleDesc" name="articleDesc" placeholder="Desc (optional)"
                                       formControlName="desc"></textarea>
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col">
-                                    <label class="form-control-label" for="articleImage">Image</label>
+                                    <label class="form-control-label" for="articleImage" jhiTranslate="osh.articles.form.image">Image</label>
                                     <input type="text" class="form-control" id="articleImage" name="articleImage" placeholder="Image URL"
                                            formControlName="mainImage" #image>
                                 </div>
                                 <div class="col-4">
-                                    <div class="article-img">
-                                        <span class="hipster img-fluid rounded" [style.backgroundImage]="'url('+ image.value +')'"></span>
-                                    </div>
+                                    <div class="article-img" *ngIf="!image.value || image.value.length < 0 "></div>
+                                    <div class="article-img" *ngIf="image.value && image.value.length > 0 "
+                                         [style.backgroundImage]="'url('+ image.value +')'"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-4">
-                                    <label class="form-control-label" for="articlePrice">Price</label>
+                                    <label class="form-control-label" for="articlePrice" jhiTranslate="osh.articles.form.price">Price</label>
                                     <input type="number" class="form-control" id="articlePrice" name="articlePrice" placeholder="Price"
                                            formControlName="price">
                                 </div>
                                 <div class="col-4">
-                                    <label class="form-control-label" for="articleCurrency">Currency</label>
+                                    <label class="form-control-label" for="articleCurrency" jhiTranslate="osh.articles.form.currency">Currency</label>
                                     <select class="form-control" id="articleCurrency" name="articleCurrency"
                                             formControlName="currency">
                                         <option *ngFor="let value of currency.values()" [value]="value">{{value}}</option>
                                     </select>
                                 </div>
                                 <div class="col-4">
-                                    <label class="form-control-label" for="articleRentPeriod">Rent Period</label>
+                                    <label class="form-control-label" for="articleRentPeriod" jhiTranslate="osh.articles.form.rentPeriod">Rent Period</label>
                                     <select class="form-control" id="articleRentPeriod" name="articleRentPeriod"
                                             formControlName="rentPeriod">
                                         <option *ngFor="let value of rentPeriod.values()" [value]="value">{{value}}</option>
@@ -173,7 +173,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label" for="articleCategory">Category</label>
+                            <label class="form-control-label" for="articleCategory" jhiTranslate="osh.articles.form.category">Category</label>
 <!--                            <input type="text" class="form-control" id="articleCategory" name="articleCategory" placeholder="Category"-->
 <!--                                   formControlName="categoryName">-->
                             <select class="form-control" id="articleCategory" name="articleCategory" formControlName="category">
