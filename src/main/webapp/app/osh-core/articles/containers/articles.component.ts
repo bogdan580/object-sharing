@@ -39,10 +39,10 @@ export class ArticlesComponent implements OnInit {
     user: [],
     location: []
   });
-  a_in_rent: Renting[] = [];
-  a_reserved: Reservation[] = [];
-  a_active: Article[] = [];
-  a_disactive: Article[] = [];
+  aInRent: Renting[] = [];
+  aReserved: Reservation[] = [];
+  aActive: Article[] = [];
+  aDisactive: Article[] = [];
   myReservations: Reservation[] = [];
   myRentings: Renting[] = [];
 
@@ -62,13 +62,13 @@ export class ArticlesComponent implements OnInit {
     artService.getActiveReservesByArticleOwner().subscribe(reservs => {
       console.log(reservs.body);
       reservs.body.forEach(r => {
-        this.a_reserved.push(r);
+        this.aReserved.push(r);
       });
     });
     artService.getActiveRentsByArticleOwner().subscribe(rents => {
       console.log(rents.body);
       rents.body.forEach(r => {
-        this.a_in_rent.push(r);
+        this.aInRent.push(r);
       });
     });
     // My reserves and rents
@@ -92,14 +92,14 @@ export class ArticlesComponent implements OnInit {
   }
 
   updateArticleTable(a: IArticle) {
-    let updateAct: Article = this.a_active.find(art => art.id === a.id);
-    let updateDisAct = this.a_disactive.find(art => art.id === a.id);
+    let updateAct: Article = this.aActive.find(art => art.id === a.id);
+    let updateDisAct = this.aDisactive.find(art => art.id === a.id);
 
     if (updateAct) {
       if (updateAct.status === a.status) {
         this.updateArtData(updateAct, a);
       } else {
-        this.a_active = this.a_active.filter(art => art.id !== a.id);
+        this.aActive = this.aActive.filter(art => art.id !== a.id);
         updateAct = null;
       }
     }
@@ -107,7 +107,7 @@ export class ArticlesComponent implements OnInit {
       if (updateDisAct.status === a.status) {
         this.updateArtData(updateDisAct, a);
       } else {
-        this.a_disactive = this.a_disactive.filter(art => art.id !== a.id);
+        this.aDisactive = this.aDisactive.filter(art => art.id !== a.id);
         updateDisAct = null;
       }
     }
@@ -115,10 +115,10 @@ export class ArticlesComponent implements OnInit {
     if (!updateAct && !updateDisAct) {
       switch (a.status) {
         case ObjectStatus.ACTIVE:
-          this.a_active.push(a);
+          this.aActive.push(a);
           break;
         case ObjectStatus.DISACTIVE:
-          this.a_disactive.push(a);
+          this.aDisactive.push(a);
           break;
       }
       this.updateForm(null);
@@ -224,8 +224,7 @@ export class ArticlesComponent implements OnInit {
           this.jhiAlertService.success('osh.alerts.closeReservation');
           this.myReservations = this.myReservations.filter(art => art.id !== res.body.id);
         });
-      },
-      reject: () => {}
+      }
     });
 
     event.stopPropagation();
@@ -235,8 +234,8 @@ export class ArticlesComponent implements OnInit {
     this.artService.makeRentFromReservation(reserv).subscribe(res => {
       if (res.ok) {
         console.log('makeRentFromReservation res', res);
-        this.a_reserved = this.a_reserved.filter(r => r.id !== reserv.id);
-        this.a_in_rent.push(res.body);
+        this.aReserved = this.aReserved.filter(r => r.id !== reserv.id);
+        this.aInRent.push(res.body);
       } else {
         console.error(res.body);
       }
@@ -253,11 +252,10 @@ export class ArticlesComponent implements OnInit {
       accept: () => {
         this.artService.closeRenting(id).subscribe(res => {
           console.log('closeRenting res', res);
-          this.a_in_rent = this.a_in_rent.filter(r => r.id !== id);
+          this.aInRent = this.aInRent.filter(r => r.id !== id);
           this.updateArticleTable(res.body.article);
         });
-      },
-      reject: () => {}
+      }
     });
 
     event.stopPropagation();

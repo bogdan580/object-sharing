@@ -27,8 +27,7 @@ const routes: Routes = [
     data: {
       authorities: [],
       pageTitle: 'osh.searchList.title'
-    },
-    canActivate: [UserRouteAccessService]
+    }
   }
 ];
 

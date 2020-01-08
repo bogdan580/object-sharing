@@ -18,9 +18,9 @@
                     <p-tabPanel [header]="'osh.articles.myEquipment' | translate">
                         <p-panel [header]="'osh.articles.rented' | translate">
                             <table class="table table-striped" aria-describedby="page-heading">
-                                <span class="not-found" *ngIf="a_in_rent.length === 0" jhiTranslate="osh.articles.404"></span>
-                                <tbody *ngIf="a_in_rent.length > 0">
-                                <tr *ngFor="let arnt of a_in_rent">
+                                <span class="not-found" *ngIf="aInRent.length === 0" jhiTranslate="osh.articles.404"></span>
+                                <tbody *ngIf="aInRent.length > 0">
+                                <tr *ngFor="let arnt of aInRent">
                                     <td>{{arnt.article.name}}
                                         <fa-icon class="status-btn" (click)="closeRent(arnt.id, $event)" [icon]="'stop-circle'"></fa-icon>
                                         <span style="float: right; margin-right: 20px;">
@@ -34,9 +34,9 @@
                         </p-panel>
                         <p-panel [header]="'osh.articles.reserved' | translate">
                             <table class="table table-striped" aria-describedby="page-heading">
-                                <span class="not-found" *ngIf="a_reserved.length === 0" jhiTranslate="osh.articles.404"></span>
-                                <tbody *ngIf="a_reserved.length > 0">
-                                <tr *ngFor="let ares of a_reserved">
+                                <span class="not-found" *ngIf="aReserved.length === 0" jhiTranslate="osh.articles.404"></span>
+                                <tbody *ngIf="aReserved.length > 0">
+                                <tr *ngFor="let ares of aReserved">
                                     <td>{{ares.article.name}}
                                         <fa-icon class="status-btn" (click)="makeRentFromReservation(ares, $event)" [icon]="'play-circle'"></fa-icon>
                                         <span style="float: right; margin-right: 20px;">
@@ -50,9 +50,9 @@
                         </p-panel>
                         <p-panel [header]="'osh.articles.active' | translate">
                             <table class="table table-striped" aria-describedby="page-heading">
-                                <span class="not-found" *ngIf="a_active.length === 0" jhiTranslate="osh.articles.404"></span>
-                                <tbody *ngIf="a_active.length > 0">
-                                <tr *ngFor="let aactv of a_active" (click)="updateForm(aactv)">
+                                <span class="not-found" *ngIf="aActive.length === 0" jhiTranslate="osh.articles.404"></span>
+                                <tbody *ngIf="aActive.length > 0">
+                                <tr *ngFor="let aactv of aActive" (click)="updateForm(aactv)">
                                     <td>
                                         {{aactv.name}}
                                         <fa-icon class="status-btn" (click)="changeStatus(aactv.id, 'disactive', $event)" [icon]="'arrow-alt-circle-down'"></fa-icon>
@@ -63,9 +63,9 @@
                         </p-panel>
                         <p-panel [header]="'osh.articles.disactive' | translate">
                             <table class="table table-striped" aria-describedby="page-heading">
-                                <span class="not-found" *ngIf="a_disactive.length === 0" jhiTranslate="osh.articles.404"></span>
-                                <tbody *ngIf="a_disactive.length > 0">
-                                <tr *ngFor="let adis of a_disactive" (click)="updateForm(adis)">
+                                <span class="not-found" *ngIf="aDisactive.length === 0" jhiTranslate="osh.articles.404"></span>
+                                <tbody *ngIf="aDisactive.length > 0">
+                                <tr *ngFor="let adis of aDisactive" (click)="updateForm(adis)">
                                     <td>
                                         {{adis.name}}
                                         <fa-icon class="status-btn" (click)="changeStatus(adis.id, 'active', $event)" [icon]="'arrow-alt-circle-up'"></fa-icon>

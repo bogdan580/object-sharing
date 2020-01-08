@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   MapOptions,

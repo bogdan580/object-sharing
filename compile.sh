@@ -1,1 +1,1 @@
-mvn clean -Pprod package -DskipTests -Djava.security.egd=file:/dev/./urandom
+./mvnw clean -Pprod package -DskipTests -Djava.security.egd=file:/dev/./urandom
