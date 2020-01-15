@@ -1,5 +1,7 @@
 {
   "osh": {
+    "welcome": "Welcome to service OBJECT SHARING!",
+    "start": "Start",
     "articles": {
       "one": "Article",
       "chooseCategory": "Select category",

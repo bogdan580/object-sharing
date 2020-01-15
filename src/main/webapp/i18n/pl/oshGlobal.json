@@ -1,5 +1,7 @@
 {
   "osh": {
+    "welcome": "Witamy w serwisie OBJECT SHARING!",
+    "start": "Zaczynamy",
     "articles": {
       "one": "Artykuł",
       "chooseCategory": "Wybierz kategorie",
