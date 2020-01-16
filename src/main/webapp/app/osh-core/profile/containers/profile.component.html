@@ -1,35 +1,168 @@
 <div class="page">
     <jhi-alert-error></jhi-alert-error>
     <jhi-alert></jhi-alert>
-    <h2 id="page-heading">
+    <h2 id="page-heading" style="display: none">
         <span>Profile</span>
     </h2>
     <div class="page-body">
 
 
-
-
         <div class="profile-data">
-            <div class="row">
-                <div class="col-3">
-                    <div class="profile-image"> Image</div>
-                    <!--todo get/set user info-->
-                </div>
-                <div class="col-4">
-                    <div class="user-info-data">User Info
-                        <!--todo get/set location-->
-                    <input (change)="print('change', $event)">
+            <form name="addArticleForm" role="form" (ngSubmit)="saveProfile()" [formGroup]="profileForm">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="profile-img">
+                            <span class="hipster img-fluid rounded"></span>
+                        </div>
+                        <div class="card">
+                            <div class="card-body profile-image">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="firstName">First name</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstName"
+                                           placeholder="Set fitst name" [readOnly]="!isEdit"
+                                           formControlName="firstName">
+                                </div>
+                                <div
+                                    *ngIf="profileForm.get('firstName').invalid && (profileForm.get('firstName').dirty || profileForm.get('firstName').touched)">
+                                    <small class="form-text text-danger"
+                                           *ngIf="profileForm.get('firstName').errors.required"
+                                           jhiTranslate="settings.messages.validate.firstname.required">
+                                        Your first name is required.
+                                    </small>
+                                    <small class="form-text text-danger"
+                                           *ngIf="profileForm.get('firstName').errors.minlength"
+                                           jhiTranslate="settings.messages.validate.firstname.minlength">
+                                        Your first name is required to be at least 1 character.
+                                    </small>
+                                    <small class="form-text text-danger"
+                                           *ngIf="profileForm.get('firstName').errors.maxlength"
+                                           jhiTranslate="settings.messages.validate.firstname.maxlength">
+                                        Your first name cannot be longer than 50 characters.
+                                    </small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label" for="firstName">Last name</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastName"
+                                           placeholder="Set last name" [readOnly]="!isEdit"
+                                           formControlName="lastName">
+                                </div>
+                                <div
+                                    *ngIf="profileForm.get('lastName').invalid && (profileForm.get('lastName').dirty || profileForm.get('lastName').touched)">
+                                    <small class="form-text text-danger"
+                                           *ngIf="profileForm.get('lastName').errors.required"
+                                           jhiTranslate="settings.messages.validate.lastname.required">
+                                        Your first name is required.
+                                    </small>
+                                    <small class="form-text text-danger"
+                                           *ngIf="profileForm.get('lastName').errors.minlength"
+                                           jhiTranslate="settings.messages.validate.lastname.minlength">
+                                        Your first name is required to be at least 1 character.
+                                    </small>
+                                    <small class="form-text text-danger"
+                                           *ngIf="profileForm.get('lastName').errors.maxlength"
+                                           jhiTranslate="settings.messages.validate.lastname.maxlength">
+                                        Your first name cannot be longer than 50 characters.
+                                    </small>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--todo get/set user info-->
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body user-info-data">
+                                <!--todo get/set location-->
+                                <div class="form-group">
+                                    <label class="form-control-label" for="tel">Tel</label>
+                                    <input type="tel" class="form-control" id="tel" name="tel" placeholder="Your phone"
+                                           formControlName="tel" [readOnly]="!isEdit">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label" for="email"
+                                           jhiTranslate="global.form.email.label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                           placeholder="{{'global.form.email.placeholder' | translate}}"
+                                           formControlName="email" [readOnly]="!isEdit">
+                                    <div
+                                        *ngIf="profileForm.get('email').invalid && (profileForm.get('email').dirty || profileForm.get('email').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="profileForm.get('email').errors.required"
+                                               jhiTranslate="global.messages.validate.email.required">
+                                            Your email is required.
+                                        </small>
+                                        <small class="form-text text-danger"
+                                               *ngIf="profileForm.get('email').errors.email"
+                                               jhiTranslate="global.messages.validate.email.invalid">
+                                            Your email is invalid.
+                                        </small>
+                                        <small class="form-text text-danger"
+                                               *ngIf="profileForm.get('email').errors.minlength"
+                                               jhiTranslate="global.messages.validate.email.minlength">
+                                            Your email is required to be at least 5 characters.
+                                        </small>
+                                        <small class="form-text text-danger"
+                                               *ngIf="profileForm.get('email').errors.maxlength"
+                                               jhiTranslate="global.messages.validate.email.maxlength">
+                                            Your email cannot be longer than 100 characters.
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label" for="city">City</label>
+                                    <input type="text" class="form-control" id="city" name="city"
+                                           placeholder="Your city" [readOnly]="!isEdit"
+                                           formControlName="city">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label" for="stateProvince">State Province</label>
+                                    <input type="text" class="form-control" id="stateProvince" name="stateProvince"
+                                           placeholder="Your state" [readOnly]="!isEdit"
+                                           formControlName="stateProvince">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label" for="postalCode">Postal code</label>
+                                    <input type="text" class="form-control" id="postalCode" name="postalCode"
+                                           placeholder="Your state" [readOnly]="!isEdit"
+                                           formControlName="postalCode">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label" for="streetAddress">Street address</label>
+                                    <input type="text" class="form-control" id="streetAddress" name="streetAddress"
+                                           placeholder="Your street" (change)="print('change', $event)"
+                                           formControlName="streetAddress" [readOnly]="!isEdit">
+                                </div>
+
+                                <button type="submit" [disabled]="profileForm.invalid || isSaving"
+                                        class="btn btn-success" style="display: block; float: right; margin-top: 1rem;"
+                                        *ngIf="isEdit" (click)="isEdit = false"
+                                        jhiTranslate="settings.form.button">
+                                    Save
+                                </button>
+                                <button type="button" *ngIf="!isEdit" (click)="isEdit = true"
+                                        class="btn btn-info" style="display: block; float: right; margin-top: 1rem;">
+                                    Edit
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="location-map">
+                            <jhi-leaflet-map
+                                [startPoint]="startPoint"
+                                [zoom]="zoom">
+                            </jhi-leaflet-map>
+                        </div>
                     </div>
                 </div>
-                <div class="col-5">
-                    <div class="location-map">
-                        <jhi-leaflet-map
-                            [startPoint]="startPoint"
-                            [zoom]="zoom">
-                        </jhi-leaflet-map>
-                    </div>
-                </div>
-            </div>
+            </form>
             <div class="row" style="padding: 15px 0 15px">
                 <div class="col text-center">
                     Wypożyczono:
@@ -40,32 +173,43 @@
             </div>
             <div class="row">
                 <div class="col">
-                    History
-                    <!--todo get history last 5 rec (get rents, get reserves, create time-string, sort by time)-->
-                    <table class="table table-striped" aria-describedby="page-heading">
-                        <tbody>
-                        <tr>
-                            <td >
-                               t1
-                            </td>
-                        </tr>
-                        <tr>
-                            <td >
-                                t2
-                            </td>
-                        </tr>
-                        <tr>
-                            <td >
-                                t3
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="card" style="margin-bottom: 1rem">
+                        <div class="card-body">
+                            <!--todo get history last 5 rec (get rents, get reserves, create time-string, sort by time)-->
+                            <table class="table table-striped" aria-describedby="page-heading">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        t1
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        t2
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        t3
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        t4
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        t5
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-
 
 
     </div>
