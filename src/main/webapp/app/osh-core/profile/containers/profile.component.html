@@ -5,6 +5,68 @@
         <span>Profile</span>
     </h2>
     <div class="page-body">
-        Body
+
+
+
+
+        <div class="profile-data">
+            <div class="row">
+                <div class="col-3">
+                    <div class="profile-image"> Image</div>
+                    <!--todo get/set user info-->
+                </div>
+                <div class="col-4">
+                    <div class="user-info-data">User Info
+                        <!--todo get/set location-->
+                    <input (change)="print('change', $event)">
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="location-map">
+                        <jhi-leaflet-map
+                            [startPoint]="startPoint"
+                            [zoom]="zoom">
+                        </jhi-leaflet-map>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding: 15px 0 15px">
+                <div class="col text-center">
+                    Wypożyczono:
+                </div>
+                <div class="col text-center">
+                    Udostępniono:
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    History
+                    <!--todo get history last 5 rec (get rents, get reserves, create time-string, sort by time)-->
+                    <table class="table table-striped" aria-describedby="page-heading">
+                        <tbody>
+                        <tr>
+                            <td >
+                               t1
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >
+                                t2
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >
+                                t3
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
     </div>
 </div>

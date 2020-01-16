@@ -34,7 +34,7 @@ export class LeafletMapComponent implements OnInit {
   set points(pnts: Point[]) {
     console.log('new points', pnts);
     this._points = pnts;
-      this.setNewMarkers();
+    this.setNewMarkers();
   }
   get points(): Point[] {
     return this._points;
@@ -101,20 +101,6 @@ export class LeafletMapComponent implements OnInit {
       zoom: this.zoom,
       center: latLng([this.defPoint.x, this.defPoint.y])
     };
-
-    /*  if (this.startPoint) {
-        this.startMarker = marker([  this.startPoint.x, this.startPoint.y ], {
-          icon: icon({
-            iconSize: [ 25, 41 ],
-            iconAnchor: [ 13, 41 ],
-            iconUrl: 'assets/images/marker-icon-start.png',
-            shadowUrl: 'leaflet/marker-shadow.png',
-          }),
-          draggable: this.draggable,
-        });
-        layers.push(this.startMarker);
-      }
-    */
   }
 
   setNewMarkers() {
@@ -125,47 +111,69 @@ export class LeafletMapComponent implements OnInit {
       });
       this.streetMaps.addTo(this.map);
 
-      if (this.points.length === 0) this._stopPoint = null;
+      if (!this.points || this.points.length === 0) {
+        this._stopPoint = null;
+      } else {
+        this.points.forEach(p => {
+          marker([p.x, p.y], {
+            icon: icon({
+              iconSize: [25, 41],
+              iconAnchor: [13, 41],
+              iconUrl: '../../../content/images/marker-icon.png',
+              shadowUrl: '../../../content/images/marker-shadow.png'
+            }),
+            draggable: this.draggable
+          }).addTo(this.map);
+        });
+      }
 
-      this.points.forEach(p => {
-        marker([p.x, p.y], {
+      if (this.stopPoint) {
+        marker([this.stopPoint.x, this.stopPoint.y], {
           icon: icon({
             iconSize: [25, 41],
             iconAnchor: [13, 41],
-            iconUrl: '../../../content/images/marker-icon.png',
+            iconUrl: '../../../content/images/marker-icon-stop.png',
             shadowUrl: '../../../content/images/marker-shadow.png'
           }),
           draggable: this.draggable
         }).addTo(this.map);
-      });
+      }
 
-      if (this.stopPoint) {
-        marker([  this.stopPoint.x, this.stopPoint.y ], {
+      if (this.startPoint) {
+        marker([this.startPoint.x, this.startPoint.y], {
           icon: icon({
-            iconSize: [ 25, 41 ],
-            iconAnchor: [ 13, 41 ],
-            iconUrl: '../../../content/images/marker-icon-stop.png',
-            shadowUrl: '../../../content/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [13, 41],
+            iconUrl: '../../../content/images/marker-icon-start.png',
+            shadowUrl: '../../../content/images/marker-shadow.png'
           }),
-          draggable: this.draggable,
+          draggable: this.draggable
         }).addTo(this.map);
       }
 
-
       // this.onMapReady(this.map);
+      if (this.startPoint) {
+        this.defPoint = this.startPoint;
+        const bounds = new LatLngBounds([[this.defPoint.x, this.defPoint.y]]);
+        this.map.fitBounds(bounds, { maxZoom: this.zoom, animate: true });
+      }
     }
-
   }
 
   onMapReady(map: Map) {
     if (!this.map) {
       this.map = map;
     }
-    if (this.points.length > 0) {
+    if (this.startPoint) {
+      this.defPoint = this.startPoint;
+    } else if (this.points && this.points.length > 0) {
       this.defPoint = this.points[0];
     }
     const bounds = new LatLngBounds([[this.defPoint.x, this.defPoint.y]]);
     map.fitBounds(bounds, { maxZoom: this.zoom, animate: true });
   }
 
+  print(resize: string, event: any) {
+    console.log(resize, event);
+  }
 }

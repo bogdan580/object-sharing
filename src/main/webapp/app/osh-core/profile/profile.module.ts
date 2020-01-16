@@ -7,14 +7,17 @@ import { ProfileComponent } from 'app/osh-core/profile/containers/profile.compon
 import { profileRoute } from 'app/osh-core/profile/profile.route';
 import { OshProfileService } from 'app/osh-core/profile/shared/profile.service';
 import { ObjectSharingSharedModule } from 'app/shared/shared.module';
+import { OshUiModule } from 'app/osh-ui/ui.module';
 const PROFILE_ROUTES = [...profileRoute];
 const CONTAINERS = [ProfileComponent];
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     RouterModule.forChild(PROFILE_ROUTES),
-    ObjectSharingSharedModule
+    ObjectSharingSharedModule,
+    OshUiModule
   ],
   exports: [], // need add ui module
   declarations: [...CONTAINERS],
