@@ -5,8 +5,6 @@
         <span>Profile</span>
     </h2>
     <div class="page-body">
-
-
         <div class="profile-data">
             <form name="addArticleForm" role="form" (ngSubmit)="saveProfile()" [formGroup]="profileForm">
                 <div class="row">
@@ -18,8 +16,9 @@
                             <div class="card-body profile-image">
                                 <div class="form-group">
                                     <label class="form-control-label" for="firstName">First name</label>
+                                    <span style="font-weight: 700; padding-left: 10px" *ngIf="!isEdit">{{profileForm.get(['firstName']).value}}</span>
                                     <input type="text" class="form-control" id="firstName" name="firstName"
-                                           placeholder="Set fitst name" [readOnly]="!isEdit"
+                                           placeholder="Set fitst name" *ngIf="isEdit"
                                            formControlName="firstName">
                                 </div>
                                 <div
@@ -43,8 +42,9 @@
 
                                 <div class="form-group">
                                     <label class="form-control-label" for="firstName">Last name</label>
+                                    <span style="font-weight: 700; padding-left: 10px" *ngIf="!isEdit">{{profileForm.get(['lastName']).value}}</span>
                                     <input type="text" class="form-control" id="lastName" name="lastName"
-                                           placeholder="Set last name" [readOnly]="!isEdit"
+                                           placeholder="Set last name" *ngIf="isEdit"
                                            formControlName="lastName">
                                 </div>
                                 <div
@@ -68,82 +68,89 @@
 
                             </div>
                         </div>
-                        <!--todo get/set user info-->
                     </div>
                     <div class="col-4">
                         <div class="card">
                             <div class="card-body user-info-data">
-                                <!--todo get/set location-->
                                 <div class="form-group">
                                     <label class="form-control-label" for="tel">Tel</label>
+                                    <span style="font-weight: 700; padding-left: 10px" *ngIf="!isEdit">{{profileForm.get(['tel']).value}}</span>
                                     <input type="tel" class="form-control" id="tel" name="tel" placeholder="Your phone"
-                                           formControlName="tel" [readOnly]="!isEdit">
+                                           formControlName="tel" *ngIf="isEdit">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-control-label" for="email"
                                            jhiTranslate="global.form.email.label">Email</label>
+                                    <span style="font-weight: 700; padding-left: 10px" *ngIf="!isEdit">{{profileForm.get(['email']).value}}</span>
                                     <input type="email" class="form-control" id="email" name="email"
                                            placeholder="{{'global.form.email.placeholder' | translate}}"
-                                           formControlName="email" [readOnly]="!isEdit">
-                                    <div
-                                        *ngIf="profileForm.get('email').invalid && (profileForm.get('email').dirty || profileForm.get('email').touched)">
-                                        <small class="form-text text-danger"
-                                               *ngIf="profileForm.get('email').errors.required"
-                                               jhiTranslate="global.messages.validate.email.required">
-                                            Your email is required.
-                                        </small>
-                                        <small class="form-text text-danger"
-                                               *ngIf="profileForm.get('email').errors.email"
-                                               jhiTranslate="global.messages.validate.email.invalid">
-                                            Your email is invalid.
-                                        </small>
-                                        <small class="form-text text-danger"
-                                               *ngIf="profileForm.get('email').errors.minlength"
-                                               jhiTranslate="global.messages.validate.email.minlength">
-                                            Your email is required to be at least 5 characters.
-                                        </small>
-                                        <small class="form-text text-danger"
-                                               *ngIf="profileForm.get('email').errors.maxlength"
-                                               jhiTranslate="global.messages.validate.email.maxlength">
-                                            Your email cannot be longer than 100 characters.
-                                        </small>
-                                    </div>
+                                           formControlName="email" *ngIf="isEdit">
+                                </div>
+                                <div *ngIf="profileForm.get('email').invalid && (profileForm.get('email').dirty || profileForm.get('email').touched)">
+                                    <small class="form-text text-danger"
+                                           *ngIf="profileForm.get('email').errors.required"
+                                           jhiTranslate="global.messages.validate.email.required">
+                                        Your email is required.
+                                    </small>
+                                    <small class="form-text text-danger"
+                                           *ngIf="profileForm.get('email').errors.email"
+                                           jhiTranslate="global.messages.validate.email.invalid">
+                                        Your email is invalid.
+                                    </small>
+                                    <small class="form-text text-danger"
+                                           *ngIf="profileForm.get('email').errors.minlength"
+                                           jhiTranslate="global.messages.validate.email.minlength">
+                                        Your email is required to be at least 5 characters.
+                                    </small>
+                                    <small class="form-text text-danger"
+                                           *ngIf="profileForm.get('email').errors.maxlength"
+                                           jhiTranslate="global.messages.validate.email.maxlength">
+                                        Your email cannot be longer than 100 characters.
+                                    </small>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-control-label" for="city">City</label>
+                                    <span style="font-weight: 700; padding-left: 10px" *ngIf="!isEdit">{{profileForm.get(['city']).value}}</span>
                                     <input type="text" class="form-control" id="city" name="city"
-                                           placeholder="Your city" [readOnly]="!isEdit"
+                                           placeholder="Your city" *ngIf="isEdit"
                                            formControlName="city">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-control-label" for="stateProvince">State Province</label>
+                                    <span style="font-weight: 700; padding-left: 10px" *ngIf="!isEdit">{{profileForm.get(['stateProvince']).value}}</span>
                                     <input type="text" class="form-control" id="stateProvince" name="stateProvince"
-                                           placeholder="Your state" [readOnly]="!isEdit"
+                                           placeholder="Your state" *ngIf="isEdit"
                                            formControlName="stateProvince">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-control-label" for="postalCode">Postal code</label>
+                                    <span style="font-weight: 700; padding-left: 10px" *ngIf="!isEdit">{{profileForm.get(['postalCode']).value}}</span>
                                     <input type="text" class="form-control" id="postalCode" name="postalCode"
-                                           placeholder="Your state" [readOnly]="!isEdit"
+                                           placeholder="Your state" *ngIf="isEdit"
                                            formControlName="postalCode">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-control-label" for="streetAddress">Street address</label>
+                                    <span style="font-weight: 700; padding-left: 10px" *ngIf="!isEdit">{{profileForm.get(['streetAddress']).value}}</span>
                                     <input type="text" class="form-control" id="streetAddress" name="streetAddress"
-                                           placeholder="Your street" (change)="print('change', $event)"
-                                           formControlName="streetAddress" [readOnly]="!isEdit">
+                                           placeholder="Your street" (change)="setNewAddress('change', $event)"
+                                           formControlName="streetAddress" *ngIf="isEdit">
                                 </div>
 
                                 <button type="submit" [disabled]="profileForm.invalid || isSaving"
                                         class="btn btn-success" style="display: block; float: right; margin-top: 1rem;"
-                                        *ngIf="isEdit" (click)="isEdit = false"
+                                        *ngIf="isEdit"
                                         jhiTranslate="settings.form.button">
                                     Save
+                                </button>
+                                <button type="button" *ngIf="isEdit" (click)="isEdit = false"
+                                        class="btn btn-secondary" style="display: block; float: right; margin-top: 1rem;margin-right: 10px;">
+                                    Cancel
                                 </button>
                                 <button type="button" *ngIf="!isEdit" (click)="isEdit = true"
                                         class="btn btn-info" style="display: block; float: right; margin-top: 1rem;">
@@ -165,10 +172,10 @@
             </form>
             <div class="row" style="padding: 15px 0 15px">
                 <div class="col text-center">
-                    Wypożyczono:
+                    Wypożyczono: {{profileData?.userInfo.rentedObjects}}
                 </div>
                 <div class="col text-center">
-                    Udostępniono:
+                    Udostępniono: {{profileData?.userInfo.providedObjects}}
                 </div>
             </div>
             <div class="row">

@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { JhiLanguageService } from 'ng-jhipster';
 import { ProfileComponent } from 'app/osh-core/profile/containers/profile.component';
 import { profileRoute } from 'app/osh-core/profile/profile.route';
-import { OshProfileService } from 'app/osh-core/profile/shared/profile.service';
+import { OshProfileService } from 'app/osh-core/profile/shared/services/profile.service';
 import { ObjectSharingSharedModule } from 'app/shared/shared.module';
 import { OshUiModule } from 'app/osh-ui/ui.module';
 const PROFILE_ROUTES = [...profileRoute];
