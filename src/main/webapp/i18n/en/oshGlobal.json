@@ -37,7 +37,29 @@
       }
     },
     "profile": {
-      "title": "Profile"
+      "title": "Profile",
+      "rented": "Rented: ",
+      "provided":  "Provided: ",
+      "form": {
+        "firstName": "Name: ",
+        "lastName": "Surname: ",
+        "tel": "Tel: ",
+        "email": "Email: ",
+        "city": "City: ",
+        "state": "State: ",
+        "postal": "Postal code: ",
+        "street": "Address: ",
+        "cancel": "Cancel",
+        "edit": "Edit"
+      },
+      "table": {
+        "type": "Type",
+        "start": "Start",
+        "end": "End",
+        "name": "Name",
+        "price": "Price",
+        "time": "Time"
+      }
     },
     "searchList": {
       "title": "Search list"

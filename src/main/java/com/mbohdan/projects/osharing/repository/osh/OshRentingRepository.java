@@ -1,6 +1,7 @@
 package com.mbohdan.projects.osharing.repository.osh;
 
 import com.mbohdan.projects.osharing.domain.Renting;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -25,4 +26,7 @@ public interface OshRentingRepository extends JpaRepository<Renting, Long> {
 
     @Query("select renting from Renting renting where renting.id = :id AND renting.article.user.login = ?#{principal.username}")
     Renting findRentByArticleOwner(@Param("id") Long id);
+
+    @Query("select rents from Renting rents where rents.user.login = ?#{principal.username}")
+    List<Renting> getLastRentings(Pageable pageable);
 }

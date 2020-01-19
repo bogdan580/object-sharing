@@ -1,5 +1,6 @@
 package com.mbohdan.projects.osharing.web.rest.osh;
 
+import com.mbohdan.projects.osharing.service.dto.osh.OshHistoryData;
 import com.mbohdan.projects.osharing.service.dto.osh.OshProfileData;
 import com.mbohdan.projects.osharing.service.osh.OshProfileService;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/proxy")
@@ -37,6 +39,13 @@ public class OshProfileResource {
         log.debug("REST request to update profile data");
         OshProfileData results = oshProfileService.updateProfileData(data);
         log.debug("OshProfileResource.updateProfileData() {}", results);
+        return ResponseEntity.ok(results);
+    }
+
+    @GetMapping("/profile/history")
+    public ResponseEntity<ArrayList<OshHistoryData>> getHistoryData() throws URISyntaxException {
+        log.debug("REST request to get profile history data");
+        ArrayList<OshHistoryData> results = oshProfileService.getUserHistory();
         return ResponseEntity.ok(results);
     }
 }

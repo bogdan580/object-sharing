@@ -37,7 +37,29 @@
       }
     },
     "profile": {
-      "title": "Moje konto"
+      "title": "Moje konto",
+      "rented": "Wypożyczono: ",
+      "provided":  "Udostępniono: ",
+      "form": {
+        "firstName": "Imię: ",
+        "lastName": "Nazwisko: ",
+        "tel": "Tel: ",
+        "email": "Email: ",
+        "city": "Miasto: ",
+        "state": "Wojewódstwo: ",
+        "postal": "Kod pocztowy: ",
+        "street": "Adres: ",
+        "cancel": "Anuluj",
+        "edit": "Edytuj"
+      },
+      "table": {
+        "type": "Typ",
+        "start": "Początek",
+        "end": "Koniec",
+        "name": "Nazwa artykulu",
+        "price": "Cena",
+        "time": "Czas trwania"
+      }
     },
     "searchList": {
       "title": "Lista wyszukiwania"

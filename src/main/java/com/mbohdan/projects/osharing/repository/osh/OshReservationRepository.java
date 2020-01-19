@@ -1,6 +1,7 @@
 package com.mbohdan.projects.osharing.repository.osh;
 
 import com.mbohdan.projects.osharing.domain.Reservation;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -33,4 +34,7 @@ public interface OshReservationRepository extends JpaRepository<Reservation, Lon
 
     @Query("select reservation from Reservation reservation where reservation.id = :id")
     Reservation findByReserveId(@Param("id") Long id);
+
+    @Query("select reservation from Reservation reservation where reservation.user.login = ?#{principal.username}")
+    List<Reservation> getLastReservations(Pageable pageable);
 }

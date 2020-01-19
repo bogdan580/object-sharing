@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { Point } from 'leaflet';
 import { FormBuilder, Validators } from '@angular/forms';
 import { OshProfileService } from '../shared/services/profile.service';
-import { ProfileData } from 'app/shared/model/osh/profile.model';
+import { HistoryData, ProfileData } from 'app/shared/model/osh/profile.model';
 
 @Component({
   selector: 'jhi-profile',
@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   startPoint: Point;
   zoom = 14;
   profileData: ProfileData;
+  historyData: HistoryData;
 
   isSaving: boolean;
   isEdit: boolean;
@@ -41,6 +42,10 @@ export class ProfileComponent implements OnInit {
       console.log('data', data);
       this.profileData = data;
       this.initProfileForm();
+    });
+    this.profileService.getUserHistory().subscribe(history => {
+      console.log('history', history);
+      this.historyData = history;
     });
   }
 

@@ -2,7 +2,7 @@
     <jhi-alert-error></jhi-alert-error>
     <jhi-alert></jhi-alert>
     <h2 id="page-heading" style="display: none">
-        <span>Profile</span>
+        <span jhiTranslate="osh.profile.title">Profile</span>
     </h2>
     <div class="page-body">
         <div class="profile-data">
@@ -15,7 +15,7 @@
                         <div class="card">
                             <div class="card-body profile-image">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="firstName">First name</label>
+                                    <label class="form-control-label" for="firstName" jhiTranslate="osh.profile.form.firstName">First name</label>
                                     <span style="font-weight: 700; padding-left: 10px" *ngIf="!isEdit">{{profileForm.get(['firstName']).value}}</span>
                                     <input type="text" class="form-control" id="firstName" name="firstName"
                                            placeholder="Set fitst name" *ngIf="isEdit"
@@ -41,7 +41,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-control-label" for="firstName">Last name</label>
+                                    <label class="form-control-label" for="firstName" jhiTranslate="osh.profile.form.lastName">Last name</label>
                                     <span style="font-weight: 700; padding-left: 10px" *ngIf="!isEdit">{{profileForm.get(['lastName']).value}}</span>
                                     <input type="text" class="form-control" id="lastName" name="lastName"
                                            placeholder="Set last name" *ngIf="isEdit"
@@ -73,7 +73,7 @@
                         <div class="card">
                             <div class="card-body user-info-data">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="tel">Tel</label>
+                                    <label class="form-control-label" for="tel" jhiTranslate="osh.profile.form.tel">Tel</label>
                                     <span style="font-weight: 700; padding-left: 10px" *ngIf="!isEdit">{{profileForm.get(['tel']).value}}</span>
                                     <input type="tel" class="form-control" id="tel" name="tel" placeholder="Your phone"
                                            formControlName="tel" *ngIf="isEdit">
@@ -81,7 +81,7 @@
 
                                 <div class="form-group">
                                     <label class="form-control-label" for="email"
-                                           jhiTranslate="global.form.email.label">Email</label>
+                                           jhiTranslate="global.form.email.label" jhiTranslate="osh.profile.form.email">Email</label>
                                     <span style="font-weight: 700; padding-left: 10px" *ngIf="!isEdit">{{profileForm.get(['email']).value}}</span>
                                     <input type="email" class="form-control" id="email" name="email"
                                            placeholder="{{'global.form.email.placeholder' | translate}}"
@@ -111,7 +111,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-control-label" for="city">City</label>
+                                    <label class="form-control-label" for="city" jhiTranslate="osh.profile.form.city">City</label>
                                     <span style="font-weight: 700; padding-left: 10px" *ngIf="!isEdit">{{profileForm.get(['city']).value}}</span>
                                     <input type="text" class="form-control" id="city" name="city"
                                            placeholder="Your city" *ngIf="isEdit"
@@ -119,7 +119,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-control-label" for="stateProvince">State Province</label>
+                                    <label class="form-control-label" for="stateProvince" jhiTranslate="osh.profile.form.state">State Province</label>
                                     <span style="font-weight: 700; padding-left: 10px" *ngIf="!isEdit">{{profileForm.get(['stateProvince']).value}}</span>
                                     <input type="text" class="form-control" id="stateProvince" name="stateProvince"
                                            placeholder="Your state" *ngIf="isEdit"
@@ -127,7 +127,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-control-label" for="postalCode">Postal code</label>
+                                    <label class="form-control-label" for="postalCode" jhiTranslate="osh.profile.form.postal">Postal code</label>
                                     <span style="font-weight: 700; padding-left: 10px" *ngIf="!isEdit">{{profileForm.get(['postalCode']).value}}</span>
                                     <input type="text" class="form-control" id="postalCode" name="postalCode"
                                            placeholder="Your state" *ngIf="isEdit"
@@ -135,7 +135,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-control-label" for="streetAddress">Street address</label>
+                                    <label class="form-control-label" for="streetAddress" jhiTranslate="osh.profile.form.street">Street address</label>
                                     <span style="font-weight: 700; padding-left: 10px" *ngIf="!isEdit">{{profileForm.get(['streetAddress']).value}}</span>
                                     <input type="text" class="form-control" id="streetAddress" name="streetAddress"
                                            placeholder="Your street" (change)="setNewAddress('change', $event)"
@@ -148,11 +148,11 @@
                                         jhiTranslate="settings.form.button">
                                     Save
                                 </button>
-                                <button type="button" *ngIf="isEdit" (click)="isEdit = false"
+                                <button type="button" *ngIf="isEdit" (click)="isEdit = false" jhiTranslate="osh.profile.form.cancel"
                                         class="btn btn-secondary" style="display: block; float: right; margin-top: 1rem;margin-right: 10px;">
                                     Cancel
                                 </button>
-                                <button type="button" *ngIf="!isEdit" (click)="isEdit = true"
+                                <button type="button" *ngIf="!isEdit" (click)="isEdit = true" jhiTranslate="osh.profile.form.edit"
                                         class="btn btn-info" style="display: block; float: right; margin-top: 1rem;">
                                     Edit
                                 </button>
@@ -172,43 +172,36 @@
             </form>
             <div class="row" style="padding: 15px 0 15px">
                 <div class="col text-center">
-                    Wypożyczono: {{profileData?.userInfo.rentedObjects}}
+                    {{"osh.profile.rented" | translate}} {{profileData?.userInfo.rentedObjects}}
                 </div>
                 <div class="col text-center">
-                    Udostępniono: {{profileData?.userInfo.providedObjects}}
+                    {{"osh.profile.provided" | translate}} {{profileData?.userInfo.providedObjects}}
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <div class="card" style="margin-bottom: 1rem">
-                        <div class="card-body">
+                    <div class="card" style="margin-bottom: 1rem; max-height: 250px; overflow-y: auto">
+                        <div class="card-body" style="padding: 5px">
                             <!--todo get history last 5 rec (get rents, get reserves, create time-string, sort by time)-->
                             <table class="table table-striped" aria-describedby="page-heading">
+                                <thead>
+                                    <tr>
+                                        <th style="border:0" jhiTranslate="osh.profile.table.type">Type</th>
+                                        <th style="border:0" jhiTranslate="osh.profile.table.start">Początek</th>
+                                        <th style="border:0" jhiTranslate="osh.profile.table.end">Koniec</th>
+                                        <th style="border:0" jhiTranslate="osh.profile.table.name">Nazwa artykulu</th>
+                                        <th style="border:0" jhiTranslate="osh.profile.table.price">Cena</th>
+                                        <th style="border:0" jhiTranslate="osh.profile.table.time">Czas trwania</th>
+                                    </tr>
+                                </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        t1
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        t2
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        t3
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        t4
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        t5
-                                    </td>
+                                <tr *ngFor="let rec of historyData">
+                                    <td> {{rec.type}} </td>
+                                    <td> {{rec.startTime | date}} </td>
+                                    <td> {{rec.endTime | date}} </td>
+                                    <td> {{rec.article.name}} </td>
+                                    <td> {{rec.price}} {{rec.currency}}/{{rec.rentPeriod}} </td>
+                                    <td> {{ (rec.endTime) ? rec.endTime - rec.startTime: 'pending'}} </td>
                                 </tr>
                                 </tbody>
                             </table>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SERVER_API_URL } from 'app/app.constants';
 import { Observable } from 'rxjs';
-import { ProfileData } from 'app/shared/model/osh/profile.model';
+import { HistoryData, ProfileData } from 'app/shared/model/osh/profile.model';
 
 @Injectable({ providedIn: 'root' })
 export class OshProfileService {
@@ -15,5 +15,9 @@ export class OshProfileService {
 
   createOrUpdateProfileData(profileData: ProfileData): Observable<ProfileData> {
     return this.http.post<ProfileData>(`${this.resourceUrl}/profile/data`, profileData);
+  }
+
+  getUserHistory(): Observable<HistoryData> {
+    return  this.http.get<HistoryData>(`${this.resourceUrl}/profile/history`);
   }
 }
