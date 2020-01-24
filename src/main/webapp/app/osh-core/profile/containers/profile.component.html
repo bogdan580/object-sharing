@@ -200,8 +200,12 @@
                                     <td> {{rec.startTime | date}} </td>
                                     <td> {{rec.endTime | date}} </td>
                                     <td> {{rec.article.name}} </td>
-                                    <td> {{rec.price}} {{rec.currency}}/{{rec.rentPeriod}} </td>
-                                    <td> {{ (rec.endTime) ? rec.endTime - rec.startTime: 'pending'}} </td>
+                                    <td> {{rec.price}} {{rec.currency ? rec.currency + '/': ''}}{{rec.rentPeriod}} </td>
+                                    <td> {{ (rec.endTime) ?
+                                                    (rec.endTime > rec.startTime) ?
+                                                            (rec.endTime - rec.startTime)/1000/60/60 + 'h'
+                                                            : 'canceled'
+                                                    : 'pending'}} </td>
                                 </tr>
                                 </tbody>
                             </table>

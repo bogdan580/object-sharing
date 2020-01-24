@@ -129,8 +129,8 @@ export class SearchListComponent implements OnInit {
       this.searchListService.saveReservation(reservation).subscribe(res => {
         this.alertService.success('osh.alerts.reserved');
         this.events = [...this.events, this.selectedDays];
+        this.selectedDays = null;
       });
-      this.selectedDays = null;
     }
   }
 
